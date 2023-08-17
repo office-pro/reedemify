@@ -7,9 +7,12 @@ app.get('/', (req, res) => {
   res.send("Hello express");
 }).get('/users',async(req,res) => {
   try {
-    const [rows, fields] = await pool.query('SELECT * FROM users');
-    res.json(rows);
-  } catch(error) {
+    const client = await pool.connect();
+    const results = await client.query("Select * from person");
+    res.json(results.rows);
+    client.release();
+    
+    } catch(error) {
     console.error("Error fetching users: ", error);
     res.status(500).json({error: "server  error"})
   }
