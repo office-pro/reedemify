@@ -1,22 +1,23 @@
-import express from 'express';
+import express, { Router } from 'express';
 import pool from "./static/db";
+import cors from 'cors' ;
+import helmet from "helmet";
+import router from './Routes/routes'
+
 
 const app = express();
 
-app.get('/', (req, res) => {
-  res.send("Hello express");
-}).get('/users',async(req,res) => {
-  try {
-    const client = await pool.connect();
-    const results = await client.query("Select * from person");
-    res.json(results.rows);
-    client.release();
-    
-    } catch(error) {
-    console.error("Error fetching users: ", error);
-    res.status(500).json({error: "server  error"})
-  }
-});
+const corsOptions = {
+  origin: '*', // Replace with the allowed origin(s)
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true, // Allow cookies, authorization headers, etc.
+  optionsSuccessStatus: 204, // Some legacy browsers (IE11, various SmartTVs) choke on a 204
+};
+
+app.use(cors(corsOptions));
+app.use(express.json());
+app.use('/', router);
+
 
 app.listen(3000, () => {
   console.log('server is running on port 3000');
