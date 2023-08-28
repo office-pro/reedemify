@@ -37,5 +37,7 @@ export default (sequelize: Sequelize) => {
   },{
     sequelize,
     modelName: 'Roles', // The name of the model
-  })
+  });
+
+  return Roles;
 }
