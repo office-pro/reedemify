@@ -1,10 +1,10 @@
 {
   "dev": {
     "driver": "pg",
-    "user": "postgres",
-    "host": "localhost",
+    "host": "postgres-dv.postgres.database.azure.com", 
+    "user":"dv_promo", 
+    "password":"dvpromo@123",
     "database": "myDb",
-    "password": "root",
-    "port": 5432
+    "ssl":true
   }
 }

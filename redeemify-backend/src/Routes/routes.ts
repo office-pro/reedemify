@@ -10,8 +10,8 @@ router.get('', (req: Request,res: Response) => {
   res.send("hello");  
 })
 
-router.use('/api/auth', authRouter);
+// router.use('/api/auth', authRouter);
 router.use('/api/products', productsRouter);
-router.use('/api/users', userRouter);
+// router.use('/api/users', userRouter);
 
 export default router;
