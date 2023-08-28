@@ -14,7 +14,7 @@ productsRouter
   const {categoryName,categoryDescription} = req.body;
   try {
     const db =  await pool.connect();
-    const rows = await db.query('Insert into public.productcategories(categoryName,categoryDescription) values ($1,$2)',[categoryName,categoryDescription]);
+    const rows = await pool.query('Insert into public.productcategories(categoryName,categoryDescription) values ($1,$2)',[categoryName,categoryDescription]);
     res.json({'message': "data added "+ rows.rowCount});
     pool.end();
   } catch(err) {
@@ -26,7 +26,7 @@ productsRouter
   const {categoryId,subCategoryName,subCategoryDescription} = req.body;
   try {
     const db =  await pool.connect();
-    const rows = await db.query('Insert into public.productsubcategories(categoryId,subCategoryName,subCategoryDescription) values ($1,$2,$3)',[categoryId,subCategoryName,subCategoryDescription]);
+    const rows = await pool.query('Insert into public.productsubcategories(categoryId,subCategoryName,subCategoryDescription) values ($1,$2,$3)',[categoryId,subCategoryName,subCategoryDescription]);
     res.json({'message': "data added "+ rows.rowCount});
     pool.end();
   } catch(err) {
@@ -38,7 +38,7 @@ productsRouter
   const {categoryId,subCategoryId,productName,price,points, productDescription} = req.body;
   try {
     const db =  await pool.connect();
-    const rows = await db.query('Insert into public.products(categoryId,subCategoryId,productName,price,points, productDescription) values ($1,$2,$3,$4,$5,$6)',[categoryId,subCategoryId,productName,price,points, productDescription]);
+    const rows = await pool.query('Insert into public.products(categoryId,subCategoryId,productName,price,points, productDescription) values ($1,$2,$3,$4,$5,$6)',[categoryId,subCategoryId,productName,price,points, productDescription]);
     res.json({'message': "data added "+ rows.rowCount});
     pool.end();
   } catch{
