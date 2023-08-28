@@ -7,7 +7,12 @@
     "start": "nodemon ./src/main.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "create-migrate": "sequelize-cli migration:generate --name ",
-    "migrate": "sequelize-cli db:migrate"
+    "migrate": "sequelize-cli db:migrate",
+    "generate-seed": "sequelize-cli seed:generate --name ",
+    "execute-seeds": "sequelize-cli db:seed:all",
+    "undo-seeds": "sequelize-cli db:seed:undo:all",
+    "execute-seed": " sequelize-cli db:seed --seed ",
+    "undo-seed": "sequelize-cli db:seed:undo --seed "
   },
   "author": "",
   "license": "ISC",
@@ -17,6 +22,7 @@
     "typescript": "^5.1.6"
   },
   "dependencies": {
+    "@types/cls-hooked": "^4.3.5",
     "@types/cors": "^2.8.13",
     "@types/db-migrate-base": "^0.0.10",
     "@types/db-migrate-pg": "^0.0.10",
@@ -25,9 +31,11 @@
     "@types/jsonwebtoken": "^9.0.2",
     "@types/node": "^20.5.0",
     "argon2": "^0.31.0",
+    "cls-hooked": "^4.2.2",
     "cors": "^2.8.5",
     "db-migrate": "^0.11.13",
     "db-migrate-pg": "^1.3.0",
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "helmet": "^7.0.0",
     "jsonwebtoken": "^9.0.1",
