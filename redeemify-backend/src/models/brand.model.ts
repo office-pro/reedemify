@@ -2,7 +2,6 @@ import {Sequelize, Model, DataTypes} from 'sequelize';
 export default (sequelize: Sequelize) => {
   class Brands extends Model {
     static associate(models: any) {
-      // Brands.belongsTo(models['Users']);
     }
   }
 
@@ -34,6 +33,8 @@ export default (sequelize: Sequelize) => {
   },{
     sequelize,
     modelName: 'Brands'
-  })
+  });
+
+  return Brands;
   
 }
