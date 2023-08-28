@@ -7,7 +7,12 @@
     "start": "nodemon ./src/main.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "create-migrate": "sequelize-cli migration:generate --name ",
-    "migrate": "sequelize-cli db:migrate"
+    "migrate": "sequelize-cli db:migrate",
+    "generate-seed": "sequelize-cli seed:generate --name ",
+    "execute-seeds": "sequelize-cli db:seed:all",
+    "undo-seeds": "sequelize-cli db:seed:undo:all",
+    "execute-seed": " sequelize-cli db:seed --seed ",
+    "undo-seed": "sequelize-cli db:seed:undo --seed "
   },
   "author": "",
   "license": "ISC",
