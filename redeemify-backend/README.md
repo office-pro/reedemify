@@ -6,6 +6,7 @@
 4) db-migrate up initialize
 5) npm run start
 
+<!-- https://stackoverflow.com/questions/68724866/cannot-install-with-npm-package-from-git -->
 
 <!-- prathamesh.mane@hotmail.com -->
 
