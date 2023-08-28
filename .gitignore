@@ -10,7 +10,7 @@ log.txt
 *.tgz
 
 .idea/
-.vscode/
+# .vscode/
 .sass-cache/
 .versions/
 coverage/
@@ -209,7 +209,7 @@ dist
 .tern-port
 
 # Stores VSCode versions used for testing VSCode extensions
-.vscode-test
+# .vscode-test
 
 # yarn v2
 .yarn/cache

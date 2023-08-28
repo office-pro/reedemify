@@ -1,23 +1,18 @@
-import { DataTypes, Model, Sequelize } from "sequelize";
+'use strict';
 
-export default (sequelize: Sequelize) => {
-  class User extends Model {
-    static Brands: any;
-    static Roles: any;
-    static associate (models: any) {
-      User.Brands = User.belongsTo(models['Brands'], {foreignKey: 'brandId'});
-      User.Roles = User.belongsTo(models['Roles'], {foreignKey: 'roleId'});
-    }
+const { DataTypes } = require('sequelize');
 
-    async createUser({brandId,roleId,firstName,lastName,mobileNo,email,password}: any) {
-      sequelize.transaction(async() => {
-        await User.create({brandId,roleId,firstName,lastName,mobileNo,email,password})
-      })
-    }
+/** @type {import('sequelize-cli').Migration} */
+module.exports = {
+  async up (queryInterface, Sequelize) {
+    /**
+     * Add altering commands here.
+     *
+     * Example:
+     * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
+     */
 
-
-  }
-  User.init({
+    await queryInterface.createTable('users', {
     userId: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
@@ -26,14 +21,26 @@ export default (sequelize: Sequelize) => {
     brandId: {
       type: DataTypes.INTEGER,
       validate: {
-        isInt: true
-      }
+        isInt: true,
+      },
+      references: {
+        model: "brands",
+        key: "brandId"
+      },
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE'
     },
     roleId: {
       type: DataTypes.INTEGER,
       validate: {
         isInt: true
-      }
+      },
+      references: {
+        model: 'roles',
+        key: 'roleId'
+      },
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE'
     },
     firstName: {
       type: DataTypes.STRING(100),
@@ -82,9 +89,17 @@ export default (sequelize: Sequelize) => {
     }
 
 
-  }, {
-    sequelize,
-    modelName: "User"
   });
-  return User;
-}
+  },
+
+  async down (queryInterface, Sequelize) {
+    /**
+     * Add reverting commands here.
+     *
+     * Example:
+     * await queryInterface.dropTable('users');
+     */
+
+    await queryInterface.dropTable('users');
+  }
+};
