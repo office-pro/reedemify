@@ -1,4 +1,12 @@
 const dbConfig = {
+    "localhost": {
+      "username": "postgres",
+      "password": "root",
+      "database": "myDb",
+      "host": "localhost",
+      "dialect": "postgres",
+      "driver": "tedious"
+    },
   "development": {
     "username": "dv_promo",
     "password": "dvpromo@123",
@@ -17,14 +25,22 @@ const dbConfig = {
     "password": null,
     "database": "database_test",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "postgres",
+    "dialectOptions": {
+      "encrypt": true,
+      "ssl":true
+    },
   },
   "production": {
     "username": "root",
     "password": null,
     "database": "database_production",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "postgres",
+    "dialectOptions": {
+      "encrypt": true,
+      "ssl":true
+    },
   }
 }
 

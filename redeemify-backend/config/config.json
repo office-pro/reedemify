@@ -1,4 +1,12 @@
 {
+  "localhost": {
+    "username": "postgres",
+    "password": "root",
+    "database": "myDb",
+    "host": "localhost",
+    "dialect": "postgres",
+    "driver": "tedious"
+  },
   "development": {
     "username": "dv_promo",
     "password": "dvpromo@123",
