@@ -1,17 +1,19 @@
-'use strict';
+import { Sequelize, Model, DataTypes } from 'sequelize';
+export default (sequelize: Sequelize) => {
+    class product extends Model {
+        static associate(models: any) {
+            product.belongsTo(models['productCategory'], {
+                foreignKey: "productCategoryId",
 
-const { DataTypes } = require('sequelize');
+            })
+            product.belongsTo(models['productSubCategory'], {
+                foreignKey: "productSubCategoryId",
 
-/** @type {import('sequelize-cli').Migration} */
-module.exports = {
-  async up (queryInterface, Sequelize) {
-    /**
-     * Add altering commands here.
-     *
-     * Example:
-     * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
-     */
-    await queryInterface.createTable('product', {
+            })
+        }
+    }
+
+    product.init({
         productId: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
@@ -42,7 +44,7 @@ module.exports = {
 
         },
         productImage: {
-            type: DataTypes.BLOB,
+            type: DataTypes.ARRAY,
             allowNull: false
         },
         productDesc: {
@@ -61,16 +63,11 @@ module.exports = {
             defaultValue: new Date()
         }
 
+    }, {
+        sequelize,
+        modelName: 'product'
     });
-  },
 
-  async down (queryInterface, Sequelize) {
-    /**
-     * Add reverting commands here.
-     *
-     * Example:
-     * await queryInterface.dropTable('users');
-     */
-    await queryInterface.dropTable('product');
-  }
-};
+    return product;
+
+}
