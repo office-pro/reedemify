@@ -1,29 +1,36 @@
 import {Sequelize, Model, DataTypes} from 'sequelize';
+
 export default (sequelize: Sequelize) => {
-  class Buckets extends Model {
+  class productCategory extends Model {
     static associate(models: any) {
-      Buckets.belongsTo(models['Brands'], {
-        foreignKey: "brandId"
-      })
+      // productCategory.belongsTo(models['Brands'], {
+      //   foreignKey: "brandId"
+      // })
     }
   }
 
-  Buckets.init({
-    bucketId: {
+  productCategory.init({
+    productCategoryId: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true
     },
-    brandId: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    bucketName: {
+    productCategoryName: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         len: {
-          args: [3,100],
+          args: [3, 100],
+          msg: "productCategoryName must be within 3 and 100 characters"
+        }
+      }
+    },
+    productCategoryDesc: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: {
+          args: [3,],
           msg: "bucketName must be within 3 and 100 characters"
         }
       }
