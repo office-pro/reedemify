@@ -8,13 +8,11 @@ import Database from './database';
 import environment from './config/environment';
 import * as models from './models/index'
 
+
 (async() => {
     try {
         const db =new Database(environment.nodeEnv,dbConfig);
-
         await db.connect()
-
-        console.log(models)
     } catch (err) {
         console.log(err)
     }
@@ -66,6 +64,6 @@ app.use(express.json());
 app.use('/', router);
 
 
-app.listen(3000, () => {
-  console.log('server is running on port 3000');
+app.listen(environment.port, () => {
+  console.log('server is running on port '+environment.port);
 })
