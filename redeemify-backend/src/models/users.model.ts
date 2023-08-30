@@ -9,12 +9,21 @@ export default (sequelize: Sequelize) => {
       User.Roles = User.belongsTo(models['Roles'], {foreignKey: 'roleId'});
     }
 
-    async createUser({brandId,roleId,firstName,lastName,mobileNo,email,password}: any) {
+    static createUser({brandId,roleId,firstName,lastName,mobileNo,email,password}: any) {
       sequelize.transaction(async() => {
         await User.create({brandId,roleId,firstName,lastName,mobileNo,email,password})
       })
     }
 
+    static deleteUsers(userId: any) {
+       sequelize.transaction(async() => {
+          await User.destroy({
+            where: {
+              'userId': userId
+            }
+          })
+       })
+    }
 
   }
   User.init({
