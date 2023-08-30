@@ -6,52 +6,52 @@
   "scripts": {
     "start": "set NODE_ENV=localhost&&set port=3000&& nodemon ./src/main.ts",
     "start-dev": "set NODE_ENV=development&&set port=4000&& nodemon ./src/main.ts",
+    "build-dev": "npm run build:development",
     "start-test": "set NODE_ENV=test&&set port=5000&& nodemon ./src/main.ts",
     "start-prod": "set NODE_ENV=production&&set port=6000&& nodemon ./src/main.ts",
-    
     "test": "echo \"Error: no test specified\" && exit 1",
-    
     "create-migrate": "sequelize-cli migration:generate --config ./config/config.json --env localhost --name ",
     "create-migrate-dev": "sequelize-cli migration:generate --config ./config/config.json --env development --name ",
     "create-migrate-test": "sequelize-cli migration:generate --config ./config/config.json --env test --name ",
     "create-migrate-prod": "sequelize-cli migration:generate --config ./config/config.json --env production --name ",
-    
     "migrate": "sequelize-cli db:migrate --config ./config/config.json --env localhost",
     "migrate-dev": "sequelize-cli db:migrate --config ./config/config.json --env development",
     "migrate-test": "sequelize-cli db:migrate --config ./config/config.json --env test",
     "migrate-prod": "sequelize-cli db:migrate --config ./config/config.json --env production",
-
     "generate-seed": "sequelize-cli seed:generate  --config ./config/config.json --env localhost --name ",
     "generate-seed-dev": "sequelize-cli seed:generate  --config ./config/config.json --env development --name ",
     "generate-seed-test": "sequelize-cli seed:generate  --config ./config/config.json --env test --name ",
     "generate-seed-prod": "sequelize-cli seed:generate  --config ./config/config.json --env production --name ",
-    
     "execute-seeds": "sequelize-cli db:seed:all  --config ./config/config.json --env localhost",
     "execute-seeds-dev": "sequelize-cli db:seed:all  --config ./config/config.json --env development",
     "execute-seeds-test": "sequelize-cli db:seed:all  --config ./config/config.json --env test",
     "execute-seeds-prod": "sequelize-cli db:seed:all  --config ./config/config.json --env production",
-    
     "undo-seeds": "sequelize-cli db:migrate:undo:all --config ./config/config.json --env localhost",
     "undo-seeds-dev": "sequelize-cli db:seed:undo:all --config ./config/config.json --env development",
     "undo-seeds-test": "sequelize-cli db:seed:undo:all --config ./config/config.json --env test",
     "undo-seeds-production": "sequelize-cli db:seed:undo:all --config ./config/config.json --env production",
-    
     "execute-seed": " sequelize-cli db:seed  --config ./config/config.json --env localhost --seed ",
     "execute-seed-dev": " sequelize-cli db:seed  --config ./config/config.json --env development --seed ",
     "execute-seed-test": " sequelize-cli db:seed  --config ./config/config.json --env test --seed ",
     "execute-seed-prod": " sequelize-cli db:seed  --config ./config/config.json --env prod --seed ",
-
     "undo-seed": "sequelize-cli db:seed:undo --config ./config/config.json --env localhost  --seed ",
     "undo-seed-dev": "sequelize-cli db:seed:undo --config ./config/config.json --env development  --seed ",
     "undo-seed-test": "sequelize-cli db:seed:undo --config ./config/config.json --env test  --seed ",
-    "undo-seed-prod": "sequelize-cli db:seed:undo --config ./config/config.json --env production  --seed "
+    "undo-seed-prod": "sequelize-cli db:seed:undo --config ./config/config.json --env production  --seed ",
+    "build:development": "webpack --config webpack.config.js",
+    "build:production": "cross-env NODE_ENV=production webpack --config webpack.config.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@types/pg": "^8.10.2",
+    "cross-env": "^7.0.3",
+    "dotenv-webpack": "^8.0.1",
+    "ts-loader": "^9.4.4",
     "ts-node": "^10.9.1",
-    "typescript": "^5.1.6"
+    "typescript": "^5.1.6",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
   },
   "dependencies": {
     "@types/cls-hooked": "^4.3.5",
@@ -71,8 +71,10 @@
     "express": "^4.18.2",
     "helmet": "^7.0.0",
     "jsonwebtoken": "^9.0.1",
+    "node-polyfill-webpack-plugin": "^2.0.1",
     "nodemon": "^3.0.1",
     "pg": "^8.11.3",
+    "pg-hstore": "^2.3.4",
     "pg-promise": "^11.5.3",
     "sequelize": "^6.32.1",
     "sequelize-cli": "^6.6.1"

@@ -6,8 +6,7 @@ import router from './Routes/routes';
 import dbConfig from './config/database';
 import Database from './database';
 import environment from './config/environment';
-import * as models from './models/index'
-
+import * as models from './models/index';
 
 (async() => {
     try {
