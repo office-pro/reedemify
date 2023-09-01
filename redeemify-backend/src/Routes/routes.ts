@@ -9,13 +9,12 @@ import environment from '../config/environment';
 const router = express.Router();
 
 router.get('', (req: Request, res: Response) => {
-  res.send(JSON.stringify(environment));
-  res.send("hello shashi");
+  res.send("hello from nodejs");
 })
 
 // router.use('/api/auth', authRouter);
 // router.use('/api/products', productsRouter);
-// router.use('/api/users', userRouter);
+router.use('/api/users', userRouter);
 // router.use('/api/wallet', WalletRouter);
 
 export default router;
