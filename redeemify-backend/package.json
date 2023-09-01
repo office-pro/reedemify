@@ -4,7 +4,7 @@
   "description": "",
   "main": "./src/main.ts",
   "scripts": {
-    "start": "set NODE_ENV=localhost&&set port=3000&& nodemon ./src/main.ts",
+    "start": "nodemon ./src/main.ts",
     "start-dev": "set NODE_ENV=development&&set port=4000&& nodemon ./src/main.ts",
     "build-dev": "npm run build:development",
     "start-test": "set NODE_ENV=test&&set port=5000&& nodemon ./src/main.ts",
