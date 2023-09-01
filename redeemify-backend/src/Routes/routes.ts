@@ -8,7 +8,7 @@ import WalletRouter from './wallet.routes';
 const router = express.Router();
 
 router.get('', (req: Request, res: Response) => {
-  res.send("hello");
+  res.send("hello shashi");
 })
 
 // router.use('/api/auth', authRouter);
