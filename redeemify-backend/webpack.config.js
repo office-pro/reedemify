@@ -10,14 +10,21 @@ module.exports = (env) => {
     mode: "development",
     output: {
       filename: 'main.js',
+      clean: true,
+      publicPath: '/',
       path: path.resolve(__dirname, 'dist'),
     },
     target: "node",
     resolve: {
-      extensions: ['.ts', '.js'],
+      extensions: [ '.js','.ts',],
     },
     module: {
       rules: [
+        {
+          test: /\.js$/,
+          use: 'babel-loader',
+          exclude: /node_modules/,
+        },
         {
           test: /\.ts$/,
           use: 'ts-loader',
@@ -26,7 +33,7 @@ module.exports = (env) => {
       ],
     },
     plugins: [
-      new NodePolyfillPlugin(),
+      // new NodePolyfillPlugin(),
       new Dotenv({
         path: `.${environment}.env`,
       }),
