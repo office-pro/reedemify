@@ -1,23 +1,22 @@
 import { DataTypes, Model, Sequelize } from "sequelize";
+import * as models from "./index";
 
 export default (sequelize: Sequelize) => {
-  class User extends Model {
-    static Brands: any;
-    static Roles: any;
+  class users extends Model {
     static associate (models: any) {
-      User.Brands = User.belongsTo(models['Brands'], {foreignKey: 'brandId'});
-      User.Roles = User.belongsTo(models['Roles'], {foreignKey: 'roleId'});
+      users.belongsTo(models['brands'], {foreignKey: 'brandId'});
+      users.belongsTo(models['roles'], {foreignKey: 'roleId'});
     }
 
     static createUser({brandId,roleId,firstName,lastName,mobileNo,email,password}: any) {
       sequelize.transaction(async() => {
-        await User.create({brandId,roleId,firstName,lastName,mobileNo,email,password})
+        await users.create({brandId,roleId,firstName,lastName,mobileNo,email,password})
       })
     }
 
     static deleteUsers(userId: any) {
        sequelize.transaction(async() => {
-          await User.destroy({
+          await users.destroy({
             where: {
               'userId': userId
             }
@@ -25,8 +24,28 @@ export default (sequelize: Sequelize) => {
        })
     }
 
+    static getUsers() {
+      return sequelize.transaction(async() => {
+        return users.findAll({
+          include: [
+            { 
+              model: models.default.brands,
+              attributes: ['brandName','brandId']
+            },
+            {
+              model: models.default.roles,
+              attributes: ['roleId','roleName']
+            }
+          ],
+          attributes: {
+            exclude: ['password','createdAt','updatedAt']
+          }
+        })
+      })
+    }
+
   }
-  User.init({
+  users.init({
     userId: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
@@ -93,7 +112,7 @@ export default (sequelize: Sequelize) => {
 
   }, {
     sequelize,
-    modelName: "User"
+    modelName: "users"
   });
-  return User;
+  return users;
 }
