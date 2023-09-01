@@ -4,10 +4,12 @@ import productsRouter from './product.routes';
 import userRouter from './user.routes';
 import authRouter from './auth.routes';
 import WalletRouter from './wallet.routes';
+import environment from '../config/environment';
 
 const router = express.Router();
 
 router.get('', (req: Request, res: Response) => {
+  res.send(JSON.stringify(environment));
   res.send("hello shashi");
 })
 
