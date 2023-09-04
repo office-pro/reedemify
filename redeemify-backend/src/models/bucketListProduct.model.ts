@@ -2,10 +2,10 @@ import { Sequelize, Model, DataTypes } from 'sequelize';
 export default (sequelize: Sequelize) => {
     class bucketListProduct extends Model {
         static associate(models: any) {
-            bucketListProduct.belongsTo(models['bucket'], {
-                foreignKey: "bucketId",
+            // bucketListProduct.belongsTo(models['bucket'], {
+            //     foreignKey: "bucketId",
 
-            })
+            // })
             bucketListProduct.belongsTo(models['product'], {
                 foreignKey: "productId",
 
