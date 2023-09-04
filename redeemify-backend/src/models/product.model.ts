@@ -1,15 +1,29 @@
 import { Sequelize, Model, DataTypes } from 'sequelize';
+import * as models from './index';
 export default (sequelize: Sequelize) => {
     class product extends Model {
         static associate(models: any) {
             product.belongsTo(models['productCategory'], {
                 foreignKey: "productCategoryId",
-
             })
             product.belongsTo(models['productSubCategory'], {
                 foreignKey: "productSubCategoryId",
-
             })
+        }
+
+        static async getAllProducts() {
+
+           return sequelize.transaction(async() => {
+             return product.findAll({
+                include: [{
+                    model: models?.default?.productCategory,
+                    attributes: ['productCategoryId', 'productCategoryName','productCategoryDesc']
+                }, {
+                    model: models?.default?.productSubCategory,
+                    attributes: ['productSubCategoryId', 'productSubCategoryName', 'productSubCategoryDesc']
+                }]
+            });
+           });
         }
     }
 
@@ -44,8 +58,9 @@ export default (sequelize: Sequelize) => {
 
         },
         productImage: {
-            type: DataTypes.ARRAY,
-            allowNull: false
+            type: DataTypes.ARRAY(DataTypes.STRING),
+            allowNull: false,
+            defaultValue: []
         },
         productDesc: {
             type: DataTypes.STRING,

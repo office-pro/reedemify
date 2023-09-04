@@ -6,6 +6,7 @@ export default (sequelize: Sequelize) => {
     static associate(models: any) {
       // brands.belongsTo(models?.users, {foreignKey: 'brandId'});
       brands.hasMany(models?.users, {foreignKey: 'brandId'});
+      brands.hasOne(models?.wallet)
     }
 
     static buildDefaultValues({balance,limit,brandCss}: any) {
@@ -45,6 +46,7 @@ export default (sequelize: Sequelize) => {
       }
       let promise = new Promise((resolve,reject) => {
         brandsArr.forEach((brand: any) =>{
+
           brands.createBrand(brand).then((data) => {
             dataObj.added.push(brand);
           }, (error) => {

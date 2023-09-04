@@ -1,32 +1,22 @@
 import { Sequelize, Model, DataTypes } from 'sequelize';
 export default (sequelize: Sequelize) => {
-    class productTransactionHistory extends Model {
+    class wallet extends Model {
         static associate(models: any) {
-            productTransactionHistory.belongsTo(models['product'], {
-                foreignKey: "productId",
-
-            })
-            productTransactionHistory.belongsTo(models['user'], {
+            wallet.belongsTo(models['users'], {
                 foreignKey: "userId",
-
             })
-            productTransactionHistory.belongsTo(models['brand'], {
+            wallet.belongsTo(models['brands'], {
                 foreignKey: "brandId",
-
             })
 
         }
     }
 
-    productTransactionHistory.init({
-        Id: {
+    wallet.init({
+        walletId: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true
-        },
-        productId: {
-            type: DataTypes.INTEGER,
-            allowNull: false
         },
         userId: {
             type: DataTypes.INTEGER,
@@ -39,14 +29,15 @@ export default (sequelize: Sequelize) => {
         points: {
             type: DataTypes.INTEGER,
             allowNull: false,
+            defaultValue: 0
         }
     },
         {
             sequelize,
-            modelName: 'productTransactionHistory',
-            tableName: 'productTransactionHistory'
+            modelName: 'wallet',
+            tableName: 'wallet'
         });
 
-    return productTransactionHistory;
+    return wallet;
 
 }

@@ -6,6 +6,7 @@ export default (sequelize: Sequelize) => {
     static associate (models: any) {
       users.belongsTo(models['brands'], {foreignKey: 'brandId'});
       users.belongsTo(models['roles'], {foreignKey: 'roleId'});
+      users.hasOne(models['wallet']);
     }
 
     static createUser({brandId,roleId,firstName,lastName,mobileNo,email,password}: any) {
