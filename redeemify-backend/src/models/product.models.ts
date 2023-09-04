@@ -65,7 +65,8 @@ export default (sequelize: Sequelize) => {
 
     }, {
         sequelize,
-        modelName: 'product'
+        modelName: 'product',
+        tableName: 'product'
     });
 
     return product;

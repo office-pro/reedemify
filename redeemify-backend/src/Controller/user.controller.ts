@@ -28,5 +28,41 @@ export class UserController {
   
   }
 
+  static async getBrandUsers(req: Request, res: Response) {
+
+    (models?.default as any)?.["brands"].findAllBrands()
+                                       .then((data: any) => {
+                                        res.json(data)
+                                      });
+
+  
+  }
+
+  static async createBrand(req: Request, res: Response) {
+
+    (models?.default as any)?.["brands"].createBrand(req?.body)
+                                       .then((data: any) => {
+                                        res.json(data)
+                                      }, () => {
+                                        res.json({errorMessage: "Data already exist"})
+                                      });
+
+  
+  }
+
+  static async createBrands(req: Request, res: Response) {
+
+    (models?.default as any)?.["brands"].createBrands(req?.body)
+                                       .then((data: any) => {
+                                        res.json(data)
+                                      }, (err: any) => {
+                                        res.json({errorMessage: "duplicate entry present"})
+                                      });
+
+  
+  }
+
+  
+
 
 }

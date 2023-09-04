@@ -35,7 +35,8 @@ export default (sequelize: Sequelize) => {
     },
         {
             sequelize,
-            modelName: 'wallet'
+            modelName: 'wallet',
+            tableName: 'wallet'
         });
 
     return wallet;
