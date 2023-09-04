@@ -39,7 +39,8 @@ export default (sequelize: Sequelize) => {
     },
         {
             sequelize,
-            modelName: 'productTransaction'
+            modelName: 'productTransaction',
+            tableName: 'productTransaction'
         });
 
     return productTransaction;

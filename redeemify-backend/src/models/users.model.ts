@@ -24,6 +24,29 @@ export default (sequelize: Sequelize) => {
        })
     }
 
+    static getUserById(userId: number) {
+      return sequelize.transaction(async() => {
+        return users.findOne({
+          where: {
+            'userId': userId
+          },
+          include: [
+            { 
+              model: models.default.brands,
+              attributes: ['brandName','brandId']
+            },
+            {
+              model: models.default.roles,
+              attributes: ['roleId','roleName']
+            }
+          ],
+          attributes: {
+            exclude: ['password','createdAt','updatedAt']
+          }
+        })
+      })
+    }
+
     static getUsers() {
       return sequelize.transaction(async() => {
         return users.findAll({
@@ -112,7 +135,8 @@ export default (sequelize: Sequelize) => {
 
   }, {
     sequelize,
-    modelName: "users"
+    modelName: "users",
+    tableName: "users"
   });
   return users;
 }

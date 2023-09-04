@@ -35,7 +35,8 @@ export default (sequelize: Sequelize) => {
     },
         {
             sequelize,
-            modelName: 'bucketListProduct'
+            modelName: 'bucketListProduct',
+            tableName: 'bucketListProduct'
         });
 
     return bucketListProduct;
