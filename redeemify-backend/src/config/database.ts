@@ -1,17 +1,19 @@
+import environment from "./environment";
+
 const dbConfig = {
     "localhost": {
-      "username": "postgres",
-      "password": "root",
+      "username": environment.dbUsername,
+      "password": environment.dbPassword,
       "database": "myDb",
-      "host": "localhost",
+      "host": environment.dbHost,
       "dialect": "postgres",
       "driver": "tedious"
     },
   "development": {
-    "username": "dv_promo",
-    "password": "dvpromo@123",
+    "username": environment.dbUsername,
+    "password": environment.dbPassword,
     "database": "myDb",
-    "host": "postgres-dv.postgres.database.azure.com",
+    "host": environment.dbHost,
     "dialect": "postgres",
     "dialectOptions": {
       "encrypt": true,
@@ -21,10 +23,10 @@ const dbConfig = {
     
   },
   "test": {
-    "username": "root",
-    "password": null,
+    "username": environment.dbUsername,
+    "password": environment.dbPassword,
     "database": "database_test",
-    "host": "127.0.0.1",
+    "host": environment.dbHost,
     "dialect": "postgres",
     "dialectOptions": {
       "encrypt": true,
@@ -32,10 +34,10 @@ const dbConfig = {
     },
   },
   "production": {
-    "username": "root",
-    "password": null,
+    "username": environment.dbUsername,
+    "password": environment.dbPassword,
     "database": "database_production",
-    "host": "127.0.0.1",
+    "host": environment.dbHost,
     "dialect": "postgres",
     "dialectOptions": {
       "encrypt": true,

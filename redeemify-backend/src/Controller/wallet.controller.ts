@@ -3,7 +3,7 @@ import pool from "../static/db";
 
 export class WalletController {
 
-    // static async add(request: Request, response: Response) {
+    static async add(request: Request, response: Response) {
 
     //     const { userId, salesAmount, walletPoints } = request.body;
 
@@ -29,9 +29,9 @@ export class WalletController {
     //         response.status(500).json({ error: "Internal Server error" })
     //     }
 
-    // }
+    }
 
-    // static async delete(req: Request, res: Response) {
+    static async delete(req: Request, res: Response) {
     //     const { walletId } = req.body;
     //     try {
     //         const db = await pool.connect();
@@ -58,5 +58,5 @@ export class WalletController {
 
     //     }
 
-    // }
+    }
 }

@@ -1,11 +1,12 @@
 import {Sequelize, Model, DataTypes} from 'sequelize';
 export default (sequelize: Sequelize) => {
-  class Brands extends Model {
+  class brands extends Model {
     static associate(models: any) {
+      // brands.belongsTo(models?.users, {foreignKey: 'brandId'});
     }
   }
 
-  Brands.init({
+  brands.init({
     brandId: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
@@ -32,9 +33,9 @@ export default (sequelize: Sequelize) => {
 
   },{
     sequelize,
-    modelName: 'Brands'
+    modelName: 'brands'
   });
 
-  return Brands;
+  return brands;
   
 }
