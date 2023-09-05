@@ -42,7 +42,8 @@ export default (sequelize: Sequelize) => {
 
     }, {
         sequelize,
-        modelName: 'productSubCategory'
+        modelName: 'productSubCategory',
+        tableName: 'productSubCategory'
     });
 
     return productSubCategory;

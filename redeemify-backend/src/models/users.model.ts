@@ -6,6 +6,7 @@ export default (sequelize: Sequelize) => {
     static associate (models: any) {
       users.belongsTo(models['brands'], {foreignKey: 'brandId'});
       users.belongsTo(models['roles'], {foreignKey: 'roleId'});
+      users.hasOne(models['wallet']);
     }
 
     static createUser({brandId,roleId,firstName,lastName,mobileNo,email,password}: any) {
@@ -22,6 +23,29 @@ export default (sequelize: Sequelize) => {
             }
           })
        })
+    }
+
+    static getUserById(userId: number) {
+      return sequelize.transaction(async() => {
+        return users.findOne({
+          where: {
+            'userId': userId
+          },
+          include: [
+            { 
+              model: models.default.brands,
+              attributes: ['brandName','brandId']
+            },
+            {
+              model: models.default.roles,
+              attributes: ['roleId','roleName']
+            }
+          ],
+          attributes: {
+            exclude: ['password','createdAt','updatedAt']
+          }
+        })
+      })
     }
 
     static getUsers() {
@@ -112,7 +136,8 @@ export default (sequelize: Sequelize) => {
 
   }, {
     sequelize,
-    modelName: "users"
+    modelName: "users",
+    tableName: "users"
   });
   return users;
 }

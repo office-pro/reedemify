@@ -40,7 +40,8 @@ export default (sequelize: Sequelize) => {
 
     }, {
         sequelize,
-        modelName: 'productCategory'
+        modelName: 'productCategory',
+        tableName: 'productCategory'
     });
 
     return productCategory;

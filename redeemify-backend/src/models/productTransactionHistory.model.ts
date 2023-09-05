@@ -6,11 +6,11 @@ export default (sequelize: Sequelize) => {
                 foreignKey: "productId",
 
             })
-            productTransactionHistory.belongsTo(models['user'], {
+            productTransactionHistory.belongsTo(models['users'], {
                 foreignKey: "userId",
 
             })
-            productTransactionHistory.belongsTo(models['brand'], {
+            productTransactionHistory.belongsTo(models['brands'], {
                 foreignKey: "brandId",
 
             })
@@ -43,7 +43,8 @@ export default (sequelize: Sequelize) => {
     },
         {
             sequelize,
-            modelName: 'productTransactionHistory'
+            modelName: 'productTransactionHistory',
+            tableName: 'productTransactionHistory'
         });
 
     return productTransactionHistory;

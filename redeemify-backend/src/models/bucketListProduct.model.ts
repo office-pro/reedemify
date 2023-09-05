@@ -1,47 +1,44 @@
 import { Sequelize, Model, DataTypes } from 'sequelize';
 export default (sequelize: Sequelize) => {
-    class productTransaction extends Model {
+    class bucketListProduct extends Model {
         static associate(models: any) {
-            productTransaction.belongsTo(models['product'], {
-                foreignKey: "productId",
+            // bucketListProduct.belongsTo(models['bucket'], {
+            //     foreignKey: "bucketId",
 
-            })
-            productTransaction.belongsTo(models['productTransactionHistory'], {
-                foreignKey: "Id",
+            // })
+            bucketListProduct.belongsTo(models['product'], {
+                foreignKey: "productId",
 
             })
 
         }
     }
 
-    productTransaction.init({
-        ptId: {
+    bucketListProduct.init({
+        Id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true
+        },
+        bucketId: {
+            type: DataTypes.INTEGER,
+            allowNull: false
         },
         productId: {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        Id: {
-            type: DataTypes.INTEGER,
-            allowNull: false
-        },
         points: {
-            type: DataTypes.INTEGER,
-            allowNull: false
-        },
-        sumOfPoints: {
             type: DataTypes.INTEGER,
             allowNull: false,
         }
     },
         {
             sequelize,
-            modelName: 'productTransaction'
+            modelName: 'bucketListProduct',
+            tableName: 'bucketListProduct'
         });
 
-    return productTransaction;
+    return bucketListProduct;
 
 }

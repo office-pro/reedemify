@@ -13,7 +13,7 @@ router.get('', (req: Request, res: Response) => {
 })
 
 // router.use('/api/auth', authRouter);
-// router.use('/api/products', productsRouter);
+router.use('/api/products', productsRouter);
 router.use('/api/users', userRouter);
 // router.use('/api/wallet', WalletRouter);
 

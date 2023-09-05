@@ -2,13 +2,11 @@ import { Sequelize, Model, DataTypes } from 'sequelize';
 export default (sequelize: Sequelize) => {
     class wallet extends Model {
         static associate(models: any) {
-            wallet.belongsTo(models['user'], {
+            wallet.belongsTo(models['users'], {
                 foreignKey: "userId",
-
             })
-            wallet.belongsTo(models['brand'], {
+            wallet.belongsTo(models['brands'], {
                 foreignKey: "brandId",
-
             })
 
         }
@@ -31,11 +29,13 @@ export default (sequelize: Sequelize) => {
         points: {
             type: DataTypes.INTEGER,
             allowNull: false,
+            defaultValue: 0
         }
     },
         {
             sequelize,
-            modelName: 'wallet'
+            modelName: 'wallet',
+            tableName: 'wallet'
         });
 
     return wallet;
