@@ -7,11 +7,16 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import {MatTableModule} from "@angular/material/table";
+import {MatSortModule} from '@angular/material/sort';
+import { UserService } from './services/user.service';
+import { SharedModule } from './shared-components/shared.modules';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, 
+  HttpClientModule, MatTableModule, MatSortModule, SharedModule],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, UserService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
