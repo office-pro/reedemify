@@ -1,0 +1,26 @@
+<ion-content>
+  <header-page></header-page>
+  
+  <ion-grid class="brands--grid">
+    <ion-row class="brands--rows">
+      <ion-col size="3" class="brands--cols" *ngFor="let brand of brands">
+        <ion-card color="light" class="brands-card" (click)="goToBrandDetails(brand)">
+          <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+          <ion-card-header>
+            <ion-card-title>{{brand.brandName}}</ion-card-title>
+          </ion-card-header>
+
+          <!-- <ion-card-content>
+           
+          </ion-card-content> -->
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <mat-paginator class="brands--paginator" [length]="100"
+            [pageSize]="10"
+            [pageSizeOptions]="[5, 10, 25, 100]"
+            aria-label="Select page">
+    </mat-paginator>
+  </ion-grid>
+</ion-content>
