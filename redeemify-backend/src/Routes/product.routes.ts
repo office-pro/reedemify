@@ -8,6 +8,7 @@ const productsRouter = express.Router();
 
 productsRouter
 .get('/', ProductController.getProducts)
+.get('/getProductCategories', ProductController.getProductCategory)
 // .post('/createProductCategories', async(req:Request, res: Response) => {
 //   console.log(req.body);
 //   const {categoryName,categoryDescription} = req.body;

@@ -31,6 +31,15 @@ module.exports = {
         mobileNo: 9900887766,
         email: "benny#lauda.com",
         password: "benny@123",
+      },
+      {
+        brandId: 3,
+        roleId: 3,
+        firstName: "angur",
+        lastName: "tanmay",
+        mobileNo: 9900777660,
+        email: "angurlaudakatanmay.com",
+        password: "benny@123",
       }
     ], {});
   },

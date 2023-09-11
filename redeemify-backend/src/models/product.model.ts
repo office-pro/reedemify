@@ -14,14 +14,16 @@ export default (sequelize: Sequelize) => {
         static async getAllProducts() {
 
            return sequelize.transaction(async() => {
-             return product.findAll({
+             return await product.findAll({
                 include: [{
                     model: models?.default?.productCategory,
                     attributes: ['productCategoryId', 'productCategoryName','productCategoryDesc']
-                }, {
+                }, 
+                {
                     model: models?.default?.productSubCategory,
                     attributes: ['productSubCategoryId', 'productSubCategoryName', 'productSubCategoryDesc']
-                }]
+                }
+                ]
             });
            });
         }
@@ -53,9 +55,7 @@ export default (sequelize: Sequelize) => {
         },
         productPrice: {
             type: DataTypes.INTEGER,
-            allowNull: false,
-
-
+            allowNull: false
         },
         productImage: {
             type: DataTypes.ARRAY(DataTypes.STRING),

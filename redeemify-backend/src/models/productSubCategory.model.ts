@@ -5,6 +5,8 @@ export default (sequelize: Sequelize) => {
             productSubCategory.belongsTo(models['productCategory'], {
                 foreignKey: "productCategoryId"
             })
+
+            // productSubCategory.hasMany(models['product'])
         }
     }
 
