@@ -11,8 +11,32 @@ export class ProductController {
                                       });
 
     // res.json("data")
+  }
 
-  
+  static async createProducts(req: Request, res: Response) {
+
+  }
+
+  static async createProductCategories(req: Request, res: Response) {
+     (models?.default as any)?.["product"].getAllProducts()
+                                       .then((data: any) => {
+                                        res.json(data)
+                                      });
+  }
+
+  static async getProductCategory(req: Request, res: Response) {
+    (models?.default as any)?.["productCategory"].getProductCategories()
+                                       .then((data: any) => {
+                                        res.json(data)
+                                      });
+  }
+
+  static async createProductSubCategory(req: Request, res: Response) {
+    
+  }
+
+  static async getProductSubCategory(req: Request, res: Response) {
+    
   }
 
 }

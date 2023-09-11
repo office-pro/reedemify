@@ -1,7 +1,55 @@
 import { Sequelize, Model, DataTypes } from 'sequelize';
+import * as models from './index';
 export default (sequelize: Sequelize) => {
     class productCategory extends Model {
         static associate(models: any) {
+            productCategory.hasMany(models?.product, {
+                foreignKey: 'productCategoryId'
+            });
+
+            productCategory.hasMany(models?.productSubCategory, {
+                foreignKey: 'productCategoryId'
+            });
+          
+        }
+
+        static async getProductCategories() {
+             return sequelize.transaction(async () => {
+
+              
+                return productCategory.findAll({
+                    include: [
+                        {
+                            model: models.default.product
+                        },
+                        {
+                            model: models.default.productSubCategory
+                        }
+                    ]
+                })
+
+                          
+            })
+        }
+
+        static async createProductCategories(productCategories: Array<any>) {
+            let duplicateCategories = [];
+            return sequelize.transaction(async () => {
+
+              productCategories.map(async ({productCategoryName,productCategoryDesc}: any) => {
+                const [product,created] = await productCategory.findOrCreate({
+                    where: {productCategoryName,productCategoryDesc}
+                })
+
+                if(!created) {
+                  console.log(product)
+                } else {
+                  console.log(created)
+                }
+                
+              })  
+              
+            })
         }
     }
 
@@ -32,6 +80,11 @@ export default (sequelize: Sequelize) => {
             }
         },
         createdAt: {
+            type: DataTypes.DATE,
+            allowNull: false,
+            defaultValue : new Date()
+        },
+        updatedAt: {
             type: DataTypes.DATE,
             allowNull: false,
             defaultValue : new Date()

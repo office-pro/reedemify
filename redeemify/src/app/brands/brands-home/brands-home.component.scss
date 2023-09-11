@@ -1,0 +1,19 @@
+.brands {
+  &--grid {
+    height: calc(100% - 56px);
+    padding: 0px;
+  }
+
+  &--rows {
+    height: calc(100% - 56px);
+  }
+
+  &--cols {
+    height: calc(100% / 2);
+    display: flex;
+  }
+
+  &--paginator {
+    width: 100%;
+  }
+}
