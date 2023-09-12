@@ -1,4 +1,4 @@
-import { Sequelize, Model, DataTypes } from 'sequelize';
+import { Sequelize, Model, DataTypes, Op } from 'sequelize';
 import * as models from './index';
 export default (sequelize: Sequelize) => {
     class productCategory extends Model {
@@ -13,10 +13,8 @@ export default (sequelize: Sequelize) => {
           
         }
 
-        static async getProductCategories() {
-             return sequelize.transaction(async () => {
-
-              
+        static async getProductCategories(conditions: any = {}) {
+            return sequelize.transaction(async () => {
                 return productCategory.findAll({
                     include: [
                         {
@@ -25,30 +23,33 @@ export default (sequelize: Sequelize) => {
                         {
                             model: models.default.productSubCategory
                         }
-                    ]
-                })
-
-                          
+                    ],
+                    ...conditions
+                })    
             })
         }
 
-        static async createProductCategories(productCategories: Array<any>) {
-            let duplicateCategories = [];
+        static async deleteProductCategories(productCategoriesIds: Array<number>,conditions: any = {}) {
             return sequelize.transaction(async () => {
+                return productCategory.destroy({
+                    where: {
+                      productCategoryId: {
+                        [Op.in]: productCategoriesIds
+                      } 
+                    },
+                    ...conditions
+                })    
+            })
+        }
 
-              productCategories.map(async ({productCategoryName,productCategoryDesc}: any) => {
-                const [product,created] = await productCategory.findOrCreate({
-                    where: {productCategoryName,productCategoryDesc}
-                })
-
-                if(!created) {
-                  console.log(product)
-                } else {
-                  console.log(created)
-                }
-                
-              })  
-              
+        static async createProductCategories(productCategories: Array<any>, conditions: any = {}) {
+            return sequelize.transaction(async () => {
+              return  productCategory.bulkCreate(productCategories, {
+                fields:['productCategoryName','productCategoryDesc'] ,
+                updateOnDuplicate: ['productCategoryName'],
+                ignoreDuplicates: false,
+                ...conditions
+              })
             })
         }
     }
@@ -87,14 +88,16 @@ export default (sequelize: Sequelize) => {
         updatedAt: {
             type: DataTypes.DATE,
             allowNull: false,
-            defaultValue : new Date()
+            defaultValue : Sequelize.literal("CURRENT_TIMESTAMP"),
+            onUpdate: Sequelize.literal("CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP") as unknown as string
         },
        
 
     }, {
         sequelize,
         modelName: 'productCategory',
-        tableName: 'productCategory'
+        tableName: 'productCategory',
+        timestamps: true
     });
 
     return productCategory;

@@ -18,9 +18,9 @@ export class ProductController {
   }
 
   static async createProductCategories(req: Request, res: Response) {
-     (models?.default as any)?.["product"].getAllProducts()
-                                       .then((data: any) => {
-                                        res.json(data)
+     (models?.default as any)?.["productCategory"].createProductCategories(req.body)
+                                      .then((data: any) => {
+                                         res.json({"message": "data added sucessfully"})
                                       });
   }
 
