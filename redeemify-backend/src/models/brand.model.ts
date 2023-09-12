@@ -40,28 +40,11 @@ export default (sequelize: Sequelize) => {
     }
 
     static createBrands(brandsArr: Array<{brandName: string,balance: any,limit: any,brandCss: any}>) {
-      let dataObj: any = {
-        added: [],
-        rejected: []
-      }
-      let promise = new Promise((resolve,reject) => {
-        brandsArr.forEach((brand: any) =>{
-
-          brands.createBrand(brand).then((data) => {
-            dataObj.added.push(brand);
-          }, (error) => {
-            dataObj.rejected.push(brand)
-          })
-        })
-        if(dataObj.added.length > 0) {
-          resolve(dataObj);
-        } else {
-          reject(dataObj);
-        }
-        
-      })
-
-      return promise;
+      return sequelize.transaction(async() => {
+         return brands.bulkCreate(brandsArr,{
+          updateOnDuplicate: ['brandName']
+         })
+      });
     }
 
     static findAllBrands() {
