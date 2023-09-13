@@ -1,5 +1,6 @@
 import { Sequelize, Model, DataTypes, Op } from 'sequelize';
 import * as models from './index';
+import { StaticModelHelper } from './static-model-helper';
 export default (sequelize: Sequelize) => {
     class productCategory extends Model {
         static associate(models: any) {
@@ -43,13 +44,12 @@ export default (sequelize: Sequelize) => {
         }
 
         static async createProductCategories(productCategories: Array<any>, conditions: any = {}) {
-            return sequelize.transaction(async () => {
-              return  productCategory.bulkCreate(productCategories, {
-                fields:['productCategoryName','productCategoryDesc'] ,
-                updateOnDuplicate: ['productCategoryName'],
-                ignoreDuplicates: false,
+
+            return StaticModelHelper.bulkCreateOrUpdate(productCategory,productCategories, {
+                keys: ['productCategoryName'],
                 ...conditions
-              })
+            }, {
+                keys: ['productCategoryName']
             })
         }
     }
@@ -68,7 +68,8 @@ export default (sequelize: Sequelize) => {
                     args: [2, 50],
                     msg: 'roleName should be between 2 and 50 characters'
                 }
-            }
+            },
+            unique: true
         },
         productCategoryDesc: {
             type: DataTypes.STRING(500),
