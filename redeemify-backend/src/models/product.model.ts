@@ -1,5 +1,6 @@
 import { Sequelize, Model, DataTypes } from 'sequelize';
 import * as models from './index';
+import { StaticModelHelper } from './static-model-helper';
 export default (sequelize: Sequelize) => {
     class product extends Model {
         static associate(models: any) {
@@ -26,6 +27,17 @@ export default (sequelize: Sequelize) => {
                 ]
             });
            });
+           
+        }
+
+        static async createProduct(productItems: Array<any>, conditions: any = {}) {
+
+            return StaticModelHelper.bulkCreateOrUpdate(product,productItems, {
+                keys: ['productName'],
+                ...conditions
+            }, {
+                keys: ['productName']
+            })
         }
     }
 
