@@ -1,4 +1,5 @@
-import { Sequelize, Model, DataTypes } from 'sequelize';
+import { Sequelize, Model, DataTypes, Op } from 'sequelize';
+import { StaticModelHelper } from './static-model-helper';
 export default (sequelize: Sequelize) => {
     class productSubCategory extends Model {
         static associate(models: any) {
@@ -8,6 +9,43 @@ export default (sequelize: Sequelize) => {
 
             // productSubCategory.hasMany(models['product'])
         }
+
+
+        static async createProductSubCategories(productSubCategories: Array<any>, conditions: any = {}) {
+
+            return StaticModelHelper.bulkCreateOrUpdate(productSubCategory,productSubCategories, {
+                keys: ['productSubCategoryName'],
+                ...conditions
+            }, {
+                keys: ['productSubCategoryName']
+            })
+        }
+
+        static async deleteProductSubCategories(productSubCategoriesIds:Array<any>){
+            return sequelize.transaction(async ()=>{
+                console.log(productSubCategoriesIds)
+                return await productSubCategory.destroy({
+                    where:productSubCategoriesIds,
+                });    
+            });
+        
+                
+        }
+
+        static async updateProductSubCategories(productSubCategories:Array<any>){
+            return sequelize.transaction(async ()=>{
+                console.log(productSubCategories)
+                return await productSubCategory.update(productSubCategories[0],{
+                    where:productSubCategories[1],
+                    // where:,
+                });    
+            });
+        
+                
+        }
+        
+
+
     }
 
     productSubCategory.init({
@@ -28,7 +66,8 @@ export default (sequelize: Sequelize) => {
                     args: [3, 100],
                     msg: "bucketName must be within 3 and 100 characters"
                 }
-            }
+            },
+            unique: true
         },
         productSubCategoryDesc:{
             type :DataTypes.STRING,
@@ -45,7 +84,8 @@ export default (sequelize: Sequelize) => {
     }, {
         sequelize,
         modelName: 'productSubCategory',
-        tableName: 'productSubCategory'
+        tableName: 'productSubCategory',
+        timestamps: true
     });
 
     return productSubCategory;

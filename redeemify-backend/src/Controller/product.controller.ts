@@ -13,8 +13,11 @@ export class ProductController {
     // res.json("data")
   }
 
-  static async createProducts(req: Request, res: Response) {
-
+  static async createProduct(req: Request, res: Response) {
+    (models?.default as any)?.["product"].createProduct(req?.body)
+                                      .then((data: any) => {
+                                         res.json({"message": "data added sucessfully"})
+                                      });
   }
 
   static async createProductCategories(req: Request, res: Response) {
@@ -32,8 +35,15 @@ export class ProductController {
   }
 
   static async createProductSubCategory(req: Request, res: Response) {
-    
+    (models?.default as any)?.["productSubCategory"].createProductSubCategories(req?.body)
+                                      .then((data: any) => {
+                                         res.json({"message": "data added sucessfully"})
+                                      });
   }
+
+  
+
+
 
   static async getProductSubCategory(req: Request, res: Response) {
     
