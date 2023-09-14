@@ -44,7 +44,6 @@ export default (sequelize: Sequelize) => {
         }
 
         static async createProductCategories(productCategories: Array<any>, conditions: any = {}) {
-
             return StaticModelHelper.bulkCreateOrUpdate(productCategory,productCategories, {
                 keys: ['productCategoryName'],
                 ...conditions

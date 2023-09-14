@@ -41,6 +41,21 @@ export class ProductController {
                                       });
   }
 
+  static async getProductSubCategories(req: Request, res: Response) {
+    console.log(req.query);
+    (models?.default as any)?.["productSubCategory"].getAllProductSubCategories()
+                                      .then((data: any) => {
+                                         res.json(data)
+                                      });
+  }
+
+  static async deleteProductSubCategories(req: Request, res: Response) {
+    (models?.default as any)?.["productSubCategory"].deleteProductSubCategories(req.body)
+                                      .then((data: any) => {
+                                         res.json(data)
+                                      });
+  }
+
   
 
 
