@@ -1,6 +1,7 @@
 import {Sequelize, Model, DataTypes} from 'sequelize';
 import * as models from './index';
 import { resolve } from 'path';
+import { StaticModelHelper } from './static-model-helper';
 export default (sequelize: Sequelize) => {
   class brands extends Model {
     static associate(models: any) {
@@ -40,11 +41,17 @@ export default (sequelize: Sequelize) => {
     }
 
     static createBrands(brandsArr: Array<{brandName: string,balance: any,limit: any,brandCss: any}>) {
-      return sequelize.transaction(async() => {
-         return brands.bulkCreate(brandsArr,{
-          updateOnDuplicate: ['brandName']
+      // return sequelize.transaction(async() => {
+      //    return brands.bulkCreate(brandsArr,{
+      //     updateOnDuplicate: ['brandName']
+      //    })
+
+      return StaticModelHelper.bulkCreateOrUpdate(brands,brandsArr, {
+          keys: ['brandName']
+         }, {
+          keys: ['brandName']
          })
-      });
+      // });
     }
 
     static findAllBrands() {

@@ -6,7 +6,11 @@ import router from './Routes/routes';
 import dbConfig from './config/database';
 import Database from './database';
 import environment from './config/environment';
+import session from 'express-session';
+import cookieParser from 'cookie-parser';
+import bodyParser from 'body-parser';
 import * as models from './models/index';
+import { AuthenticationMiddleware } from './authentication/authenticationMiddleware';
 
 (async() => {
     try {
@@ -17,39 +21,7 @@ import * as models from './models/index';
     }
 })()
 
-
-
 const app = express();
-
-// pool.connect(err => {
-//     console.log('hello')
-//     if (err) throw err;
-//     else {
-//         queryDatabase();
-//     }
-// });
-
-// function queryDatabase() {
-//     const query = `
-//         DROP TABLE IF EXISTS inventory;
-//         CREATE TABLE inventory (id serial PRIMARY KEY, name VARCHAR(50), quantity INTEGER);
-//         INSERT INTO inventory (name, quantity) VALUES ('banana', 150);
-//         INSERT INTO inventory (name, quantity) VALUES ('orange', 154);
-//         INSERT INTO inventory (name, quantity) VALUES ('apple', 100);
-//     `;
-
-//     pool
-//         .query(query)
-//         .then(() => {
-//             console.log('Table created successfully!');
-//             pool.end();
-//         })
-//         .catch(err => console.log(err))
-//         .then(() => {
-//             console.log('Finished execution, exiting now');
-//             process.exit();
-//         });
-// }
 
 const corsOptions = {
   origin: '*', // Replace with the allowed origin(s)
@@ -59,8 +31,17 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+app.use(bodyParser.json());
+app.use(cookieParser());
 app.use(express.json());
-app.use('/', router);
+app.use(
+  session({
+    secret: 'your-secret-key', // Replace with a strong secret key
+    resave: false,
+    saveUninitialized: true,
+  })
+);
+app.use('/', AuthenticationMiddleware.authenticate , router);
 
 
 app.listen(environment.port, () => {

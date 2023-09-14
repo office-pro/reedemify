@@ -1,5 +1,6 @@
 import { Sequelize, Model, DataTypes, Op } from 'sequelize';
 import { StaticModelHelper } from './static-model-helper';
+import * as models from './index';
 export default (sequelize: Sequelize) => {
     class productSubCategory extends Model {
         static associate(models: any) {
@@ -7,7 +8,9 @@ export default (sequelize: Sequelize) => {
                 foreignKey: "productCategoryId"
             })
 
-            // productSubCategory.hasMany(models['product'])
+            productSubCategory.hasMany(models['product'], {
+                foreignKey: "productCategoryId"
+            })
         }
 
 
@@ -21,15 +24,36 @@ export default (sequelize: Sequelize) => {
             })
         }
 
-        static async deleteProductSubCategories(productSubCategoriesIds:Array<any>){
+        static async getAllProductSubCategories(conditions: any = {}) {
+
+            return sequelize.transaction(async() => {
+                return await productSubCategory.findAll({
+                    include: [
+                        {
+                            model:  models.default.productCategory
+                        },
+                        {
+                            model:  models.default.product
+                        }
+                    ],
+                    ...conditions
+                })
+            })
+        }
+
+        static async deleteProductSubCategories(productSubCategoriesIds:Array<any>, conditions: any = {}){
             return sequelize.transaction(async ()=>{
                 console.log(productSubCategoriesIds)
                 return await productSubCategory.destroy({
-                    where:productSubCategoriesIds,
+                    where:{
+                        productSubCategoryId: {
+                            [Op.in]: productSubCategoriesIds
+                        }
+                    },
+                    ...conditions
                 });    
             });
         
-                
         }
 
         static async updateProductSubCategories(productSubCategories:Array<any>){
