@@ -1,4 +1,4 @@
-import { Sequelize, Model, DataTypes } from 'sequelize';
+import { Sequelize, Model, DataTypes, Op } from 'sequelize';
 import * as models from './index';
 import { StaticModelHelper } from './static-model-helper';
 export default (sequelize: Sequelize) => {
@@ -9,6 +9,19 @@ export default (sequelize: Sequelize) => {
             })
             product.belongsTo(models['productSubCategory'], {
                 foreignKey: "productSubCategoryId",
+            })
+        }
+
+        static async deleteProducts(productIds: Array<number>,conditions: any = {}) {
+            return sequelize.transaction(async () => {
+                return product.destroy({
+                    where: {
+                      productId: {
+                        [Op.in]: productIds
+                      } 
+                    },
+                    ...conditions
+                })    
             })
         }
 
