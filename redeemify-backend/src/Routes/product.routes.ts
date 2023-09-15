@@ -1,9 +1,7 @@
 import express from 'express';
 import { ProductController } from '../Controller/product.controller';
 
-
 const productsRouter = express.Router();
-
 
 productsRouter
 // get Apis
@@ -25,6 +23,5 @@ productsRouter
 .delete('/deleteProductSubCategories', ProductController.deleteProductSubCategories)
 .delete('/deleteProductCategories', ProductController.deleteProductCategories)
 .delete('/deleteProducts', ProductController.deleteProducts)
-
 
 export default productsRouter;

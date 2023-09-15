@@ -20,7 +20,7 @@ module.exports = {
         firstName: "NItin",
         lastName: "Tillu",
         mobileNo: 9967901834,
-        email: "tillu123#lauda.com",
+        email: "tillu123#redeemify.com",
         password: "tillu@123",
       },
       {
@@ -29,7 +29,7 @@ module.exports = {
         firstName: "benny",
         lastName: "shane",
         mobileNo: 9900887766,
-        email: "benny#lauda.com",
+        email: "benny@redeemify.com",
         password: "benny@123",
       },
       {
@@ -38,7 +38,7 @@ module.exports = {
         firstName: "angur",
         lastName: "tanmay",
         mobileNo: 9900777660,
-        email: "angurlaudakatanmay.com",
+        email: "angurtanmay@redeemify.com",
         password: "benny@123",
       }
     ], {});
@@ -57,5 +57,7 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
+
+    await queryInterface.bulkDelete('users', null, {});
   }
 };

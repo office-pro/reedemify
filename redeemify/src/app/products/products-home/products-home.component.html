@@ -1,0 +1,33 @@
+<ion-content>
+  <header-page></header-page>
+  
+  <ion-grid class="products--grid">
+    <ion-row class="products--rows">
+      <ion-col size="3">
+         <ion-card color="light" class="products--card" >
+          <ion-card-header>
+            Filters
+          </ion-card-header>
+
+          <ion-card-content>
+            <products-filter></products-filter>
+          </ion-card-content>
+        </ion-card>
+        
+      </ion-col>
+      <ion-col size="9">
+        <ion-card color="light" class="products--card" >
+          <ion-card-content>
+            <products-list></products-list>
+          </ion-card-content>
+        </ion-card>
+        
+      </ion-col>
+    </ion-row>
+    <mat-paginator class="brands--paginator" [length]="100"
+            [pageSize]="10"
+            [pageSizeOptions]="[5, 10, 25, 100]"
+            aria-label="Select page">
+    </mat-paginator>
+  </ion-grid>
+</ion-content>
