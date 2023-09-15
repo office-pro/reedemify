@@ -1,0 +1,16 @@
+.products {
+  &--grid {
+    height: calc(100% - 57px);
+    padding: 0px;
+  }
+
+  &--rows {
+    height: calc(100% - 55px);
+  }
+
+  &--card {
+    margin: 0px;
+    margin-top: 5px;
+    height: 100%;
+  }
+}

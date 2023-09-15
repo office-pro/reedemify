@@ -11,7 +11,11 @@ export default (sequelize: Sequelize) => {
 
     static createUser({brandId,roleId,firstName,lastName,mobileNo,email,password}: any) {
       sequelize.transaction(async() => {
-        await users.create({brandId,roleId,firstName,lastName,mobileNo,email,password})
+        await users.findOrCreate({
+          where: {
+            brandId,roleId,firstName,lastName,mobileNo,email,password
+          }
+        })
       })
     }
 
