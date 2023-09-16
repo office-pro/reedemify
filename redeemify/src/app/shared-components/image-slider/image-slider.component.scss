@@ -1,0 +1,34 @@
+.image-slider {
+
+  &--images-container {
+    display: flex;
+    background: #eee;
+    justify-content: center;
+    height: 115px;
+    padding: 3px;
+    position: relative;
+
+    img {
+      object-fit: contain;
+    }
+  }
+
+  &--back-icon {
+    position: absolute;
+    left: 0px;
+    top: 38%;
+    font-size: 20px;
+    box-shadow: 1px 1px 6px #000;
+  }
+
+  &--forward-icon{
+    position: absolute;
+    right: 0px;
+    top: 38%;
+    font-size: 20px;
+    box-shadow: 1px 1px 6px #000;
+  }
+  
+
+}
+
