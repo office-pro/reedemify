@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, Input} from "@angular/core";
 
 @Component({
   selector: 'products-list',
@@ -8,7 +8,8 @@ import {Component} from "@angular/core";
 
 export class ProductsListComponent {
   
-  products: Array<any> = []
+  @Input()
+  data: Array<any> = []
   
   constructor() {
 

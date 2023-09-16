@@ -1,4 +1,5 @@
 import {Component} from "@angular/core";
+import { ProductService } from "../services/products.services";
 
 @Component({
   selector: 'products-home',
@@ -10,8 +11,13 @@ export class ProductsHomeComponent {
   
   products: Array<any> = []
   
-  constructor() {
+  constructor(private productService: ProductService) {}
 
+  ngOnInit() {
+    this.productService.getProducts().subscribe((data: any) => {
+      this.products = [...data,...data,...data,...data];
+      console.log(this.products);
+    })
   }
 
 

@@ -1,0 +1,7 @@
+<div class="image-slider--images-container" *ngIf="!!(imageUrls?.length)">
+  <ion-icon *ngIf="imageUrls.length > 1" (click)="prev()" class="image-slider--back-icon" name="chevron-back-outline"></ion-icon>
+  <ng-container *ngFor="let imageUrl of imageUrls; index as i">
+    <img [src]="imageUrl" [hidden]="currentIndex != i" (load)="onLoad($event)" (loadstart)="onLoadStart($event)" (loadeddata)="onLoaded($event)"/>
+  </ng-container>              
+  <ion-icon *ngIf="imageUrls.length > 1" (click)="next()"  class="image-slider--forward-icon" name="chevron-forward-outline"></ion-icon>
+</div>

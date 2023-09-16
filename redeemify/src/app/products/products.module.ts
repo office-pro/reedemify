@@ -9,12 +9,13 @@ import { ProductsListComponent } from "./products-list/products-list.component";
 import { SharedModule } from "../shared-components/shared.modules";
 import { ProductsFilterComponent } from "./products-filter/products-filter.component";
 import { MatPaginatorModule } from "@angular/material/paginator";
+import { ProductService } from "./services/products.services";
 
 @NgModule({
   declarations: [ProductsHomeComponent, ProductsListComponent, ProductsFilterComponent],
   imports: [CommonModule, FormsModule, IonicModule, HttpClientModule, SharedModule,ProductsRoutingModule, MatPaginatorModule],
   exports: [],
-  providers: []
+  providers: [ProductService]
 })
 
 export class ProductsModule{}
