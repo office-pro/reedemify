@@ -18,6 +18,11 @@
     left: 0px;
     top: 38%;
     font-size: 20px;
+    color: #777777;
+    
+  }
+
+  &--back-icon:hover, &--forward-icon:hover {
     box-shadow: 1px 1px 6px #000;
   }
 
@@ -26,7 +31,8 @@
     right: 0px;
     top: 38%;
     font-size: 20px;
-    box-shadow: 1px 1px 6px #000;
+    color: #777777;
+
   }
   
 
