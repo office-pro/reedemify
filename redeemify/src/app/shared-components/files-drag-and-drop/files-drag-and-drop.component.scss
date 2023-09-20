@@ -1,0 +1,43 @@
+
+
+.box {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+
+  &__input {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    align-items: center;
+    padding: 10px;
+    border: 2px dashed #ddd;
+    color: darkslategray;
+  }
+
+  &__upload-image {
+
+  }
+  
+  &__dragndrop {
+    display: none;
+  }
+
+  &__uploading {
+    display: none;
+  }
+
+  &__success {
+    display: none;
+  }
+
+  &__error {
+    display: none;
+  }
+
+  #file {
+    display: none;
+  }
+}
