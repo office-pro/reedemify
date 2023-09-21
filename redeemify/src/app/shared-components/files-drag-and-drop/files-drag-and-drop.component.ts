@@ -1,6 +1,6 @@
 import {Component, EventEmitter, HostBinding, HostListener, Input, Output} from "@angular/core";
 import { NgForm } from "@angular/forms";
-import { DomSanitizer } from "@angular/platform-browser";
+import { DomSanitizer, SafeResourceUrl, SafeUrl } from "@angular/platform-browser";
 
 @Component({
   selector: 'file-drag-drop',
@@ -11,7 +11,10 @@ import { DomSanitizer } from "@angular/platform-browser";
 export class FileDragDropComponent {
 
   uploadForm: NgForm | any;
-  private filesList: Array<any> = []
+  filesList: Array<any> = []
+
+  @Input()
+  className: "small" | "medium" | "" = "";
 
   @Input()
   multiple: boolean = true;
@@ -19,11 +22,20 @@ export class FileDragDropComponent {
   @Input()
   fileUploadTypes: Array<string> = [];
 
+  @Input()
+  showUploadButton: boolean = true;
+
+  @Output() fileBlobs: EventEmitter<Array<any>> = new EventEmitter();
+  @Output() urls: EventEmitter<Array<any>> = new EventEmitter();
   @Output() files: EventEmitter<Array<any>> = new EventEmitter();
+
+  private fileBlobsArr: Array<any> = [];
+  private urlsArr: Array<any> = [];
+
 
   @HostBinding("style.background") private background = "#eee";
 
-  constructor(private sanitizer: DomSanitizer) { }
+  constructor(private sanitizer: DomSanitizer) {}
 
   @HostListener("dragover", ["$event"]) public onDragOver(evt: DragEvent) {
     evt.preventDefault();
@@ -56,6 +68,8 @@ export class FileDragDropComponent {
       const file = filesArr[i];
       const url = this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(file));
       files.push({ file, url });
+      this.fileBlobsArr.push(file);
+      this.urlsArr.push((url as any)?.changingThisBreaksApplicationSecurity);
     }
     return files
   }
@@ -69,6 +83,25 @@ export class FileDragDropComponent {
     if (filesArr.length > 0) {
         this.filesList.push(filesArr);
         this.files.emit(filesArr);
+        this.fileBlobs.emit(this.fileBlobsArr);
+        this.urls.emit(this.urlsArr);
       }
+  }
+
+  ngOnDestroy() {
+    if(this.files) {
+      this.files.unsubscribe();
+      this.filesList = [];
+    }
+    
+    if(this.fileBlobs) {
+      this.fileBlobs.unsubscribe();
+      this.fileBlobsArr = []
+    }
+
+    if(this.urls) {
+      this.urls.unsubscribe();
+      this.urlsArr = []
+    }
   }
 }
