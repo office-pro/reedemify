@@ -11,9 +11,10 @@ import { ProductsFilterComponent } from "./products-filter/products-filter.compo
 import { MatPaginatorModule } from "@angular/material/paginator";
 import {MatToolbarModule} from "@angular/material/toolbar"
 import { ProductService } from "./services/products.services";
+import { ProductImageUploaderComponent } from "./products-image-uploader/products-image-uploader.component";
 
 @NgModule({
-  declarations: [ProductsHomeComponent, ProductsListComponent, ProductsFilterComponent],
+  declarations: [ProductsHomeComponent, ProductsListComponent, ProductsFilterComponent,ProductImageUploaderComponent],
   imports: [CommonModule, FormsModule, IonicModule, HttpClientModule, SharedModule,ProductsRoutingModule, MatPaginatorModule, MatToolbarModule],
   exports: [],
   providers: [ProductService]
