@@ -1,5 +1,6 @@
 import express from 'express';
 import { ProductController } from '../Controller/product.controller';
+import { UploadData } from '../middleware/upload.middleware';
 
 const productsRouter = express.Router();
 
@@ -13,6 +14,7 @@ productsRouter
 .post('/createProductCategories', ProductController.createProductCategories)
 .post('/createProductSubCategories', ProductController.createProductSubCategory)
 .post('/create', ProductController.createProduct)
+.post('/uploadImages', UploadData.upload.any(), ProductController.uploadImages)
 
 // update api's
 .put('/updateProductCategories', ProductController.createProductCategories)
