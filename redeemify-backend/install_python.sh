@@ -24,4 +24,4 @@ cd ..
 rm -rf Python-3.9.0 Python-3.9.0.tgz
 
 # Verify Python installation
-python3.9 --version
+python --version
