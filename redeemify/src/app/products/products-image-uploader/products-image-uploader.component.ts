@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { ProductImageDetails, ProductImageDetail, ProductImageDetailModel } from "./product-images.interface";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 
 @Component({
   selector: 'products-image-uploader',
@@ -9,7 +10,9 @@ import { ProductImageDetails, ProductImageDetail, ProductImageDetailModel } from
 
 export class ProductImageUploaderComponent {
 
-  constructor() {}
+  constructor(private httpClient: HttpClient) {}
+
+
   
   imageDetails: ProductImageDetails = {
     productImageDetails: [
@@ -32,5 +35,22 @@ export class ProductImageUploaderComponent {
 
   uploadData() {
     console.log(this.imageDetails.productImageDetails);
+    let headers = new HttpHeaders();
+    headers.append('Accept', 'multipart/form-data');
+    let data = this.imageDetails.productImageDetails.map((productImageDetail: ProductImageDetailModel) => {
+      let formData = new FormData();
+      formData.append("productImageName",productImageDetail.productImageName )
+      formData.append("imageUrls",'[]')
+      
+      productImageDetail.productImageFiles.forEach((file: any) => {
+        formData.append('files[]', file, file.name)
+      })
+
+      return formData;
+    })
+  
+
+    this.httpClient.post("http://localhost:3000/api/products/uploadImages", data[0], {headers} )
+                   .subscribe((data: any) => console.log(data));
   }
 }
