@@ -75,34 +75,34 @@ export class ProductController {
   static async uploadImages(req: Request, res: Response) {
 
 
-      const listS3Buckets = () => {
-         const command = 's3cmd ls';
+      // const listS3Buckets = () => {
+      //    const command = 's3cmd ls';
 
-         exec(command, (error, stdout, stderr) => {
-            if (error) {
-               console.error(`Error running 's3cmd ls': ${error.message}`);
-               return;
-            }
+      //    exec(command, (error, stdout, stderr) => {
+      //       if (error) {
+      //          console.error(`Error running 's3cmd ls': ${error.message}`);
+      //          return;
+      //       }
 
-            if (stderr) {
-               console.error(`s3cmd stderr: ${stderr}`);
-               return;
-            }
+      //       if (stderr) {
+      //          console.error(`s3cmd stderr: ${stderr}`);
+      //          return;
+      //       }
 
-            // Parse the output to extract bucket names
-            const bucketList = stdout
-               .split('\n')
-               .filter((line) => line.trim() !== '')
-               .map((line) => line.trim().split(/\s+/).pop());
+      //       // Parse the output to extract bucket names
+      //       const bucketList = stdout
+      //          .split('\n')
+      //          .filter((line) => line.trim() !== '')
+      //          .map((line) => line.trim().split(/\s+/).pop());
 
-            // Print the list of bucket names
-            console.log('List of S3 buckets:');
-            console.log(bucketList);
-         });
-      };
+      //       // Print the list of bucket names
+      //       console.log('List of S3 buckets:');
+      //       console.log(bucketList);
+      //    });
+      // };
 
-      // Call the function to list S3 buckets
-      listS3Buckets();
+      // // Call the function to list S3 buckets
+      // listS3Buckets();
 
 
      console.log("body - ",req.body.productImageName);
