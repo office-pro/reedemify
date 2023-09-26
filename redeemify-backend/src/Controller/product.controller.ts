@@ -1,6 +1,14 @@
 import {Request, Response} from 'express'
 import * as models from '../models/index';
-import {exec} from 'child_process';
+import * as AWS from 'aws-sdk';
+
+// Configure AWS SDK with your credentials and region
+AWS.config.update({
+  accessKeyId: 'V3R1SE0BJR7T0C4339D0',
+  secretAccessKey: '1IiMUCZFogOdVeD1bhZmJKkENVCKE8KURFwb8xex',
+  region: 'us-east-1',
+  s3ForcePathStyle: true, 
+});
 
 
 export class ProductController {
@@ -74,38 +82,19 @@ export class ProductController {
 
   static async uploadImages(req: Request, res: Response) {
 
+   const s3 = new AWS.S3({
+      endpoint: 'del1.vultrobjects.com'
+   });
 
-      // const listS3Buckets = () => {
-      //    const command = 's3cmd ls';
-
-      //    exec(command, (error, stdout, stderr) => {
-      //       if (error) {
-      //          console.error(`Error running 's3cmd ls': ${error.message}`);
-      //          return;
-      //       }
-
-      //       if (stderr) {
-      //          console.error(`s3cmd stderr: ${stderr}`);
-      //          return;
-      //       }
-
-      //       // Parse the output to extract bucket names
-      //       const bucketList = stdout
-      //          .split('\n')
-      //          .filter((line) => line.trim() !== '')
-      //          .map((line) => line.trim().split(/\s+/).pop());
-
-      //       // Print the list of bucket names
-      //       console.log('List of S3 buckets:');
-      //       console.log(bucketList);
-      //    });
-      // };
-
-      // // Call the function to list S3 buckets
-      // listS3Buckets();
-
-
-     console.log("body - ",req.body.productImageName);
+   s3.createBucket({ Bucket: "test-shashi-bucket" }, (err, data) => {
+      if (err) {
+         console.error('Error creating bucket:', err);
+      } else {
+         console.log('Bucket created successfully:', data.Location);
+      }
+   });
+   
+    console.log("body - ",req.body.productImageName);
      console.log("files - ",req.files);
      res.json({message: "uploaded image"});
   }
