@@ -8,16 +8,21 @@
     "driver": "tedious"
   },
   "development": {
-    "username": "dv_promo",
-    "password": "dvpromo@123",
+    "username": "avnadmin",
+    "password": "AVNS_lZHUqqz-nHwuck2O4X0",
     "database": "myDb",
-    "host": "postgres-dv.postgres.database.azure.com",
+  
+    "host": "pg-274eaa2e-shaelm29-c1b9.aivencloud.com",
     "dialect": "postgres",
     "dialectOptions": {
       "encrypt": true,
-      "ssl":true
+      "ssl": {
+        "rejectUnauthorized": true,
+        "ca":"-----BEGIN CERTIFICATE-----\nMIIEQTCCAqmgAwIBAgIUc6JG5HWvQSnJKCXQqsN4Z1jcuzQwDQYJKoZIhvcNAQEM\nBQAwOjE4MDYGA1UEAwwvYmE2MzY5MWYtNjUwOS00ZTc5LTg0MDUtZDYyMzQxMmNk\nMGE2IFByb2plY3QgQ0EwHhcNMjMwOTI4MTE1NzQ0WhcNMzMwOTI1MTE1NzQ0WjA6\nMTgwNgYDVQQDDC9iYTYzNjkxZi02NTA5LTRlNzktODQwNS1kNjIzNDEyY2QwYTYg\nUHJvamVjdCBDQTCCAaIwDQYJKoZIhvcNAQEBBQADggGPADCCAYoCggGBAM/mAxfp\nd20LE1q05VTVEhWBisCX3wY3fZPRyyaKdDnolwuGinpJvP3NZLyphkpw8z208SUI\nGPPWaRxBpfHOasEInOjarDf7fr60/2tFbgAS0zyZIpg5MUuXf0kT44UU16mYZsA+\nDAanFI94kXfNEHTxuiFCATnfWe151RGMnmKGKyDTkkAriavZ+k5bTfLuY6dNinXw\nOlFI58OMiyPRyvGl+cyBcKAX9rp021Uu2aOkJLKfolueyV8/gJIFnzm3MrH6bPjB\nyjQdYXeLks2J0znR1mJCPRPZ6ej90pU5us0siEJAMWpHqjnEcNSw4hd5Di7LkbXh\nkcvzqNtHF+jDbTalU7u4139WCRFIMO4TRHkeWSCMoDfWoboxY6yjPpnZ0uFKTSwp\nCBd0CcTMrxUugd5Sgdf2VPwDCk4Yqk6dFxNSVZ8dzjaXPA1XIS7lBo2u1ce83Dve\nwNdRUOO59eWqkjFXOSpawupq4oN80oiUVackOtUEKh/DxuxywE8C6RbPQQIDAQAB\noz8wPTAdBgNVHQ4EFgQUf1kHX7nadVXmXbB7hTib41UkbS8wDwYDVR0TBAgwBgEB\n/wIBADALBgNVHQ8EBAMCAQYwDQYJKoZIhvcNAQEMBQADggGBALOu0ZhVT3EBhPDC\n0TRz15l9NNif/EayHuEJLfl7RMTaZg+U4MEzC9Z6LfTAv2trmDdz6V2IzR7TXE8X\n/X/O8bLZ1GIKclC4lF4EfHjzVEWAMs8dszi0AznkE6dH38DbbwntkgkN58lzQdUC\n7amibHtQfndENTR3aw1U8e20rr2Dv3IZ5/87e9yDqOcCzScLg0to5p2rrdmq/Sml\nZMoON8us3fdwmFhRXe1889H06OEh4/iLLpjtJmRsq7ynXkxHhQvv9YIQFV1yKU0x\nTmc4B1xS8shu8BdV2KojlaSvYozFYETXzTqvBo0tnS1/TLAobQAR3NTGPxiId38E\nNk9SJksxqnYbPVzvTt0SkopEtqMwFw2SDjo5l/OG3rI9krThVrYDy224c0uR5kUs\nFlckhINfhb0m1E2rAl7Qljt5eZMgcmA3kSERl4nI3PzVMXLP/AHz/7QxGyJVKFbr\nHlt1PJVjiE1vpo29pTiTgbAGaGHJn8vclEHybocjHRp9Vxx4ug==\n-----END CERTIFICATE-----"
+    }
     },
-     "driver": "tedious"
+     "driver": "tedious",
+     "port": 19100
     
   },
   "test": {

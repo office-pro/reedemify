@@ -15,7 +15,7 @@ module.exports = {
 
     await queryInterface.bulkInsert('users', [
       {
-        brandId: 1,
+        brandId: 3,
         roleId: 4,
         firstName: "NItin",
         lastName: "Tillu",
@@ -24,7 +24,7 @@ module.exports = {
         password: "tillu@123",
       },
       {
-        brandId: 2,
+        brandId: 4,
         roleId: 3,
         firstName: "benny",
         lastName: "shane",
@@ -33,7 +33,7 @@ module.exports = {
         password: "benny@123",
       },
       {
-        brandId: 3,
+        brandId: 5,
         roleId: 3,
         firstName: "angur",
         lastName: "tanmay",

@@ -9,17 +9,20 @@ const dbConfig = {
       "dialect": "postgres",
       "driver": "tedious"
     },
+    
   "development": {
     "username": environment.dbUsername,
     "password": environment.dbPassword,
     "database": "myDb",
+  
     "host": environment.dbHost,
     "dialect": "postgres",
     "dialectOptions": {
       "encrypt": true,
-      "ssl":true
+      "ssl": environment.ssl
     },
-     "driver": "tedious"
+     "driver": "tedious",
+     "port": 19100
     
   },
   "test": {
