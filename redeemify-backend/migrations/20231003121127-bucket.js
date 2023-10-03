@@ -10,27 +10,48 @@ module.exports = {
      *
      * Example:
      * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
+     * 
+     * 
+     * 
      */
-    await queryInterface.createTable('bucketListProduct', {
-        Id: {
+
+    await queryInterface.createTable('bucket',
+     { bucketId: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true
         },
-        bucketId: {
+        brandId: {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        productId: {
-            type: DataTypes.INTEGER,
+       isActive: {
+            type: DataTypes.BOOLEAN,
+            defaultValue:false,
             allowNull: false
         },
-        points: {
-            type: DataTypes.INTEGER,
+        createdAt: {
+            type: DataTypes.DATE,
             allowNull: false,
-        }
-    });
+            defaultValue: new Date()
+        },
+       
+      
+       
+       
+        updatedAt: {
+            type: DataTypes.DATE,
+            allowNull: false,
+            defaultValue: new Date()
+        },
+        createdBy:{
+            type:DataTypes.INTEGER,
+            allowNull:false,
+
+
+        }})
   },
+
 
   async down (queryInterface, Sequelize) {
     /**
@@ -39,6 +60,6 @@ module.exports = {
      * Example:
      * await queryInterface.dropTable('users');
      */
-    await queryInterface.dropTable('bucketListProduct');
+    await queryInterface.dropTable('bucket');
   }
 };
