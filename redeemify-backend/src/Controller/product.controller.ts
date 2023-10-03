@@ -1,14 +1,8 @@
 import {Request, Response} from 'express'
 import * as models from '../models/index';
-import * as AWS from 'aws-sdk';
-
-// Configure AWS SDK with your credentials and region
-AWS.config.update({
-  accessKeyId: 'V3R1SE0BJR7T0C4339D0',
-  secretAccessKey: '1IiMUCZFogOdVeD1bhZmJKkENVCKE8KURFwb8xex',
-  region: 'us-east-1',
-  s3ForcePathStyle: true, 
-});
+import { FirebaseStorageModel } from '../object-storage-models/firebaseStorage.model';
+// import { VultrModel } from '../object-storage-models/vultr.model';
+// import { VultrResponseHelper } from '../utils/vultr-response-helpers';
 
 
 export class ProductController {
@@ -81,22 +75,25 @@ export class ProductController {
   }
 
   static async uploadImages(req: Request, res: Response) {
+     
+   //   await VultrModel.getAllBuckets().then((response: any) => {
+   //       console.log("json obj - ", JSON.stringify(response.data.object_storages));
+   //       console.log("body - ",req.body.productImageName);
+   //       console.log("files - ",req.files);
+   //       res.json({message: VultrResponseHelper.getObjectStorage(response.data.object_storages)});
+   //   })
 
-   const s3 = new AWS.S3({
-      endpoint: 'del1.vultrobjects.com'
-   });
+   await FirebaseStorageModel.uploadFiles(req.files as Array<any>,req.body.productImageName)
+                              .then((data:any) => {
+                                console.log("data - ", JSON.stringify(data))
+                              })
+                              .finally(() => {
+                                 res.json({message: "hello world"});
+                              })
 
-   s3.createBucket({ Bucket: "test-shashi-bucket" }, (err, data) => {
-      if (err) {
-         console.error('Error creating bucket:', err);
-      } else {
-         console.log('Bucket created successfully:', data.Location);
-      }
-   });
-   
-    console.log("body - ",req.body.productImageName);
-     console.log("files - ",req.files);
-     res.json({message: "uploaded image"});
+   // console.log("body - ",req.body.productImageName);
+   // console.log("files - ",req.files);
+   // res.json({message: "hello world"});
   }
 
 }

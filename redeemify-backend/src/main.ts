@@ -11,6 +11,7 @@ import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import * as models from './models/index';
 import { AuthenticationMiddleware } from './authentication/authenticationMiddleware';
+import { FirebaseStorageModel } from './object-storage-models/firebaseStorage.model';
 
 (async() => {
     try {
@@ -20,6 +21,8 @@ import { AuthenticationMiddleware } from './authentication/authenticationMiddlew
         console.log(err)
     }
 })()
+
+const firebaseStorage = new FirebaseStorageModel();
 
 const app = express();
 
