@@ -11,7 +11,8 @@ import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import * as models from './models/index';
 import { AuthenticationMiddleware } from './authentication/authenticationMiddleware';
-import { FirebaseStorageModel } from './object-storage-models/firebaseStorage.model';
+import { S3StorageUploader } from './object-storage-models/s3StorageUploader.model';
+// import { FirebaseStorageModel } from './object-storage-models/firebaseStorage.model';
 
 (async() => {
     try {
@@ -22,7 +23,8 @@ import { FirebaseStorageModel } from './object-storage-models/firebaseStorage.mo
     }
 })()
 
-const firebaseStorage = new FirebaseStorageModel();
+// const firebaseStorage = new FirebaseStorageModel();
+const s3Storage = new S3StorageUploader();
 
 const app = express();
 

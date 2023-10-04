@@ -1,15 +1,12 @@
 import {Request, Response} from 'express'
 import * as models from '../models/index';
-import { FirebaseStorageModel } from '../object-storage-models/firebaseStorage.model';
-// import { VultrModel } from '../object-storage-models/vultr.model';
-// import { VultrResponseHelper } from '../utils/vultr-response-helpers';
-
+import { ImageResizerHelper } from '../utils/image-resizer-helper';
+import { S3StorageUploader } from '../object-storage-models/s3StorageUploader.model';
 
 export class ProductController {
    
   
   static async createProduct(req: Request, res: Response) {
-    console.log("body - ",req.body);
     (models?.default as any)?.["product"].createProduct(req?.body)
                                       .then((data: any) => {
                                          res.json({"message": "data added sucessfully"})
@@ -42,7 +39,7 @@ export class ProductController {
     (models?.default as any)?.["product"].getAllProducts()
                                        .then((data: any) => {
                                         res.json(data)
-                                      });
+                                      });                                               
 
   }
 
@@ -67,33 +64,30 @@ export class ProductController {
                                       });
   }
 
-  static async deleteProducts(req: Request, res: Response) {
-    (models?.default as any)?.["product"].deleteProducts(req.body)
+   static async deleteProducts(req: Request, res: Response) {
+      (models?.default as any)?.["product"].deleteProducts(req.body)
                                       .then((data: any) => {
                                          res.json(data)
                                       });
-  }
+   }
 
-  static async uploadImages(req: Request, res: Response) {
-     
-   //   await VultrModel.getAllBuckets().then((response: any) => {
-   //       console.log("json obj - ", JSON.stringify(response.data.object_storages));
-   //       console.log("body - ",req.body.productImageName);
-   //       console.log("files - ",req.files);
-   //       res.json({message: VultrResponseHelper.getObjectStorage(response.data.object_storages)});
-   //   })
+   static async uploadImages(req: Request, res: Response) {
+      let files: Array<any> = ImageResizerHelper.resizeImages(req.files as Array<any>);
+      
+      S3StorageUploader.uploadFiles(req,res,files).then((data:any) => {
 
-   await FirebaseStorageModel.uploadFiles(req.files as Array<any>,req.body.productImageName)
-                              .then((data:any) => {
-                                console.log("data - ", JSON.stringify(data))
-                              })
-                              .finally(() => {
-                                 res.json({message: "hello world"});
-                              })
+         let obj = {
+            productImagesName: req?.body?.productImageName,
+            imageUrls: data
+         };
 
-   // console.log("body - ",req.body.productImageName);
-   // console.log("files - ",req.files);
-   // res.json({message: "hello world"});
-  }
+         (models?.default as any)?.["productImagesUrlContainer"]
+                                  .createProductImagesUrlContainer([obj])
+                                  .then((data: any) => {
+                                     res.json(obj)
+                                  });
+
+      })
+   }
 
 }
