@@ -4,9 +4,9 @@ import { StaticModelHelper } from './static-model-helper';
 export default (sequelize: Sequelize) => {
     class productImagesUrlContainer extends Model {
         static associate(models: any) {
-          productImagesUrlContainer.belongsTo(models['product'],{
-                foreignKey: "productImagesUrlContainerId"
-          })
+          // productImagesUrlContainer.belongsTo(models['product'],{
+          //       foreignKey: "productImagesUrlContainerId"
+          // })
         }
 
         static async deleteProductImagesUrlContainers(productImagesUrlContainerId: Array<number>,conditions: any = {}) {
