@@ -56,6 +56,13 @@ Hlt1PJVjiE1vpo29pTiTgbAGaGHJn8vclEHybocjHRp9Vxx4ug==
       "universe_domain": "googleapis.com"
     }
   },
+  awsStorage: {
+    securityCredentials: {
+      accessKeyId: 'AKIAV5CMLKKCFPGQ3ZBB',
+      secretAccessKey: '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'
+    },
+    bucketName: "test-shashi-bucket"
+  },
   api: {
     vultr: {
       'getAllObjectStorage': "https://api.vultr.com/v2/object-storage"
@@ -64,5 +71,11 @@ Hlt1PJVjiE1vpo29pTiTgbAGaGHJn8vclEHybocjHRp9Vxx4ug==
 
     }
 
+  },
+  resizeImageParameters: {
+    width: 800, 
+    height: 600
   }
+
+
 }
