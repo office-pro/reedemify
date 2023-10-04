@@ -10,6 +10,9 @@ export default (sequelize: Sequelize) => {
             product.belongsTo(models['productSubCategory'], {
                 foreignKey: "productSubCategoryId",
             })
+            product.belongsTo(models['productImagesUrlContainer'], {
+                foreignKey: "productImagesUrlContainerId"
+            })
         }
 
         static async deleteProducts(productIds: Array<number>,conditions: any = {}) {
@@ -36,7 +39,12 @@ export default (sequelize: Sequelize) => {
                 {
                     model: models?.default?.productSubCategory,
                     attributes: ['productSubCategoryId', 'productSubCategoryName', 'productSubCategoryDesc']
-                }
+                },
+                {
+                    model: models?.default?.productImagesUrlContainer,
+                    attributes: ['productImagesUrlContainerId', 'productImagesName', 'imageUrls']
+                },
+
                 ]
             });
            });
@@ -82,10 +90,9 @@ export default (sequelize: Sequelize) => {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        productImage: {
-            type: DataTypes.ARRAY(DataTypes.STRING),
-            allowNull: false,
-            defaultValue: []
+        productImagesUrlContainerId: {
+            type: DataTypes.INTEGER,
+            allowNull: true
         },
         productDesc: {
             type: DataTypes.STRING,

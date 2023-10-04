@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { ProductImageDetails, ProductImageDetail, ProductImageDetailModel } from "./product-images.interface";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { forkJoin } from "rxjs";
 
 @Component({
   selector: 'products-image-uploader',
@@ -12,8 +13,6 @@ export class ProductImageUploaderComponent {
 
   constructor(private httpClient: HttpClient) {}
 
-
-  
   imageDetails: ProductImageDetails = {
     productImageDetails: [
       new ProductImageDetailModel()
@@ -48,9 +47,9 @@ export class ProductImageUploaderComponent {
 
       return formData;
     })
-  
 
-    this.httpClient.post("http://localhost:3000/api/products/uploadImages", data[0], {headers} )
-                   .subscribe((data: any) => console.log(data));
+    let observable$ = data.map((obj) => this.httpClient.post("http://localhost:3000/api/products/uploadImages", obj, {headers} ))
+    forkJoin(observable$).subscribe((data: any) => console.log(data));
+      
   }
 }

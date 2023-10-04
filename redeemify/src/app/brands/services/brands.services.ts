@@ -12,7 +12,8 @@ export class BrandService {
     if(!fetchFromServer && this.brands.length > 0) {
       return of([...this.brands]);
     }
-    return this.http.get("https://test-reedemify.onrender.com/api/users/brands")
+    return this.http.get("http://localhost:3000/api/users/brands")
+                    //.get("https://test-reedemify.onrender.com/api/users/brands")
                     .pipe(
                       map((data: any) => {
                         this.brands = data;
