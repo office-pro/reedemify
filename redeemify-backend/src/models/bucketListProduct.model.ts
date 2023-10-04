@@ -10,7 +10,7 @@ export default (sequelize: Sequelize) => {
 
             })
              bucketListProduct.belongsTo(models['users'], {
-                foreignKey: "createdBy",
+                foreignKey: "userId",
 
 
             })
@@ -101,7 +101,7 @@ export default (sequelize: Sequelize) => {
             allowNull: false,
             defaultValue: new Date()
         },
-         createdBy:{
+         userId:{
             type:DataTypes.INTEGER,
             allowNull:false,
 
