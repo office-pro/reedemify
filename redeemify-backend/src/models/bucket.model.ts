@@ -4,15 +4,13 @@ import { StaticModelHelper } from './static-model-helper';
 export default (sequelize: Sequelize) => {
     class bucket extends Model {
         static associate(models: any) {
-            bucket.belongsTo(models['brandId'], {
+            bucket.belongsTo(models['brands'], {
                 foreignKey: "brandId",
 
 
             })
-             bucket.belongsTo(models['userId'], {
-                foreignKey: "createdBy",
-
-
+             bucket.belongsTo(models['users'], {
+                foreignKey: "userId",
             })
             
             
@@ -89,11 +87,9 @@ export default (sequelize: Sequelize) => {
             allowNull: false,
             defaultValue: new Date()
         },
-        createdBy:{
+        userId:{
             type:DataTypes.INTEGER,
             allowNull:false,
-
-
         }
 
     }, {
