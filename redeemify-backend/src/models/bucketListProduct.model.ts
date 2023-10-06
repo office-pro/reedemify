@@ -4,60 +4,69 @@ import { StaticModelHelper } from './static-model-helper';
 export default (sequelize: Sequelize) => {
     class bucketListProduct extends Model {
         static associate(models: any) {
-            bucketListProduct.belongsTo(models['bucket'], {
-                foreignKey: "bucketId",
-
-
+            bucketListProduct.belongsTo(models['product'], {
+                foreignKey: "productId",
             })
              bucketListProduct.belongsTo(models['users'], {
                 foreignKey: "userId",
+            })
 
-
+            bucketListProduct.belongsTo(models['bucket'], {
+                foreignKey: "bucketId",
             })
             
             
         }
 
-        // static async deletebucketListProducts(bucketListProductIds: Array<number>,conditions: any = {}) {
-        //     return sequelize.transaction(async () => {
-        //         return bucketListProduct.destroy({
-        //             where: {
-        //               bucketListProductId: {
-        //                 [Op.in]: bucketListProductIds
-        //               } 
-        //             },
-        //             ...conditions
-        //         })    
-        //     })
-        // }
+        static async deletebucketListProducts(bucketListProductIds: Array<number>,conditions: any = {}) {
+            return sequelize.transaction(async () => {
+                return bucketListProduct.destroy({
+                    where: {
+                      bucketListProductId: {
+                        [Op.in]: bucketListProductIds
+                      } 
+                    },
+                    ...conditions
+                })    
+            })
+        }
 
-        // static async getAllbucketListProducts() {
+        static async getAllbucketListProducts() {
 
-        //    return sequelize.transaction(async() => {
-        //      return await bucketListProduct.findAll({
-        //         include: [{
-        //             model: models?.default?.bucketListProductCategory,
-        //             attributes: ['bucketListProductCategoryId', 'bucketListProductCategoryName','bucketListProductCategoryDesc']
-        //         }, 
-        //         {
-        //             model: models?.default?.bucketListProductSubCategory,
-        //             attributes: ['bucketListProductSubCategoryId', 'bucketListProductSubCategoryName', 'bucketListProductSubCategoryDesc']
-        //         }
-        //         ]
-        //     });
-        //    });
+           return sequelize.transaction(async() => {
+             return await bucketListProduct.findAll({
+                include: [ 
+                {
+                    model: models?.default?.product
+                  
+                }
+                ]
+            });
+           });
            
-        // }
+        }
 
-        // static async createbucketListProduct(bucketListProductItems: Array<any>, conditions: any = {}) {
+        static async createbucketListProduct(bucketListProductItems: Array<any>, conditions: any = {}) {
 
-        //     return StaticModelHelper.bulkCreateOrUpdate(bucketListProduct,bucketListProductItems, {
-        //         keys: ['bucketListProductName'],
-        //         ...conditions
-        //     }, {
-        //         keys: ['bucketListProductName']
-        //     })
-        // }
+            return StaticModelHelper.bulkCreateOrUpdate(bucketListProduct,bucketListProductItems, {
+                keys: ['bucketListProductId'],
+                ...conditions
+            }, {
+                keys: ['bucketListProductId']
+            })
+        }
+
+        static async getByBucketId(queryParams:any) {
+
+            return sequelize.transaction(async() => {
+              return await bucketListProduct.findAll({
+                where:{
+                    bucketId: queryParams.bucketId
+                }
+             });
+            });
+            
+         }
     }
 
     bucketListProduct.init({
@@ -101,7 +110,7 @@ export default (sequelize: Sequelize) => {
             allowNull: false,
             defaultValue: new Date()
         },
-         userId:{
+        userId:{
             type:DataTypes.INTEGER,
             allowNull:false,
 
@@ -111,7 +120,7 @@ export default (sequelize: Sequelize) => {
       
        
        
-       
+    
 
     }, {
         sequelize,

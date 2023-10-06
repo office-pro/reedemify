@@ -12,50 +12,57 @@ export default (sequelize: Sequelize) => {
              bucket.belongsTo(models['users'], {
                 foreignKey: "userId",
             })
+
+            bucket.hasMany(models['bucketListProduct'], {
+                foreignKey: "bucketListProductId",
+            })
             
             
         }
 
-        // static async deletebuckets(bucketIds: Array<number>,conditions: any = {}) {
-        //     return sequelize.transaction(async () => {
-        //         return bucket.destroy({
-        //             where: {
-        //               bucketId: {
-        //                 [Op.in]: bucketIds
-        //               } 
-        //             },
-        //             ...conditions
-        //         })    
-        //     })
-        // }
+        static async deletebuckets(bucketIds: Array<number>,conditions: any = {}) {
+            return sequelize.transaction(async () => {
+                console.log(bucketIds)
+                return bucket.destroy({
+                    where: {
+                      bucketId: {
+                        [Op.in]: bucketIds
+                      } 
+                    },
+                    ...conditions
+                })    
+            })
+        }
 
-        // static async getAllbuckets() {
+        static async getAllbuckets() {
 
-        //    return sequelize.transaction(async() => {
-        //      return await bucket.findAll({
-        //         include: [{
-        //             model: models?.default?.bucketCategory,
-        //             attributes: ['bucketCategoryId', 'bucketCategoryName','bucketCategoryDesc']
-        //         }, 
-        //         {
-        //             model: models?.default?.bucketSubCategory,
-        //             attributes: ['bucketSubCategoryId', 'bucketSubCategoryName', 'bucketSubCategoryDesc']
-        //         }
-        //         ]
-        //     });
-        //    });
+           return sequelize.transaction(async() => {
+             return await bucket.findAll({
+                include: [{
+                    model: models?.default?.brands,
+                    attributes: ['brandId', 'brandName']
+                }, 
+                {
+                    model: models?.default?.users,
+                    attributes: ['userId', 'firstName', 'lastName']
+                }, {
+                    model: models?.default?.bucketListProduct
+                }
+                ]
+            });
+           });
            
-        // }
+        }
 
-        // static async createbucket(bucketItems: Array<any>, conditions: any = {}) {
+        static async createbucket(bucketItems: Array<any>, conditions: any = {}) {
 
-        //     return StaticModelHelper.bulkCreateOrUpdate(bucket,bucketItems, {
-        //         keys: ['bucketName'],
-        //         ...conditions
-        //     }, {
-        //         keys: ['bucketName']
-        //     })
-        // }
+            return StaticModelHelper.bulkCreateOrUpdate(bucket,bucketItems, {
+                keys: ['bucketName'],
+                ...conditions
+            }, {
+                keys: ['bucketName']
+            })
+        }
     }
 
     bucket.init({
@@ -64,10 +71,17 @@ export default (sequelize: Sequelize) => {
             autoIncrement: true,
             primaryKey: true
         },
+        bucketName:{
+            type:DataTypes.STRING,
+            allowNull:false,
+            unique:true
+
+        },
         brandId: {
             type: DataTypes.INTEGER,
             allowNull: false
         },
+        
        isActive: {
             type: DataTypes.BOOLEAN,
             defaultValue:false,
@@ -78,10 +92,6 @@ export default (sequelize: Sequelize) => {
             allowNull: false,
             defaultValue: new Date()
         },
-       
-      
-       
-       
         updatedAt: {
             type: DataTypes.DATE,
             allowNull: false,
