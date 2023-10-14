@@ -7,8 +7,10 @@ export class ProductController {
    
   
   static async createProduct(req: Request, res: Response) {
+    console.log("req - ", req.body);
     (models?.default as any)?.["product"].createProduct(req?.body)
                                       .then((data: any) => {
+                                         console.log("data - ", data);
                                          res.json({"message": "data added sucessfully"})
                                       });
   }
@@ -50,6 +52,13 @@ export class ProductController {
                                       });
   }
 
+  static async getProductImages(req: Request, res: Response) {
+    (models?.default as any)?.["productImagesUrlContainer"].getAllProductImagesUrlContainer()
+                                      .then((data: any) => {
+                                         res.json(data)
+                                      });
+  }
+
   static async deleteProductSubCategories(req: Request, res: Response) {
     (models?.default as any)?.["productSubCategory"].deleteProductSubCategories(req.body)
                                       .then((data: any) => {
@@ -83,9 +92,19 @@ export class ProductController {
 
          (models?.default as any)?.["productImagesUrlContainer"]
                                   .createProductImagesUrlContainer([obj])
-                                  .then((data: any) => {
-                                     res.json(obj)
-                                  });
+                                  .then((obj: any) => {
+                                    (models?.default as any)?.["productImagesUrlContainer"]
+                                                             .findOne({
+                                                                        where: {
+                                                                              "productImagesName": req.body.productImageName
+                                                                        }
+                                                                     })
+                                                            .then((findData: any) => {
+                                                              res.json(findData)
+                                                            })
+                                  })
+
+                                 
 
       })
    }

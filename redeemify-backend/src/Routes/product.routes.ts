@@ -9,6 +9,7 @@ productsRouter
 .get('/', ProductController.getProducts)
 .get('/getProductCategories', ProductController.getProductCategory)
 .get('/getProductSubCategories', ProductController.getProductSubCategories)
+.get('/getProductImages', ProductController.getProductImages)
 
 // post api's
 .post('/createProductCategories', ProductController.createProductCategories)

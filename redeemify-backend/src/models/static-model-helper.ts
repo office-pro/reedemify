@@ -1,4 +1,3 @@
-import { Sequelize } from "sequelize";
 
 export class StaticModelHelper {
    
@@ -9,9 +8,9 @@ export class StaticModelHelper {
     let updateKeys = JSON.parse(JSON.stringify(updateConditions.keys));
     delete createConditions.keys;
     delete updateConditions.keys;
-    for(const record of records) {
+    let finalOp:Array<any> = [];
+    for(let record of records) {
       try{
-          console.log("record data - ",StaticModelHelper.whereKeyValueExtractor(keys,record))
           const [recordObj, created] = await model.findOrCreate({
               where: StaticModelHelper.whereKeyValueExtractor(keys,record),
               defaults: record,
@@ -19,19 +18,20 @@ export class StaticModelHelper {
           });
 
           if (created) {
+              finalOp.push(recordObj.toJSON());
               console.log('data created:', recordObj.toJSON());
           } else {
               console.log('data already exists. Skipping...');
-
 
               await model.update(record,{
                   where: StaticModelHelper.whereKeyValueExtractor(updateKeys,record),
                   ...updateConditions
               }).then((updatedObj: any) => {
-                  console.log('data updated:', updatedObj);
+                  console.log('data updated:', record);
               })
               .catch((error: any) => {
                   console.error('Error updating data:', error);
+                  finalOp.push(record); 
               });
 
           }
@@ -39,6 +39,7 @@ export class StaticModelHelper {
           console.error('Error inserting or updating data:', error);
       }
     }
+    return Promise.resolve(finalOp);
   }
 
   static whereKeyValueExtractor(keys:Array<string> = [], record: any = {}) {
