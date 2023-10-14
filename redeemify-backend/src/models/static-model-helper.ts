@@ -9,13 +9,8 @@ export class StaticModelHelper {
     delete createConditions.keys;
     delete updateConditions.keys;
     let finalOp:Array<any> = [];
-    console.log("records - ",records);
-    let i = 0;
     for(let record of records) {
-      i++;
-      console.log("index - ", i);
       try{
-          console.log("record data - ",StaticModelHelper.whereKeyValueExtractor(keys,record))
           const [recordObj, created] = await model.findOrCreate({
               where: StaticModelHelper.whereKeyValueExtractor(keys,record),
               defaults: record,
@@ -27,7 +22,6 @@ export class StaticModelHelper {
               console.log('data created:', recordObj.toJSON());
           } else {
               console.log('data already exists. Skipping...');
-
 
               await model.update(record,{
                   where: StaticModelHelper.whereKeyValueExtractor(updateKeys,record),
