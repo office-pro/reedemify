@@ -31,14 +31,17 @@ export default (sequelize: Sequelize) => {
            
         }
 
-        static async createProductImagesUrlContainer(productItems: Array<any>, conditions: any = {}) {
+        static createProductImagesUrlContainer(productItems: Array<any>, conditions: any = {}) {
 
-            return StaticModelHelper.bulkCreateOrUpdate(productImagesUrlContainer,productItems, {
-                keys: ['productImagesName'],
-                ...conditions
-            }, {
-                keys: ['productImagesName']
+            return new Promise((resolve: any, reject: any) => {
+                  resolve(StaticModelHelper.bulkCreateOrUpdate(productImagesUrlContainer,productItems, {
+                    keys: ['productImagesName'],
+                    ...conditions
+                }, {
+                    keys: ['productImagesName']
+                }))
             })
+             
         }
     }
 
