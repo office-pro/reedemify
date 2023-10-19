@@ -7,8 +7,12 @@ export class ProductService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getProducts() {
-    return this.httpClient.get("http://localhost:3000/api/products")
+  getProducts(brandId: number = 0) {
+    return this.httpClient.get("http://localhost:3000/api/products?brandId="+brandId)
+  }
+
+  getProductsByProductId(brandId: number = 0, productId: number) {
+    return this.httpClient.get("http://localhost:3000/api/products?brandId="+brandId+"&productId="+productId)
   }
 
   createProducts(product: Array<any>) {

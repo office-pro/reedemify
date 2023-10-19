@@ -12,6 +12,7 @@ import {MatTableModule} from "@angular/material/table";
 import {MatSortModule} from '@angular/material/sort';
 import { UserService } from './services/user.service';
 import { SharedModule } from './shared-components/shared.modules';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [AppComponent],

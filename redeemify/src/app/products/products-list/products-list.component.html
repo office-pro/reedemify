@@ -13,7 +13,15 @@
           <image-slider [imageUrls]="product?.productImagesUrlContainer?.imageUrls"></image-slider>
  
           <ion-card-content>
-           {{product.productName}}
+            <div class="">
+              <div class="">
+                <h3 style="margin: 0; font-weight: 600;">{{product.productName}}</h3>
+                <p>Rs {{product.productPrice}}</p>
+              </div>
+              <div class="">
+                     
+              </div>
+            </div>
           </ion-card-content>
         </ion-card>
       </ion-col>

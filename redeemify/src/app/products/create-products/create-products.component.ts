@@ -2,6 +2,8 @@ import { Component } from "@angular/core";
 import { FormArray, FormBuilder, Validators } from "@angular/forms";
 import { ProductService } from "../services/products.services";
 import { ExcelService } from "src/app/shared-components/services/excel-helper.service";
+import { Router } from "@angular/router";
+import { ProductUtils } from "../utils/product.utils";
 
 @Component({
   selector: 'create-products',
@@ -18,8 +20,9 @@ export class CreateProductComponent {
   selectedProductCategory: any = [];
   selectedProductSubCategory: any = [];
   selectedProductImage: any = [];
+  productUtils = ProductUtils
 
-  constructor(private fb: FormBuilder, private productService: ProductService) {
+  constructor(private fb: FormBuilder, private productService: ProductService, public router: Router) {
     this.createProductForm = this.fb.group({
       // Other form controls
       productEntries: new FormArray([]),
@@ -70,6 +73,7 @@ export class CreateProductComponent {
       let productValues = controls.map((control: any) => control.value);
       this.productService.createProducts(productValues)
                           .subscribe((product: any) => {
+                            this.resetData();
                             alert("products created");
                           });
     }
@@ -80,6 +84,15 @@ export class CreateProductComponent {
     this.filterProductCategory(productCategoryId,index);
     this.filterProductSubCategory(productSubCategoryId, index);
     this.filterProductImages(productImagesUrlContainerId, index);
+  }
+
+  private resetData() {
+
+    this.selectedProductCategory = [];
+    this.selectedProductSubCategory = [];
+    this.selectedProductImage = [];
+    this.productEntriesArray.clear();
+
   }
 
   filterProductCategory(productCategoryId: number,index: number) {

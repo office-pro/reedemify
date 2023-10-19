@@ -28,13 +28,14 @@
               Products
             </div>
             <div class="products--menu-container-actions">
-              <ion-button id="open-modal" size="small">Create</ion-button>
+              <ion-button fill="outline" size="small" (click)="productUtils.goToCreateRoute(router)">Create</ion-button>
+              <ion-button fill="outline" size="small" (click)="productUtils.goTouploadProductImages(router)">Upload Images</ion-button>
             </div>
 
-            <div class="products--menu-container-actions">
+            <!-- <div class="products--menu-container-actions">
               <ion-button size="small" (click)="fileInput.click()">Upload via excel</ion-button>
               <input type="file" #fileInput (change)="onExcelUpload($event.target)" style="visibility: hidden;">
-            </div>
+            </div> -->
           <!-- </ion-card> -->
 
         </div>
@@ -55,75 +56,4 @@
             aria-label="Select page">
     </mat-paginator>
   </ion-grid>
-
-   <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
-    <ng-template>
-      <ion-header>
-        <ion-toolbar>
-          <ion-buttons slot="start">
-            <ion-button (click)="cancel()">Cancel</ion-button>
-          </ion-buttons>
-          <ion-title>Create Products</ion-title>
-          <ion-buttons slot="end">
-            <ion-button (click)="confirm()" [strong]="true">Confirm</ion-button>
-          </ion-buttons>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content class="ion-padding">
-
-
-        
-        <form [formGroup]="productForm" (ngSubmit)="createForm()">
-          <ion-item>
-            <ion-label position="stacked">Enter your name</ion-label>
-            <ion-input type="text" placeholder="Your name"  name="productName" formControlName="productName"></ion-input>
-          </ion-item>
-
-          <ion-item>
-            <ion-label position="stacked">Enter Price</ion-label>
-            <ion-input type="text" placeholder="Your name"  name="productPrice" formControlName="productPrice"></ion-input>
-          </ion-item>
-
-          <ion-item>
-            <ion-label position="stacked">Enter productCategory</ion-label>
-            <!-- <ion-input type="text" placeholder="Your name"  name="productCategoryId" formControlName="productCategoryId"></ion-input> -->
-            <mat-select [(value)]="selectedProductCategory" formControlName="productCategoryId">
-              <mat-option *ngFor="let food of productCategories" [value]="food">
-                {{food.productCategoryName}}
-              </mat-option>
-            </mat-select>
-          </ion-item>
-
-          <ion-item>
-            <ion-label position="stacked">Enter your productSubCategory</ion-label>
-            <mat-select [(value)]="selectedProductSubCategory" formControlName="productSubCategoryId">
-              <mat-option *ngFor="let food of selectedProductCategory?.productSubCategories" [value]="food.productSubCategoryId">
-                {{food?.productSubCategoryName}}
-              </mat-option>
-            </mat-select>
-          </ion-item>
-
-          <ion-item>
-            <ion-label position="stacked">Enter your productImages</ion-label>
-            <mat-select [(value)]="selectedProductImage" formControlName="productImagesUrlContainerId">
-              <mat-option *ngFor="let food of productImages" [value]="food.productImagesUrlContainerId">
-                {{food.productImagesName}}
-              </mat-option>
-            </mat-select>
-          </ion-item>
-
-          <ion-item>
-            <ion-label position="stacked">Enter your productDesc</ion-label>
-            <ion-input type="text" placeholder="Your name"  name="productDesc" formControlName="productDesc"></ion-input>
-          </ion-item>
-
-          <button type="submit">Save</button>
-
-
-        </form>
-        
-        
-      </ion-content>
-    </ng-template>
-  </ion-modal>
 </ion-content>

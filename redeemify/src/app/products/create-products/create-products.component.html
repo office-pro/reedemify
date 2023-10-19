@@ -6,10 +6,10 @@
       <mat-toolbar>
         <input type="file" #fileInput (change)="onExcelUpload($event.target)" style="visibility: hidden;"/>
 
-        <ion-col size="6">
+        <ion-col size="5">
           <ion-searchbar animated="true" placeholder="Search Products"></ion-searchbar>
         </ion-col>
-        <ion-col size="6">
+        <ion-col size="7" class="products-create--menu-items">
           <ion-button fill="outline" size="small" (click)="addProductEntries()">
             <ion-icon slot="start" name="add-outline"></ion-icon>
             New Product
@@ -22,7 +22,10 @@
             <ion-icon slot="start" name="download-outline"></ion-icon>
             Download
           </ion-button>
-          <ion-button fill="outline" size="small" [disabled]="!createProductForm.valid" (click)="submitForm(createProductForm)">Create</ion-button>
+          <ion-button fill="outline" size="small" (click)="productUtils.goTouploadProductImages(router)">
+            Add Images
+          </ion-button>
+          <ion-button fill="outline" size="small" [disabled]="!createProductForm.valid" (click)="submitForm(createProductForm)">Save</ion-button>
         </ion-col>
       </mat-toolbar>
 
@@ -34,7 +37,7 @@
             <div formArrayName="productEntries">
               <ng-container  *ngFor="let entry of productEntriesArray.controls; let i = index">
                   
-                  <ion-accordion class="{{(entry?.invalid && entry?.dirty) ? 'product-create--invalid': null}}" value="{{'product'+i}}">
+                  <ion-accordion class="{{(entry?.invalid) ? 'product-create--invalid': null}}" value="{{'product'+i}}">
                     <ion-item slot="header" color="light">
                       <ion-label>{{!!entry?.value?.productName ? entry?.value?.productName : "Product "+ (i + 1)}}</ion-label>
                       <ion-label class="product-create--trash-container">
@@ -88,8 +91,8 @@
                      
 
                       <ion-row>
-                        <ion-col size="6" *ngIf="selectedProductImage[i]?.imageUrls?.length > 0">
-                          <image-slider clss="products-image-uploader--main--el" [imageUrls]="selectedProductImage[i]?.imageUrls" ></image-slider>
+                        <ion-col size="6" class="" *ngIf="selectedProductImage[i]?.imageUrls?.length > 0">
+                          <image-slider class="products-image-uploader--main--el" [imageUrls]="selectedProductImage[i]?.imageUrls" ></image-slider>
                         </ion-col>
                         <ion-col size="6">
                           <ion-item>

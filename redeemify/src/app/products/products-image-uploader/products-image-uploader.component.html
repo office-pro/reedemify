@@ -11,8 +11,10 @@
                 <ion-card-title>Upload Product Images</ion-card-title>
               </div>
               <div class="products-image-uploader--header-actions">
+                <ion-button fill="outline" size="small" (click)="productUtils.goToCreateRoute(router)">Create Products</ion-button>
+                <ion-button fill="outline" size="small" (click)="productUtils.goToProductsHomePage(router)">Products</ion-button>
                 <ion-button fill="outline" size="small" (click)="addProductImageDetail()">Add Images</ion-button>
-                <ion-button fill="outline" size="small" (click)="uploadData()">Upload Data</ion-button>
+                <ion-button fill="outline" size="small" (click)="uploadData()">Save</ion-button>
               </div>
             </div>
           </ion-card-header>
