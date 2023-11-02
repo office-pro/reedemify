@@ -8,7 +8,8 @@ import { ProductsDetailComponent } from "./products-detail/products-detail.compo
 
 const routes: Routes = [
   { path: '', component: ProductsHomeComponent },
-  { path: ':productId', component: ProductsDetailComponent},
+  { path: 'details/:productId', component: ProductsDetailComponent },
+  { path: 'edit/:productId', component: ProductsDetailComponent },
   { path: 'upload-images', component: ProductImageUploaderComponent },
   { path: 'create', component: CreateProductComponent },
 ]

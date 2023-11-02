@@ -12,7 +12,7 @@ export class ProductService {
   }
 
   getProductsByProductId(brandId: number = 0, productId: number) {
-    return this.httpClient.get("http://localhost:3000/api/products?brandId="+brandId+"&productId="+productId)
+    return this.httpClient.get("http://localhost:3000/api/products/getProductByProductId/"+productId)
   }
 
   createProducts(product: Array<any>) {
@@ -29,6 +29,10 @@ export class ProductService {
 
   getProductImages() {
     return this.httpClient.get("http://localhost:3000/api/products/getProductImages");
+  }
+
+  deleteProducts(productArrIds: Array<number> = []) {
+    return this.httpClient.post("http://localhost:3000/api/products/deleteProducts", productArrIds)
   }
 
   

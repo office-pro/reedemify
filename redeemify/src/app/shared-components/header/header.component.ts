@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { Router } from "@angular/router";
 
@@ -9,13 +9,14 @@ import { Router } from "@angular/router";
 })
 
 export class HeaderComponent {
-  loginForm: NgForm | any;
+
+  @Input()
+  logo: string = "";
+
+  @Input()
+  showPoweredBy: boolean = false;
 
   constructor(private router: Router) {}
-
-  login(form: NgForm) {
-     
-  }
 
   navigateToHome() {
     this.router.navigateByUrl("/home");

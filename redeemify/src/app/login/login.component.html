@@ -11,6 +11,10 @@
           <ion-card-content>
             <form #loginForm="ngForm">
               <ion-item>
+                <ion-label position="floating">Brand Name</ion-label>
+                <ion-input type="text" name="brandName" #brandName="ngModel" required ngModel></ion-input>
+              </ion-item>
+              <ion-item>
                 <ion-label position="floating">Mobile Number</ion-label>
                 <ion-input type="number" name="mobileNo" #mobileNo="ngModel" required ngModel></ion-input>
               </ion-item>

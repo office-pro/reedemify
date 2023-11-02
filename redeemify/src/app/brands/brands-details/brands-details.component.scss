@@ -1,0 +1,35 @@
+
+    .brands-details{
+
+      &--details-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &--title {
+          flex: 1;
+        }
+
+        &--actions {
+          flex: 1;
+          text-align: right;
+        }
+      }
+
+      &--image-container {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 0 10px;
+        &--image {
+          padding: 0 10px;
+          img {
+            height: 50px;
+          }
+        }
+        &--action {
+
+        }
+      }
+
+    }

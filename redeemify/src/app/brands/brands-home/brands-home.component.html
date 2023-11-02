@@ -1,11 +1,21 @@
 <ion-content>
   <header-page></header-page>
+
+  <div class="brands-home--search-container">
+    <div class="brands-home--search-container--search">
+      <ion-searchbar animated="true" placeholder="Animated"></ion-searchbar>
+    </div>
+    <div class="brands-home--search-container--search-actions">
+      <ion-button size="small" (click)="goToBrandDetails({})">Create</ion-button>
+    </div>
+  </div>
   
-  <ion-grid class="brands--grid">
-    <ion-row class="brands--rows">
-      <ion-col size="3" class="brands--cols" *ngFor="let brand of brands">
+  <ion-grid class="brands-home--grid">
+    <ion-row class="brands-home--rows">
+
+      <ion-col size="3" class="brands-home--cols" *ngFor="let brand of brands">
         <ion-card color="light" class="brands-card" (click)="goToBrandDetails(brand)">
-          <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+          <img alt="{{brand?.brandName}}" src="{{brand?.brandCss?.logo}}" />
           <ion-card-header>
             <ion-card-title>{{brand.brandName}}</ion-card-title>
           </ion-card-header>

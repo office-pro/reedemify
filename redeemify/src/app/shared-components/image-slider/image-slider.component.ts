@@ -11,6 +11,12 @@ export class ImageSliderComponent {
   @Input()
   imageUrls: Array<string> = [];
 
+  @Input()
+  type: "default" | "large" = "default";
+
+  @Input()
+  showPreview = false;
+
   private interval: any
 
   currentIndex = 0;
@@ -37,7 +43,8 @@ export class ImageSliderComponent {
     // clearInterval(this.interval)
   }
 
-  next() {
+  next(event: any) {
+    this.stopDefaultEvents(event);
     if(this.currentIndex < this.imageUrls.length - 1 ) {
       this.currentIndex++;
     } else {
@@ -45,12 +52,18 @@ export class ImageSliderComponent {
     }
   }
 
-  prev() {
+  prev(event: any) {
+    this.stopDefaultEvents(event);
     if(this.currentIndex > 0 ) {
       this.currentIndex--;
     } else {
       this.currentIndex = this.imageUrls.length - 1;
     }
+  }
+
+  private stopDefaultEvents(event: any) {
+    event.preventDefault();
+    event.stopPropagation();
   }
 
 

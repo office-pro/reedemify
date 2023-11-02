@@ -1,7 +1,7 @@
 <ion-grid class="products-list--grid">
     <ion-row class="products-list--rows">
       <ion-col size="3"  class="products-list--cols" *ngFor="let product of data">
-        <ion-card color="light" class="products-list--card">
+        <ion-card color="light" class="products-list--card" (click)="productUtils.goToProductDetailsPage(router, product.productId)">
           <!-- <img alt="Silhouette of mountains"  src="https://ionicframework.com/docs/img/demos/card-media.png" 
           [src]="product?.productImage[0]"
           /> -->

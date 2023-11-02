@@ -1,7 +1,7 @@
 import {Request, Response} from 'express';
+import * as models from '../models/index';
 import * as argon2 from 'argon2';
 import * as jwt from 'jsonwebtoken';
-import pool from '../static/db';
 
 export class AuthController {
 
@@ -23,7 +23,42 @@ export class AuthController {
     // }
   }
 
-  static async login(request: Request, response: Response) {
+  static async login(req: Request, res: Response) {
+
+    const {mobileNo, otp, brandName} = req.body;
+
+    (models?.default as any)?.["brands"]
+                             .findBrandByBrandId({brandName})
+                             .then((data: any) => {
+                               if(data?.length > 0) {
+                                (models?.default as any)?.["users"]
+                                  .getUserById({mobileNo})
+                                  .then((dataVal: any) => {
+                                    console.log("datavalues - ",data[0].dataValues)
+                                    console.log("dataVal - ",dataVal)
+                                    if(!!dataVal && (dataVal.dataValues.brandId == data[0].dataValues.brandId)) {
+                                      const {mobileNo, userId, userName, role, brand} = dataVal.dataValues;
+                                   
+                                      console.log("roles - ", role.dataValues);
+                                      console.log("brands - ", brand.dataValues);
+
+
+
+
+
+                                      res.json({"data": jwt.sign({mobileNo, userId, userName,...role.dataValues,...brand.dataValues}, brand.dataValues.brandName, { expiresIn: '1h' })})
+                                    } else {
+                                      res.status(500).send('Invalid user , client name or otp');
+                                    }
+                                  })
+                               } else {
+                                res.status(500).send('Invalid user , client name or otp');
+                               }
+                              }, () => {
+                                res.status(500).send('Invalid user , client name or otp');
+                              });
+
+
     //  const {username, passcode} = request.body;
      
     //  try {

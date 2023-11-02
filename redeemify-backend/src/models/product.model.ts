@@ -51,8 +51,34 @@ export default (sequelize: Sequelize) => {
            
         }
 
-        static async createProduct(productItems: Array<any>, conditions: any = {}) {
+        static async getProductById(id: number) {
 
+           return sequelize.transaction(async() => {
+             return await product.findOne({
+                where: {
+                    productId: id
+                },
+                include: [{
+                    model: models?.default?.productCategory,
+                    attributes: ['productCategoryId', 'productCategoryName','productCategoryDesc']
+                }, 
+                {
+                    model: models?.default?.productSubCategory,
+                    attributes: ['productSubCategoryId', 'productSubCategoryName', 'productSubCategoryDesc']
+                },
+                {
+                    model: models?.default?.productImagesUrlContainer,
+                    attributes: ['productImagesUrlContainerId', 'productImagesName', 'imageUrls']
+                },
+
+                ]
+            });
+           });
+           
+        }
+
+        static async createProduct(productItems: Array<any>, conditions: any = {}) {
+            console.log("productItems - ",productItems);
             return StaticModelHelper.bulkCreateOrUpdate(product,productItems, {
                 keys: ['productName'],
                 ...conditions

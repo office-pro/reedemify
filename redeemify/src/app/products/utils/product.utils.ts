@@ -9,6 +9,10 @@ export class ProductUtils {
     router.navigateByUrl("/products/upload-images");
   }
 
+  static goToProductDetailsPage(router: Router, id: number) {
+    router.navigateByUrl(`/products/details/${id}`);
+  }
+
   static goToProductsHomePage(router: Router) {
     router.navigateByUrl("/products")
   }

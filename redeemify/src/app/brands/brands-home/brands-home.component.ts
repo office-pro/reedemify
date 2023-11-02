@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { BrandService } from "../services/brands.services";
 import { Router } from "@angular/router";
+import { AppUtilityService } from "src/app/shared-components/services/app-utility.service";
 
 @Component({
   selector: 'brand-home',
@@ -11,7 +12,7 @@ export class BrandsHomeComponent {
 
   brands: Array<any> = [];
 
-  constructor(private brandsService: BrandService, private router: Router) {
+  constructor(private brandsService: BrandService, private router: Router, private appUtility: AppUtilityService) {
 
   }
 
@@ -26,7 +27,11 @@ export class BrandsHomeComponent {
   }
 
   goToBrandDetails(brand: any) {
-    this.router.navigateByUrl(`/brands/${brand.brandId}`)
+    if(brand.brandId) {
+      this.router.navigateByUrl(`/brands/${brand.brandId}`)
+    } else {
+      this.router.navigateByUrl(`/brands/new`)
+    }
   }
   
 }
