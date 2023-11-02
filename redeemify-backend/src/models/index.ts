@@ -6,8 +6,6 @@ let models: any = {};
 export function registersModels(sequelize: any) {
   const thisFile = path.basename(__filename);
   const modelFiles = fs.readdirSync(__dirname);
-  console.log("filename - ", __filename);
-  console.log("__dirname - ", __dirname);
   const filteredModelFiles = modelFiles.filter((file) => {
     return file != thisFile && file.slice(-9) === '.model.ts';
   })
@@ -21,10 +19,12 @@ export function registersModels(sequelize: any) {
 
   Object.keys(models).forEach((modelName) => {
     if(models[modelName].associate) {
-      models[modelName].associate(models)
-      // models[modelName].create()
+      models[modelName].associate(models);
+      models[modelName].sync()
     }
   });
+
+  
 
   models.sequelize = sequelize;
 }

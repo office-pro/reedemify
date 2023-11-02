@@ -1,0 +1,36 @@
+<ion-content>
+  <header-page></header-page>
+
+  <div class="brands-home--search-container">
+    <div class="brands-home--search-container--search">
+      <ion-searchbar animated="true" placeholder="Animated"></ion-searchbar>
+    </div>
+    <div class="brands-home--search-container--search-actions">
+      <ion-button size="small" (click)="goToBrandDetails({})">Create</ion-button>
+    </div>
+  </div>
+  
+  <ion-grid class="brands-home--grid">
+    <ion-row class="brands-home--rows">
+
+      <ion-col size="3" class="brands-home--cols" *ngFor="let brand of brands">
+        <ion-card color="light" class="brands-card" (click)="goToBrandDetails(brand)">
+          <img alt="{{brand?.brandName}}" src="{{brand?.brandCss?.logo}}" />
+          <ion-card-header>
+            <ion-card-title>{{brand.brandName}}</ion-card-title>
+          </ion-card-header>
+
+          <!-- <ion-card-content>
+           
+          </ion-card-content> -->
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <mat-paginator class="brands--paginator" [length]="100"
+            [pageSize]="10"
+            [pageSizeOptions]="[5, 10, 25, 100]"
+            aria-label="Select page">
+    </mat-paginator>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,59 @@
+<ion-content>
+  <header-page></header-page>
+  
+  <ion-grid class="products--grid">
+    <ion-row class="products--rows">
+      <mat-toolbar>
+        <ion-col size="6" sizeXs="12">
+          <ion-searchbar animated="true" placeholder="Animated"></ion-searchbar>
+        </ion-col>
+      </mat-toolbar>
+      <ion-col size="3" sizeSm="3" sizeXs="0">
+         <!-- <ion-card color="light" class="products--card" >
+          <ion-card-header>
+            Filters
+          </ion-card-header>
+
+          <ion-card-content> -->
+            <products-filter></products-filter>
+          <!-- </ion-card-content>
+        </ion-card> -->
+        
+      </ion-col>
+      <ion-col size="9" sizeSm="9" sizeXs="12">
+        <div class="products--menu-container">
+          <!-- <ion-card> -->
+
+            <div class="products--menu-container-label">
+              Products
+            </div>
+            <div class="products--menu-container-actions">
+              <ion-button fill="outline" size="small" (click)="productUtils.goToCreateRoute(router)">Create</ion-button>
+              <ion-button fill="outline" size="small" (click)="productUtils.goTouploadProductImages(router)">Upload Images</ion-button>
+            </div>
+
+            <!-- <div class="products--menu-container-actions">
+              <ion-button size="small" (click)="fileInput.click()">Upload via excel</ion-button>
+              <input type="file" #fileInput (change)="onExcelUpload($event.target)" style="visibility: hidden;">
+            </div> -->
+          <!-- </ion-card> -->
+
+        </div>
+        <!-- <ion-card color="light" class="products--card" >
+          <ion-card-header>
+            Products
+          </ion-card-header>
+          <ion-card-content> -->
+          <products-list [data]="products"></products-list>
+          <!-- </ion-card-content> -->
+        <!-- </ion-card> -->
+        
+      </ion-col>
+    </ion-row>
+    <mat-paginator class="brands--paginator" [length]="100"
+            [pageSize]="10"
+            [pageSizeOptions]="[5, 10, 25, 100]"
+            aria-label="Select page">
+    </mat-paginator>
+  </ion-grid>
+</ion-content>

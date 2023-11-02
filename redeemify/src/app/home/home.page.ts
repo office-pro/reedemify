@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
+import { UserService } from '../services/user.service';
+import { RouteUtils } from '../utils/route.utils';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -7,20 +10,14 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 })
 export class HomePage {
 
-  constructor(private http: HttpClient) {}
+  routeUtils = RouteUtils;
 
-
-
+  constructor(private http: HttpClient, private userService: UserService, public router: Router) {
+  }
 
   fetchData() {
-    this.http.get("http://localhost:3000/users",
-    {
-      headers: new HttpHeaders().set("Access-Control-Allow-Origin", "*")
-    .set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
-    .set("Access-Control-Allow-Headers", "Content-Type")
-    }).subscribe((data) => {
-      console.log("data - ", data);
-    })
+    
   }
 
 }
+

@@ -1,0 +1,134 @@
+<ion-content>
+  <header-page></header-page>
+  
+  <ion-grid class="products-create--grid">
+    <ion-row class="products-create--rows">
+      <mat-toolbar>
+        <input type="file" #fileInput (change)="onExcelUpload($event.target)" style="visibility: hidden;"/>
+
+        <ion-col size="5">
+          <ion-searchbar animated="true" placeholder="Search Products"></ion-searchbar>
+        </ion-col>
+        <ion-col size="7" class="products-create--menu-items">
+          <ion-button fill="outline" size="small" (click)="addProductEntries()">
+            <ion-icon slot="start" name="add-outline"></ion-icon>
+            New Product
+          </ion-button>
+          <ion-button fill="outline" size="small" (click)="fileInput.click()">
+            <ion-icon slot="start" name="cloud-upload-outline"></ion-icon>
+            Upload
+          </ion-button>
+          <ion-button fill="outline" size="small">
+            <ion-icon slot="start" name="download-outline"></ion-icon>
+            Download
+          </ion-button>
+          <ion-button fill="outline" size="small" (click)="productUtils.goTouploadProductImages(router)">
+            Add Images
+          </ion-button>
+          <ion-button fill="outline" size="small" [disabled]="!createProductForm.valid" (click)="submitForm(createProductForm)">Save</ion-button>
+        </ion-col>
+      </mat-toolbar>
+
+      <ion-col>
+        <ion-accordion-group (ionChange)="accordionGroupChange($event)">
+
+          <form [formGroup]="createProductForm">
+
+            <div formArrayName="productEntries">
+              <ng-container  *ngFor="let entry of productEntriesArray.controls; let i = index">
+                  
+                  <ion-accordion class="{{(entry?.invalid) ? 'product-create--invalid': null}}" value="{{'product'+i}}">
+                    <ion-item slot="header" color="light">
+                      <ion-label>{{!!entry?.value?.productName ? entry?.value?.productName : "Product "+ (i + 1)}}</ion-label>
+                      <ion-label class="product-create--trash-container">
+                        <ion-icon name="trash-outline" (click)="removeProductEntries(i)"></ion-icon>
+                      </ion-label>
+                    </ion-item>
+
+                    <div class="ion-padding" [formGroupName]="i" slot="content">
+                      <!-- Define your entry form controls here -->
+                      <!-- For example: -->
+                      <ion-row class="products-create--images-row-container">
+                        <ion-col size="6">
+                          <ion-item>
+                            <ion-label position="stacked">Enter your name</ion-label>
+                            <ion-input type="text" placeholder="Your name"  name="productName" formControlName="productName"></ion-input>
+                          </ion-item>
+                        </ion-col>
+
+                        <ion-col size="6">
+                          <ion-item>
+                            <ion-label position="stacked">Enter Price</ion-label>
+                            <ion-input type="text" placeholder="Your name"  name="productPrice" formControlName="productPrice"></ion-input>
+                          </ion-item>
+                        </ion-col>
+                      </ion-row>
+
+                      <ion-row>
+                        <ion-col size="6">
+                          <ion-item>
+                            <ion-label position="stacked">Enter productCategory</ion-label>
+                            <!-- <ion-input type="text" placeholder="Your name"  name="productCategoryId" formControlName="productCategoryId"></ion-input> -->
+                            <mat-select [value]="selectedProductCategory[i]?.productCategoryId" (valueChange)="filterProductCategory($event,i)" formControlName="productCategoryId">
+                              <mat-option *ngFor="let productCategory of productCategories" [value]="productCategory.productCategoryId">
+                                {{productCategory.productCategoryName}}
+                              </mat-option>
+                            </mat-select>
+                          </ion-item>
+                        </ion-col>
+                        <ion-col size="6">
+                          <ion-item>
+                            <ion-label position="stacked">Enter your productSubCategory</ion-label>
+                            <mat-select [value]="selectedProductSubCategory[i]?.productSubCategoryId" (valueChange)="filterProductSubCategory($event,i)" formControlName="productSubCategoryId">
+                              <mat-option *ngFor="let productSubCategory of selectedProductCategory[i]?.productSubCategories" [value]="productSubCategory.productSubCategoryId">
+                                {{productSubCategory?.productSubCategoryName}}
+                              </mat-option>
+                            </mat-select>
+                          </ion-item>
+                        </ion-col>
+                      </ion-row>
+
+                     
+
+                      <ion-row>
+                        <ion-col size="6" class="" *ngIf="selectedProductImage[i]?.imageUrls?.length > 0">
+                          <image-slider class="products-image-uploader--main--el" [imageUrls]="selectedProductImage[i]?.imageUrls" ></image-slider>
+                        </ion-col>
+                        <ion-col size="6">
+                          <ion-item>
+                            <ion-label position="stacked">Enter your productImages</ion-label>
+                            <mat-select [value]="selectedProductImage[i]?.productImagesUrlContainerId" (valueChange)="filterProductImages($event,i)"  formControlName="productImagesUrlContainerId">
+                              <mat-option *ngFor="let productImage of productImages" [value]="productImage.productImagesUrlContainerId">
+                                {{productImage.productImagesName}}
+                              </mat-option>
+                            </mat-select>
+                          </ion-item>
+                        </ion-col>
+                       
+                      </ion-row>
+
+                      
+
+                     
+
+                      <ion-item>
+                        <ion-textarea label="Product Description" labelPlacement="stacked" name="productDesc" formControlName="productDesc" placeholder="Enter product description"></ion-textarea>
+                      </ion-item>
+
+                      <!-- <button type="submit">Save</button>
+                      <button type="button" (click)="removeProductEntries(i)">Remove</button> -->
+                    </div>
+
+                  </ion-accordion>
+              </ng-container>
+
+            </div>
+
+          </form>
+        </ion-accordion-group>
+      </ion-col>
+
+    </ion-row>
+
+  </ion-grid>
+</ion-content>

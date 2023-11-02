@@ -1,0 +1,11 @@
+
+<mat-form-field>
+  <mat-select [formControl]="selectCtrl" placeholder="placeholder" #singleSelect>
+    <input [(ngModel)]="filter" click="onClick($event)"/>
+
+    <mat-option *ngFor="let data of values" [value]="data">
+      {{data[key]}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+

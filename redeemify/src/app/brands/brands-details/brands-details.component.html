@@ -1,0 +1,260 @@
+<ion-content>
+  <header-page logo="{{brand?.brandCss?.logo}}" [showPoweredBy]="true"></header-page>
+  
+  <ion-grid class="brands--grid">
+    <ion-row class="brands--rows">
+
+      <ion-col size="12">
+        <ion-card>  
+        <ion-card-header>
+          <ion-card-title>
+            <div class="brands-details--details-container">
+              <div class="brands-details--details-container--title">Brand Details</div>
+              <div class="brands-details--details-container--actions">
+                <ion-button size="small" (click)="isEdit = !isEdit" [disabled]="isEdit">Edit</ion-button>
+                <ion-button size="small" [disabled]="!isEdit" (click)="this.onSave()">Save</ion-button>
+              </div>
+            </div>
+          </ion-card-title>
+        </ion-card-header> 
+        <ion-card-content>
+          <ion-list>
+            <ion-item>
+              <ion-input
+                label="Brand Name"
+                labelPlacement="stacked"
+                [clearInput]="true"
+                placeholder="Enter Brand Name"
+                [value]="brand?.brandName"
+                [(ngModel)]="brand.brandName"
+                [disabled]="!isEdit"
+              >
+              </ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-input
+                label="Wallet Balance"
+                labelPlacement="stacked"
+                [clearInput]="true"
+                placeholder="Enter Wallet Balance"
+                [value]="brand?.balance"
+                [(ngModel)]="brand.balance"
+                [disabled]="!isEdit"
+              >
+              </ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-input
+                label="Wallet Limit"
+                labelPlacement="stacked"
+                [clearInput]="true"
+                placeholder="Enter Wallet Limit Balance"
+                [value]="brand?.limit"
+                [(ngModel)]="brand.limit"
+                [disabled]="!isEdit"
+              >
+              </ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-checkbox [(ngModel)]="brand.isActive" [value]="brand?.isActive" [disabled]="!isEdit">Is Active</ion-checkbox>
+            </ion-item>
+          </ion-list>
+        </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      
+      <ion-col size="12">
+        <ion-card >  
+        <ion-card-header>
+          <ion-card-title>
+            <div class="brands-details--details-container">
+              <div class="brands-details--details-container--title">Users</div>
+              <div class="brands-details--details-container--actions">
+                <ion-button size="small" [disabled]="!isEdit">Add</ion-button>
+              </div>
+            </div>
+          </ion-card-title>
+         
+        </ion-card-header> 
+        <ion-card-content>
+          <table mat-table [dataSource]="brand?.users" class="mat-elevation-z8">
+
+              <!--- Note that these columns can be defined in any order.
+                    The actual rendered columns are set as a property on the row definition" -->
+
+              <!-- Position Column -->
+              <ng-container matColumnDef="firstName">
+                <th mat-header-cell *matHeaderCellDef> No. </th>
+                <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+              </ng-container>
+
+              <!-- Name Column -->
+              <ng-container matColumnDef="lastName">
+                <th mat-header-cell *matHeaderCellDef> Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+              </ng-container>
+
+              <!-- Weight Column -->
+              <ng-container matColumnDef="email">
+                <th mat-header-cell *matHeaderCellDef> email </th>
+                <td mat-cell *matCellDef="let element"> {{element?.email}} </td>
+              </ng-container>
+
+              <!-- Symbol Column -->
+              <ng-container matColumnDef="mobileNo">
+                <th mat-header-cell *matHeaderCellDef> mobileNo </th>
+                <td mat-cell *matCellDef="let element"> {{element?.mobileNo}} </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-card >  
+        <ion-card-header>
+          <ion-card-title>
+            <div class="brands-details--details-container">
+              <div class="brands-details--details-container--title">Products Bucket</div>
+              <div class="brands-details--details-container--actions">
+                <ion-button size="small" [disabled]="!isEdit">Add</ion-button>
+              </div>
+            </div>
+          </ion-card-title>
+        </ion-card-header> 
+        <ion-card-content>
+          Yet to be developed
+        </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-card >  
+        <ion-card-header>
+          <ion-card-title>
+            Client Styling
+          </ion-card-title>
+        </ion-card-header> 
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="6">
+                <ion-item>
+                  <ion-input
+                    label="Primary Color"
+                    labelPlacement="stacked"
+                    [clearInput]="true"
+                    [value]="brand?.brandCss?.primaryColor"
+                    [(ngModel)]="brand.brandCss.primaryColor"
+                    type="color"
+                    [disabled]="!isEdit"
+                  >
+                  </ion-input>
+                  
+                </ion-item>
+              </ion-col>
+              <ion-col size="6">
+                <ion-item>
+                  <ion-input
+                    label="Secondary Color"
+                    labelPlacement="stacked"
+                    [clearInput]="true"
+                    [value]="brand?.brandCss?.secondaryColor"
+                    [(ngModel)]="brand.brandCss.secondaryColor"
+                    type="color"
+                    [disabled]="!isEdit"
+                  >
+                  </ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col size="6">
+                <ion-item>
+                  <ion-input
+                    label="Header Color"
+                    labelPlacement="stacked"
+                    [clearInput]="true"
+                    [value]="brand?.brandCss?.headerColor"
+                    [(ngModel)]="brand.brandCss.headerColor"
+                    type="color"
+                    [disabled]="!isEdit"
+                  >
+                  </ion-input>
+                  
+                </ion-item>
+              </ion-col>
+              <ion-col size="6">
+                <ion-item>
+                  <ion-input
+                    label="Font Color"
+                    labelPlacement="stacked"
+                    [clearInput]="true"
+                    [value]="brand?.brandCss?.textColor"
+                    [(ngModel)]="brand.brandCss.textColor"
+                    type="color"
+                    [disabled]="!isEdit"
+                  >
+                  </ion-input>
+                </ion-item>
+              </ion-col>
+              <!-- <ion-col size="6">
+                <ion-item>
+                  <ion-input
+                    label="Border Color"
+                    labelPlacement="stacked"
+                    [clearInput]="true"
+                    value=""
+                    type="color"
+                    [disabled]="!isEdit"
+                  >
+                  </ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col size="6">
+                <ion-item>
+                  <ion-input
+                    label="Light Color"
+                    labelPlacement="stacked"
+                    [clearInput]="true"
+                    value=""
+                    type="color"
+                    [disabled]="!isEdit"
+                  >
+                  </ion-input>
+                </ion-item>
+              </ion-col> -->
+
+              <ion-col size="6">
+                <div class="brands-details--image-container">
+                  <div class="brands-details--image-container--image">
+                    <img src="{{brand?.brandCss?.logo}}" />
+                  </div>
+                  <div class="brands-details--image-container--action">
+                    <input type="file" style="display: none;" #fileUpload (change)="showImage($event)">
+                    <ion-button [disabled]="!isEdit" size="small" (click)="fileUpload.click()">Add Logo</ion-button>
+                  </div>
+                </div>
+                
+              </ion-col>
+
+              <ion-col size="6">
+                <ion-checkbox labelPlacement="end">Dark Mode</ion-checkbox>
+                <ion-button [disabled]="!isEdit" size="small" (click)="updateTheme()">Update Changes</ion-button>
+              </ion-col>
+
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+  
+  </ion-grid>
+</ion-content>

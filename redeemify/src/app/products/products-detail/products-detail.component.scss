@@ -1,0 +1,27 @@
+.products-details {
+  &--link-container {
+    text-transform: capitalize;
+    color: #777;
+    font-size: 12px;
+    cursor: pointer;
+  }
+
+  &--label-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+   
+
+    &--label-name {
+      font-size: 20px;
+      font-weight: 600;
+      flex: 1;
+    }
+
+    &--label-actions {
+      flex: 1;
+      text-align: right;
+    }
+
+  }
+}

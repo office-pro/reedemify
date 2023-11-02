@@ -9,37 +9,10 @@ module.exports = {
      * Add altering commands here.
      *
      * Example:
-     * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
+     * await queryInterface.createTable('wallet', { id: Sequelize.INTEGER });
      */
-    await queryInterface.createTable('bucket', {
-    bucketId: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true
-    },
-    brandId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references:{
-        model:'brands',
-        key:'brandId'
-      },
-      onUpdate:'CASCADE',
-      onDelete:'CASCADE'
-      
-    },
-    bucketName: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        len: {
-          args: [3,100],
-          msg: "bucketName must be within 3 and 100 characters"
-        }
-      }
-    }
-
-  });
+    await queryInterface.dropTable('bucket')
+   
   },
 
   async down (queryInterface, Sequelize) {
@@ -47,8 +20,8 @@ module.exports = {
      * Add reverting commands here.
      *
      * Example:
-     * await queryInterface.dropTable('users');
+     * await queryInterface.dropTable('wallet');
      */
-     await queryInterface.dropTable('bucket');
+    //  await queryInterface.dropTable('wallet');
   }
 };

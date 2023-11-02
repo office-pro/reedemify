@@ -1,0 +1,49 @@
+<ion-content>
+  <header-page></header-page>
+  
+  <ion-grid class="products-details--grid">
+    <ion-row class="products-details--rows">
+      
+      <ion-col size="5">
+        <div>
+          <image-slider type="large" [showPreview]="true" [imageUrls]="product?.productImagesUrlContainer?.imageUrls"></image-slider>
+        </div>
+      </ion-col>
+      <ion-col size="7">
+        <div>
+
+          <div class="products-details--link-container">
+            <span *ngIf="product?.productCategory?.productCategoryName">{{product?.productCategory?.productCategoryName}} > </span>
+            <span *ngIf="product?.productSubCategory?.productSubCategoryName">{{product?.productSubCategory?.productSubCategoryName}} > </span>
+            <span *ngIf="product?.productName">{{product?.productName}}</span>
+          </div> 
+
+
+
+
+          <div class="products-details--label-container" *ngIf="product?.productName">
+            <div class="products-details--label-container--label-name">
+              {{product.productName}}
+            </div>
+            <div class="products-details--label-container--label-actions">
+              <ion-button fill="outline" size="small" (click)="onProductDelete()">Delete</ion-button>
+              <ion-button fill="outline" size="small" (click)="isEdit = !isEdit">Edit</ion-button>
+            </div>
+          </div>
+
+          <h4 *ngIf="product?.productPrice">Price  - {{product?.productPrice}}</h4>
+          
+          <ng-container *ngIf="product.productDesc">
+
+            <p>Description</p>
+
+            <p>{{product.productDesc}}</p>
+
+          </ng-container>
+
+        </div>
+      </ion-col>
+     
+    </ion-row>
+  </ion-grid>
+</ion-content>

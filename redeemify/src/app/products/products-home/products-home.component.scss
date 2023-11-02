@@ -1,0 +1,42 @@
+.products {
+  &--grid {
+    height: calc(100% - 57px);
+    padding: 0px;
+  }
+
+  // &--rows {
+  //   // height: calc(100% - 55px);
+  // }
+
+  &--card {
+    margin: 0px;
+    margin-top: 5px;
+    height: 100%;
+  }
+
+  // menu container
+
+  &--menu-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &--menu-container-label {
+    float: left;
+    width: 30%;
+    font-size: 20px;
+    font-weight: 500;
+  }
+
+  &--menu-container-actions {
+    width: 70%;
+    text-align: end;
+  }
+
+  // end of menu container
+
+  ion-card-content {
+    padding: 0;
+  }
+}

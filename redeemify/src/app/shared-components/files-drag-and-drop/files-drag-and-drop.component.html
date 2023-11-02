@@ -1,0 +1,19 @@
+<form #uploadForm="ngForm" class="box {{'box__'+className}}" method="post" action="" enctype="multipart/form-data" (ngSubmit)="onSubmit($event)">
+  <div class="{{'box__'+className}}__input" >
+    <input style="visibility: hidden;" (change)="onFileUpload($event.target)" class="box__file" type="file" name="files[]" id="file" data-multiple-caption="{count} files selected" multiple #input/>
+    
+    <img (click)="input.click()" src="../../../assets/drag-drop.png" class="{{className ?'box__'+className+'__upload-image' : 'box'+'__upload-image' }}" alt="drag-drop-icon"/>
+    
+    <label for="file">
+      <strong>Drag and Drop</strong>
+
+       Or
+
+      <strong>Click here to upload the files</strong> 
+    </label>
+    <ion-button class="box__button" [size]="className ? className : 'large' " type="submit" *ngIf="showUploadButton">Upload</ion-button>
+  </div>
+  <div class="box__uploading">Uploading…</div>
+  <div class="box__success">Done!</div>
+  <div class="box__error">Error! <span></span>.</div>
+</form>

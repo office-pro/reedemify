@@ -1,0 +1,13 @@
+<div class="{{type == 'default' ? 'image-slider--images-container' : 'image-slider--images-container-large'}} " *ngIf="!!(imageUrls?.length)">
+  <ion-icon *ngIf="imageUrls.length > 1" (click)="prev($event)" class="image-slider--back-icon" name="chevron-back-outline"></ion-icon>
+  <ng-container *ngFor="let imageUrl of imageUrls; index as i">
+    <img [src]="imageUrl" [hidden]="currentIndex != i" (load)="onLoad($event)" (loadstart)="onLoadStart($event)" (loadeddata)="onLoaded($event)"/>
+  </ng-container>              
+  <ion-icon *ngIf="imageUrls.length > 1" (click)="next($event)"  class="image-slider--forward-icon" name="chevron-forward-outline"></ion-icon>
+</div>
+
+<div class="image-slider--images-preview-large" *ngIf="showPreview">
+  <ng-container *ngFor="let imageUrl of imageUrls; index as i">
+    <img [src]="imageUrl"/>
+  </ng-container>
+</div>

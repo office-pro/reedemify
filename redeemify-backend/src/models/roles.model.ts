@@ -1,23 +1,24 @@
 import {DataTypes, Model, Sequelize} from 'sequelize';
 
 export default (sequelize: Sequelize) => {
-  class Roles extends Model {
+  class roles extends Model {
     static associate(models: any) {
       // Roles.belongsTo(models['Users']);
+      // roles.belongsTo(models?.users)
     }
 
     static async createNewRole({
       roleName
     }: any) {
        return sequelize.transaction(async () => {
-         await Roles.create({
+         await roles.create({
           roleName
          })
        })
     }
   }
 
-  Roles.init({
+  roles.init({
     roleId: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
@@ -36,8 +37,9 @@ export default (sequelize: Sequelize) => {
     }
   },{
     sequelize,
-    modelName: 'Roles', // The name of the model
+    modelName: 'roles', // The name of the model
+    tableName: 'roles'
   });
 
-  return Roles;
+  return roles;
 }
