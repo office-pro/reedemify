@@ -1,18 +1,19 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { Inject, Injectable } from "@angular/core";
 import { Observable, map, of, tap } from "rxjs";
+import { AppUtilityService } from "src/app/shared-components/services/app-utility.service";
 
 @Injectable()
 export class BrandService {
 
   private brands: Array<any> = [];
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,@Inject(AppUtilityService) private appUtility?: AppUtilityService) {}
 
-  getAllBrands(fetchFromServer = false): Observable<any> {
+  getAllBrands(fetchFromServer = false, options = {page: this.appUtility?.pageNo, limit: this.appUtility?.pageLimit }): Observable<any> {
     if(!fetchFromServer && this.brands.length > 0) {
       return of([...this.brands]);
     }
-    return this.http.get("http://localhost:3000/api/brands")
+    return this.http.get(`http://localhost:3000/api/brands?offset=${options.page}&limit=${options.limit}`)
                     //.get("https://test-reedemify.onrender.com/api/users/brands")
                     .pipe(
                       map((data: any) => {

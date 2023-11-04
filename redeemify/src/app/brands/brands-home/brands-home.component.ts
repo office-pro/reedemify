@@ -2,6 +2,8 @@ import { Component } from "@angular/core";
 import { BrandService } from "../services/brands.services";
 import { Router } from "@angular/router";
 import { AppUtilityService } from "src/app/shared-components/services/app-utility.service";
+import { PageOptions } from "src/app/shared-components/models/page-options.model";
+import { UrlUtils } from "src/app/utils/url.utils";
 
 @Component({
   selector: 'brand-home',
@@ -11,18 +13,22 @@ import { AppUtilityService } from "src/app/shared-components/services/app-utilit
 export class BrandsHomeComponent {
 
   brands: Array<any> = [];
+  pageOptions:PageOptions = new PageOptions();
 
-  constructor(private brandsService: BrandService, private router: Router, private appUtility: AppUtilityService) {
-
+  constructor(private brandsService: BrandService, private router: Router, public appUtility: AppUtilityService) {
+    this.pageOptions.setParams(appUtility.pageLimit,appUtility.pageNo);
   }
 
   ngOnInit() {
-    this.getAllBrands()
+    this.getAllBrands();
   }
 
   getAllBrands() {
-    this.brandsService.getAllBrands().subscribe((data: any) => {
-      this.brands = data;
+    const {page,limit} = UrlUtils.convertQueryParamsToObject();
+
+    this.brandsService.getAllBrands(false,{page,limit}).subscribe((data: any) => {
+      this.brands = data.data;
+      this.pageOptions.total = data.total;
     })
   }
 
@@ -33,5 +39,6 @@ export class BrandsHomeComponent {
       this.router.navigateByUrl(`/brands/new`)
     }
   }
+
   
 }
