@@ -39,9 +39,9 @@ export class BrandController {
     console.log('req files - ',JSON.stringify(req.body));
     console.log('req files - ',(req.files as any)[0]);
     const {primaryColor, secondaryColor,headerColor, textColor, isDarkMode,logo} = req.body;
-    const {brandName, balance, limit, isActive} = req.body;
+    const {brandName, balance, limit, isActive,showPoweredByText} = req.body;
     let brand = {
-      brandName, balance, limit, isActive,
+      brandName, balance, limit, isActive, showPoweredByText,
       brandCss: {primaryColor, secondaryColor, isDarkMode, logo, headerColor, textColor}
     }
 

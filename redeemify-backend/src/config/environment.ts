@@ -5,8 +5,9 @@ export default {
     dbPassword: process.env.DB_PASSWORD || 'AVNS_lZHUqqz-nHwuck2O4X0',
     dbHost: process.env.DB_HOST || 'pg-274eaa2e-shaelm29-c1b9.aivencloud.com',
     // saltRounds: parseInt(process?.env?.SALT_ROUNDS) || 10,
-    jwtAccessTokenSecret: process.env.JWT_ACCESS_TOKEN_SECRET || "",
+    jwtAccessTokenSecret: process.env.JWT_ACCESS_TOKEN_SECRET || `Jb&';~}jZtve+4%k^fugU*sF.+2;\"O#AbE|fRv7(W*M')A[@Jy$rR%~aQB;}S(`,
     jwtRefreshTokenSecret: process.env.JWT_REFRESH_TOKEN_SECRET || "",
+    
     ssl: {
         rejectUnauthorized: true,
         ca: `-----BEGIN CERTIFICATE-----

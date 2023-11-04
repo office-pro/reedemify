@@ -1,5 +1,5 @@
 <ion-content>
-  <header-page logo="{{brand?.brandCss?.logo}}" [showPoweredBy]="true"></header-page>
+  <header-page logo="{{brand?.brandCss?.logo}}" [showPoweredBy]="brand?.showPoweredByText"></header-page>
   
   <ion-grid class="brands--grid">
     <ion-row class="brands--rows">
@@ -61,6 +61,11 @@
             <ion-item>
               <ion-checkbox [(ngModel)]="brand.isActive" [value]="brand?.isActive" [disabled]="!isEdit">Is Active</ion-checkbox>
             </ion-item>
+
+            <ion-item>
+              <ion-checkbox [(ngModel)]="brand.showPoweredByText" [value]="brand?.showPoweredByText" [disabled]="!isEdit">Show Powered By Text</ion-checkbox>
+            </ion-item>
+            
           </ion-list>
         </ion-card-content>
         </ion-card>

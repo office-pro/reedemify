@@ -30,7 +30,8 @@ export class BrandDetailsComponent {
           this.brandService.getBrandByBrandId(params.brandId)
                         .then((data:any) => {
                           data.subscribe((dataObj: any) => {
-                            this.brand = dataObj[0]
+                            this.brand = dataObj[0];
+                            this.updateTheme();
                           })
                         })
       }
@@ -89,6 +90,7 @@ export class BrandDetailsComponent {
       balance: 0,
       limit: 0,
       isActive: true,
+      showPoweredByText: true,
       brandCss: {
         primaryColor: "#ffffff",
         secondaryColor: "#3dc2ff",

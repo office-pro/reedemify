@@ -2,6 +2,7 @@ import {Request, Response} from 'express';
 import * as models from '../models/index';
 import * as argon2 from 'argon2';
 import * as jwt from 'jsonwebtoken';
+import environment from '../config/environment'
 
 export class AuthController {
 
@@ -46,7 +47,7 @@ export class AuthController {
 
 
 
-                                      res.json({"data": jwt.sign({mobileNo, userId, userName,...role.dataValues,...brand.dataValues}, brand.dataValues.brandName, { expiresIn: '1h' })})
+                                      res.json({"data": jwt.sign({mobileNo, userId, userName,...role.dataValues,...brand.dataValues}, environment.jwtAccessTokenSecret, { expiresIn: '1h' })})
                                     } else {
                                       res.status(500).send('Invalid user , client name or otp');
                                     }
