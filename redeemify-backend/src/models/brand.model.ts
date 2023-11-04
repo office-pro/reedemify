@@ -72,7 +72,7 @@ export default (sequelize: Sequelize) => {
       });
     }
 
-    static findAllBrands() {
+    static findAllBrands(options: any = {}) {
       return sequelize.transaction(async() => {
         return brands.findAll({
         attributes: ['brandId', 'brandName','brandCss','showPoweredByText', 'isActive'],
@@ -84,7 +84,8 @@ export default (sequelize: Sequelize) => {
               attributes: ['roleName']
             }]
           }
-        ]
+        ],
+        ...options
         });
       });
     }

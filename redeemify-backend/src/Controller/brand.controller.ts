@@ -5,11 +5,11 @@ import { S3StorageUploader } from '../object-storage-models/s3StorageUploader.mo
 export class BrandController {
   
   static async getBrands(req: Request, res: Response) {
-
-    (models?.default as any)?.["brands"].findAllBrands()
+    const total = await (models?.default as any)?.["brands"]?.count();
+    (models?.default as any)?.["brands"].findAllBrands({offset: parseInt((req?.query as any)?.offset),limit: parseInt((req?.query as any)?.limit)})
                                        .then((data: any) => {
-                                        res.json(data)
-                                      });
+                                        res.json({data, total});
+                                    });
   
   }
 
