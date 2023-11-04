@@ -15,22 +15,64 @@ module.exports = {
 
     await queryInterface.bulkInsert('brands', [
       {
-        brandName: 'Apple',
+        brandName: 'Redeemify',
         balance: 0,
         limit: 2500000,
-        brandCss: '{}'
+        isActive: true,
+        showPoweredByText: false,
+        brandCss: {
+          primaryColor: '#ffffff',
+          secondaryColor: '#446879',
+          isDarkMode: 'false',
+          logo: 'https://test-shashi-bucket.s3.ap-south-1.amazonaws.com/redeemify/Redeemify+LOGO+FINAL_page-0001.jpg',
+          headerColor: '#312f92',
+          textColor: '#292828'
+        }
       },
       {
-        brandName: 'Dell',
+        brandName: 'Test1',
+        balance: 0,
+        limit: 2500000,
+        isActive: true,
+        showPoweredByText: true,
+        brandCss: {
+          primaryColor: "#3880ff",
+          secondaryColor: "#3dc2ff",
+          logo: 'https://test-shashi-bucket.s3.ap-south-1.amazonaws.com/demo-logo/logo.png',
+          headerColor: "#ffffff",
+          textColor: "#0b171b",
+          isDarkMode: false
+        }
+      },
+      {
+        brandName: 'Test2',
         balance: 0,
         limit: 1500000,
-        brandCss: '{}'
+        isActive: true,
+        showPoweredByText: true,
+        brandCss:  {
+          primaryColor: "#3880ff",
+          secondaryColor: "#3dc2ff",
+          logo: 'https://test-shashi-bucket.s3.ap-south-1.amazonaws.com/demo-logo/logo.png',
+          headerColor: "#ffffff",
+          textColor: "#0b171b",
+          isDarkMode: false
+        }
       },
       {
-        brandName: 'Samsung',
+        brandName: 'Test3',
         balance: 0,
         limit: 1000000,
-        brandCss: '{}'
+        isActive: true,
+        showPoweredByText: true,
+        brandCss: {
+          primaryColor: "#3880ff",
+          secondaryColor: "#3dc2ff",
+          logo: 'https://test-shashi-bucket.s3.ap-south-1.amazonaws.com/demo-logo/logo.png',
+          headerColor: "#ffffff",
+          textColor: "#0b171b",
+          isDarkMode: false
+        }
       }
       ], {
         css: null

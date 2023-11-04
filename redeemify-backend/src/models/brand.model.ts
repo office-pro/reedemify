@@ -58,7 +58,7 @@ export default (sequelize: Sequelize) => {
       return sequelize.transaction(async() => {
         return brands.findAll({
         where: brand,
-        attributes: ['brandId', 'brandName', 'brandCss', 'limit','balance', 'isActive'],
+        attributes: ['brandId', 'brandName', 'brandCss', 'limit','balance','showPoweredByText','isActive'],
         include: [
           {  model: models?.default?.users,
             attributes: ['userId','firstName','lastName','mobileNo','roleId','email'],
@@ -75,7 +75,7 @@ export default (sequelize: Sequelize) => {
     static findAllBrands() {
       return sequelize.transaction(async() => {
         return brands.findAll({
-        attributes: ['brandId', 'brandName','brandCss'],
+        attributes: ['brandId', 'brandName','brandCss','showPoweredByText', 'isActive'],
         include: [
           {  model: models?.default?.users,
             attributes: ['userId','firstName','lastName','mobileNo','roleId','email'],
@@ -119,8 +119,12 @@ export default (sequelize: Sequelize) => {
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: true
+    },
+    showPoweredByText: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true
     }
-
   },{
     sequelize,
     timestamps: true,

@@ -12,7 +12,7 @@ export class ThemeService {
 
     document.documentElement.style.setProperty('--ion-text-color', fontColor);
     document.documentElement.style.setProperty('--ion-color-base', fontColor);
-    this.generateMultipleColorShade(primaryColor)
+    this.generateMultipleColorShade(primaryColor,fontColor)
     // this.generatePrimaryColorShades(10);
   }
 
@@ -64,8 +64,25 @@ export class ThemeService {
     return {
       h: Math.round(h),
       s: Math.round(s * 100),
-      l: Math.round(l * 100)
+      l: Math.round(l * 100),
+      rgb: `rgb(${r}, ${g}, ${b})`
     };
+  }
+
+  isColorDark(rgb: string) {
+  // Split the RGB values
+    const values = rgb.match(/\d+/g);
+    if (!values || values.length !== 3) {
+      return false; // Invalid input
+    }
+
+    const [r, g, b] = values.map(Number);
+
+    // Calculate relative luminance
+    const luminance = 0.299 * r + 0.587 * g + 0.114 * b;
+
+    // Adjust the luminance threshold as needed (0.5 is a common threshold)
+    return luminance < 128; // If the luminance is below 128 (out of 255), consider it dark
   }
 
   generatePrimaryColorShades(lightnessIncrement: number) {
@@ -91,9 +108,9 @@ export class ThemeService {
     const b = parseInt(baseColor.slice(5, 7), 16);
 
     // Calculate the new color values
-    const newR = Math.max(0, Math.min(255, r - step));
-    const newG = Math.max(0, Math.min(255, g - step));
-    const newB = Math.max(0, Math.min(255, b - step));
+    const newR = Math.max(0, Math.min(255, r + step));
+    const newG = Math.max(0, Math.min(255, g + step));
+    const newB = Math.max(0, Math.min(255, b + step));
 
     // Convert the new RGB values back to hexadecimal
     const newColor = `#${newR.toString(16).padStart(2, '0')}${newG.toString(16).padStart(2, '0')}${newB.toString(16).padStart(2, '0')}`;
@@ -101,17 +118,19 @@ export class ThemeService {
     return newColor;
   }
 
-  generateMultipleColorShade(baseColor: string) {
+  generateMultipleColorShade(baseColor: string, alternateColor: string) {
     let steps = this.generateSteps();
 
     if(steps?.length > 0) {
       let colorShades: any = {};
       steps.forEach((step: number) => {
         const root = document.documentElement;
-        colorShades[step] = this.calculateShade(baseColor,step/10);
+        colorShades[step] = this.calculateShade(baseColor,step/25);
         console.log(`--ion-color-step-${step}`, colorShades[step])
-        root.style.setProperty(`--ion-color-step-${step}`, colorShades[step]);
+        root.style.setProperty(`--ion-color-step-${step}`, step != 850 ? colorShades[step] : alternateColor);
       })
+
+      document.documentElement.style.setProperty(`--ion-card-background`, colorShades[200] );
     }
   }
 
