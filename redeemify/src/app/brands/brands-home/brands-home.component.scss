@@ -1,4 +1,4 @@
-.brands {
+.brands-home {
   &--grid {
     height: calc(100% - 56px);
     padding: 0px;
@@ -15,5 +15,20 @@
 
   &--paginator {
     width: 100%;
+  }
+
+  &--search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &--search {
+      flex: 1
+    }
+
+    &--search-actions {
+      flex: 1;
+      text-align: right;
+    }
   }
 }

@@ -29,16 +29,14 @@ export default (sequelize: Sequelize) => {
        })
     }
 
-    static getUserById(userId: number) {
+    static getUserById(user: {userId?: number, userName?: string, mobileNo?:number}) {
       return sequelize.transaction(async() => {
         return users.findOne({
-          where: {
-            'userId': userId
-          },
+          where: user,
           include: [
             { 
               model: models.default.brands,
-              attributes: ['brandName','brandId']
+              attributes: ['brandName','brandId', 'brandCss', 'isActive']
             },
             {
               model: models.default.roles,

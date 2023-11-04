@@ -7,6 +7,7 @@ const productsRouter = express.Router();
 productsRouter
 // get Apis
 .get('/', ProductController.getProducts)
+.get('/getProductByProductId/:productId', ProductController.getProductById)
 .get('/getProductCategories', ProductController.getProductCategory)
 .get('/getProductSubCategories', ProductController.getProductSubCategories)
 .get('/getProductImages', ProductController.getProductImages)
@@ -25,6 +26,6 @@ productsRouter
 // delete api's
 .delete('/deleteProductSubCategories', ProductController.deleteProductSubCategories)
 .delete('/deleteProductCategories', ProductController.deleteProductCategories)
-.delete('/deleteProducts', ProductController.deleteProducts)
+.post('/deleteProducts', ProductController.deleteProducts)
 
 export default productsRouter;

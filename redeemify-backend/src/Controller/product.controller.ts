@@ -45,6 +45,15 @@ export class ProductController {
 
   }
 
+  static async getProductById(req: Request, res: Response) {
+    console.log(req);
+    (models?.default as any)?.["product"].getProductById(req.params.productId)
+                                       .then((data: any) => {
+                                        res.json(data)
+                                      });                                               
+
+  }
+
   static async getProductSubCategories(req: Request, res: Response) {
     (models?.default as any)?.["productSubCategory"].getAllProductSubCategories()
                                       .then((data: any) => {

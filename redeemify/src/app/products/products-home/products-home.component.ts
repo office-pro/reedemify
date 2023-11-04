@@ -4,6 +4,8 @@ import { IonModal } from "@ionic/angular";
 import { OverlayEventDetail } from '@ionic/core/components';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ExcelService } from "src/app/shared-components/services/excel-helper.service";
+import { Router } from "@angular/router";
+import { ProductUtils } from "../utils/product.utils";
 
 @Component({
   selector: 'products-home',
@@ -21,6 +23,7 @@ export class ProductsHomeComponent {
   selectedProductCategory: any;
   selectedProductSubCategory: any;
   selectedProductImage: any;
+  productUtils = ProductUtils;
 
   files: Array<any> = [];
 
@@ -44,7 +47,7 @@ export class ProductsHomeComponent {
     }
   }
   
-  constructor(private productService: ProductService, private fb: FormBuilder) {
+  constructor(private productService: ProductService, private fb: FormBuilder, public router: Router) {
     this.productForm = this.fb.group({
       productName: ["",[Validators.required]],
       productPrice: [0, [Validators.required]],
@@ -65,6 +68,10 @@ export class ProductsHomeComponent {
                           console.log(data)
                        })
 
+  }
+
+  uploadImages() {
+    this.router.navigateByUrl("/products/upload-images");
   }
 
   ngOnInit() {

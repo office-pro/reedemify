@@ -2,6 +2,8 @@ import { Component } from "@angular/core";
 import { ProductImageDetails, ProductImageDetail, ProductImageDetailModel } from "./product-images.interface";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { forkJoin } from "rxjs";
+import { ProductUtils } from "../utils/product.utils";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'products-image-uploader',
@@ -11,7 +13,9 @@ import { forkJoin } from "rxjs";
 
 export class ProductImageUploaderComponent {
 
-  constructor(private httpClient: HttpClient) {}
+  productUtils = ProductUtils
+
+  constructor(private httpClient: HttpClient, public router: Router) {}
 
   imageDetails: ProductImageDetails = {
     productImageDetails: [

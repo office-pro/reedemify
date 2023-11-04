@@ -1,4 +1,6 @@
 import {Component, Input} from "@angular/core";
+import { ProductUtils } from "../utils/product.utils";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'products-list',
@@ -7,13 +9,13 @@ import {Component, Input} from "@angular/core";
 })
 
 export class ProductsListComponent {
+
+  productUtils = ProductUtils;
   
   @Input()
   data: Array<any> = []
   
-  constructor() {
-
-  }
+  constructor(public router: Router) {}
 
 
 }
