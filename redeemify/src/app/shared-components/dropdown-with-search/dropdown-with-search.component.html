@@ -1,0 +1,20 @@
+<ion-item>
+  <ion-input [disabled]="isDisabled" [readonly]="true" label="{{label}}" labelPlacement="stacked" placeholder="{{placeholder}}" [value]="selectedValue"  [(ngModel)]="selectedValue" [matMenuTriggerFor]="menu"></ion-input>
+</ion-item>
+
+<mat-menu #menu="matMenu" class="dropdown-with-search" >
+  <div (click)="$event.stopPropagation()" mat-menu-item>
+    <ion-input class="dropdown-with-search--search-input" label="Search Value" [value]="searchValue" [(ngModel)]="searchValue" (ngModelChange)="onSearch()"  labelPlacement="floating" placeholder="Search Data"></ion-input>
+  </div>
+  
+  <ng-container *ngFor="let item of filteredData">
+    <div mat-menu-item class="dropdown-with-search--icon-container" (click)="onValueChange(item)" >
+      <span class="dropdown-with-search--icon-container--text">{{item[key]}}</span>
+      <ion-icon *ngIf="selectedValue == item[key]" name="checkmark-sharp" class="dropdown-with-search--icon-container--icon"></ion-icon>
+    </div>
+  </ng-container>
+
+  <div mat-menu-item class="dropdown-with-search--icon-container" *ngIf="!filteredData?.length">
+    <span class="dropdown-with-search--icon-container--text">{{emptyResultsLabel}}</span>
+  </div>
+</mat-menu>

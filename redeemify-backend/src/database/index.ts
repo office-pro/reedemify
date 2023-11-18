@@ -18,6 +18,7 @@ export default class Database {
     // setup namespace for transactions
     const namespace = cls.createNamespace("transactions-namespace");
     Sequelize.useCLS(namespace);
+    
     // create connection
     const {username, password, host, port, database,dialect, dialectOptions} = this.dbConfig[this.environment];
     

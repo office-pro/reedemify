@@ -6,8 +6,8 @@
     
     <ion-grid>
       <ion-row>
-        <ion-col size="3">
-          <ion-card (click)="routeUtils.goToProducts(router)">
+        <ion-col size="3" *ngIf="rolesRestrictor.isSuperAdmin">
+          <ion-card (click)="routeUtils.goToProducts(router)" >
             <img src="../../assets/consumer-products.webp">
             <ion-card-content>
               <ion-card-title>Products</ion-card-title>
@@ -15,7 +15,7 @@
           </ion-card>
         </ion-col>
 
-        <ion-col size="3">
+        <ion-col size="3" *ngIf="rolesRestrictor.isSuperAdmin">
           <ion-card (click)="routeUtils.goToClientsPage(router)">
             <img src="../../assets/clients-images.avif">
             <ion-card-content>
@@ -24,11 +24,20 @@
           </ion-card>
         </ion-col>
 
-        <ion-col size="3">
-          <ion-card (click)="routeUtils.goToClientsPage(router)">
+        <ion-col size="3" *ngIf="rolesRestrictor.isAdmin">
+          <ion-card (click)="routeUtils.goToUsersHomePage(router)">
             <img src="../../assets/clients-images.avif">
             <ion-card-content>
               <ion-card-title>Users</ion-card-title>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+
+        <ion-col size="3" *ngIf="rolesRestrictor.isSuperAdmin">
+          <ion-card (click)="routeUtils.goToProductsUploadedImages(router)">
+            <img style="height: 192px;" src="../../assets/drag-drop.png">
+            <ion-card-content>
+              <ion-card-title>Uploaded Images</ion-card-title>
             </ion-card-content>
           </ion-card>
         </ion-col>

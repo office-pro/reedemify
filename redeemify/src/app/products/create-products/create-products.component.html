@@ -18,12 +18,12 @@
             <ion-icon slot="start" name="cloud-upload-outline"></ion-icon>
             Upload
           </ion-button>
-          <ion-button fill="outline" size="small">
+          <ion-button fill="outline" size="small" download="create-product" href="../../../assets/excel/products/product-create.xlsx">
             <ion-icon slot="start" name="download-outline"></ion-icon>
             Download
           </ion-button>
           <ion-button fill="outline" size="small" (click)="productUtils.goTouploadProductImages(router)">
-            Add Images
+            Add Imagess
           </ion-button>
           <ion-button fill="outline" size="small" [disabled]="!createProductForm.valid" (click)="submitForm(createProductForm)">Save</ion-button>
         </ion-col>

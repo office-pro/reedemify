@@ -1,0 +1,41 @@
+<header-page></header-page>
+
+<ion-content [fullscreen]="true">
+
+  <div id="product-images-list" class="product-images-list">
+    
+    <ion-grid class="product-images-list--grid">
+      <ion-row class="product-images-list--row">
+
+        <mat-toolbar>
+          <ion-col size="6" sizeXs="12">
+            <ion-searchbar animated="true" placeholder="Search Images" [(ngModel)]="productSearch" (ngModelChange)="onSearch($event)"></ion-searchbar>
+          </ion-col>
+        </mat-toolbar>
+        <ion-col size="12" *ngFor="let productImageObj of filteredData" class="product-images-list--col">
+          <ion-card class="product-images-list--card-container">
+            <ion-card-content class="product-images-list--card-container--content">
+
+              <div class="product-images-list--card-container--content--image-container">
+                <div class="product-images-list--card-container--content--image-container--image-slider">
+                  <image-slider cssClass="productImageList" [imageUrls]="productImageObj?.imageUrls"></image-slider>
+                </div>
+                <div class="product-images-list--card-container--content--image-container--image-info">
+
+                <ion-label class="product-images-list--card-container--content--image-container--image-info--label">
+                  <h1 style="margin: 0px;">{{productImageObj?.productImagesName}}</h1>
+                  <h2>Id : {{productImageObj?.productImagesUrlContainerId}}</h2>
+                </ion-label>
+                  
+                </div>
+              </div>
+              
+              
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  
+  </div>
+</ion-content>

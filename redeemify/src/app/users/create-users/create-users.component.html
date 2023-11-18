@@ -1,0 +1,116 @@
+<ion-content>
+  <header-page></header-page>
+  
+  <ion-grid class="products-create--grid">
+    <ion-row class="products-create--rows">
+      <mat-toolbar>
+        <input type="file" #fileInput (change)="onExcelUpload($event.target)" style="visibility: hidden;"/>
+
+        <ion-col size="5">
+          <ion-searchbar animated="true" placeholder="Search Users"></ion-searchbar>
+        </ion-col>
+        <ion-col size="7" class="products-create--menu-items">
+          <ion-button fill="outline" size="small" (click)="addUserEntries()">
+            <ion-icon slot="start" name="add-outline"></ion-icon>
+            New Product
+          </ion-button>
+          <ion-button fill="outline" size="small" (click)="fileInput.click()">
+            <ion-icon slot="start" name="cloud-upload-outline"></ion-icon>
+            Upload
+          </ion-button>
+          <ion-button fill="outline" size="small" download="user-create" href="../../../assets/excel/users/user-create.xlsx">
+            <ion-icon slot="start" name="download-outline"></ion-icon>
+            Download
+          </ion-button>
+
+          <!-- <a mat-button download="filename" target="_blank" href="../../../assets/excel/users/user-create.xlsx">
+            <ion-icon slot="start" name="download-outline"></ion-icon>
+            Download
+          </a> -->
+          <ion-button fill="outline" size="small" (click)="submitForm(createUserForm)">Save</ion-button>
+        </ion-col>
+      </mat-toolbar>
+
+      <ion-col>
+        <ion-accordion-group (ionChange)="accordionGroupChange($event)">
+
+          <form [formGroup]="createUserForm">
+
+            <div formArrayName="userEntries">
+              <ng-container  *ngFor="let entry of userEntriesArray.controls; let i = index">
+                  
+                  <ion-accordion class="{{(entry?.invalid) ? 'product-create--invalid': null}}" value="{{'product'+i}}">
+                    <ion-item slot="header" color="light">
+                      <ion-label>{{!!entry?.value?.firstName || !!entry?.value?.lastName  ? entry?.value?.firstName + " " + entry?.value?.lastName : "User "+ (i + 1)}}</ion-label>
+                      <ion-label class="product-create--trash-container">
+                        <ion-icon name="trash-outline" (click)="removeProductEntries(i)"></ion-icon>
+                      </ion-label>
+                    </ion-item>
+
+                    <div class="ion-padding" [formGroupName]="i" slot="content">
+ 
+                      <ion-row class="products-create--images-row-container">
+                        <ion-col size="6">
+                          <ion-item>
+                            <ion-label position="stacked">First Name</ion-label>
+                            <ion-input type="text" placeholder="First Name"  name="firstName" formControlName="firstName"></ion-input>
+                          </ion-item>
+                        </ion-col>
+
+                        <ion-col size="6">
+                          <ion-item>
+                            <ion-label position="stacked">Last Name</ion-label>
+                            <ion-input type="text" placeholder="Last Name"  name="lastName" formControlName="lastName"></ion-input>
+                          </ion-item>
+                        </ion-col>
+                      </ion-row>
+
+                      <ion-row>
+                        <ion-col size="6">
+                          <ion-item>
+                            <dropdown-with-search [selectedId]="brandId" selectedIdKey="brandId" [selectedValue]="brandName" (selectedObjectChange)="onSelectedBrandChange($event,i)"  label="Brands" placeholder="Select Brands" [(data)]="brandData" name="brandId" formControlName="brandId" key="brandName" brands-data></dropdown-with-search>
+                          </ion-item>
+                        </ion-col>
+                        <ion-col size="6">
+                          <ion-item>
+                           <dropdown-with-search [selectedValue]="roleNames[i]" label="Roles" placeholder="Select Roles" 
+                           (selectedObjectChange)="onSelectedRoleChange($event,i)" [(data)]="roleData" 
+                           name="roleId" formControlName="roleId" key="roleName" roles-data></dropdown-with-search>
+                          </ion-item>
+
+                        </ion-col>
+                      </ion-row>
+
+                      <ion-row>
+                        <ion-col size="6">
+                          <ion-item>
+                            <ion-label position="stacked">Mobile Number</ion-label>
+                            <ion-input type="text" placeholder="Enter Mobile Number"  name="mobileNo" formControlName="mobileNo"></ion-input>
+                          </ion-item>
+                        </ion-col>
+
+                        <ion-col size="6">
+                          <ion-item>
+                            <ion-label position="stacked">Email</ion-label>
+                            <ion-input type="text" placeholder="Enter Email"  name="email" formControlName="email"></ion-input>
+                          </ion-item>
+                        </ion-col>
+                       
+                      </ion-row>
+
+
+                    </div>
+
+                  </ion-accordion>
+              </ng-container>
+
+            </div>
+
+          </form>
+        </ion-accordion-group>
+      </ion-col>
+
+    </ion-row>
+
+  </ion-grid>
+</ion-content>

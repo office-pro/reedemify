@@ -1,0 +1,21 @@
+.dropdown-with-search {
+  background-color: var(--ion-background-color);
+
+  &--search-input {
+    color: var(--ion-text-color);
+  }
+  
+  &--icon-container {
+    position: relative;
+    &--text {
+      color: var(--ion-text-color);
+    }
+    &--icon {
+      position: absolute;
+      top: 30%;
+      right: 10px;
+      color: var(--ion-text-color);
+    }
+  }
+   
+}

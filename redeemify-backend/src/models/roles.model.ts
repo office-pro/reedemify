@@ -7,6 +7,14 @@ export default (sequelize: Sequelize) => {
       // roles.belongsTo(models?.users)
     }
 
+    static async findAllRoles() {
+      return sequelize.transaction(async () => {
+        return roles.findAll({
+          attributes: ['roleId','roleName']
+        })
+      })
+    }
+
     static async createNewRole({
       roleName
     }: any) {

@@ -1,0 +1,35 @@
+<ion-content>
+  <header-page></header-page>
+  
+  <ion-grid class="users-home--grid">
+    <ion-row class="users-home--rows">
+
+
+      <ion-col>
+        <ion-card>  
+        <ion-card-header>
+          <ion-card-title>
+            <div class="users-home--details-container">
+              <div class="users-home--details-container--title">Users</div>
+              <div class="users-home--details-container--actions">
+                <ion-button size="small" (click)="routerUtils.goToUsersCreatePage(router)">Add</ion-button>
+              </div>
+            </div>
+          </ion-card-title>
+         
+        </ion-card-header> 
+        <ion-card-content>
+          <users-table></users-table>
+        </ion-card-content>
+    </ion-card>
+      </ion-col>
+
+    <!-- <dropdown-with-search label="Brands" placeholder="Select Brands" [(data)]="brandData" key="brandName" brands-data></dropdown-with-search>
+    <dropdown-with-search label="Users" placeholder="Select Users" [(data)]="userData" key="firstName" users-data></dropdown-with-search>
+    <dropdown-with-search label="Roles" placeholder="Select Roles" [(data)]="roleData" key="roleName" roles-data></dropdown-with-search> -->
+
+
+    </ion-row>
+
+  </ion-grid>
+</ion-content>

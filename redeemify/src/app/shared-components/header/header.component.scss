@@ -2,6 +2,7 @@
 
 .header-page {
   &--container {
+    position: relative
     
     &--toolbar {
 
@@ -24,6 +25,14 @@
       
     }
 
+    &--user-avatar-image {
+      position: absolute;
+      right: 10px;
+      height: 35px;
+      width: 35px;
+      top: 0px;
+    }
+
     &--toolbar-powered-by {
       font-size: 8px;
       position: absolute;
@@ -35,3 +44,19 @@
 
   }
 }
+
+.header-popup {
+  background-color: var(--ion-color-step-300);
+  color: var(--ion-text-color);
+
+  &--text {
+    padding: 5px 10px;
+    text-transform: capitalize;
+  }
+
+  button {
+    cursor: pointer;
+  }
+  
+}
+

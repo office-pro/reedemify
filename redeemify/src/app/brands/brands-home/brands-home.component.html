@@ -14,7 +14,7 @@
     <ion-row class="brands-home--rows">
 
       <ion-col size="3" class="brands-home--cols" *ngFor="let brand of brands">
-        <ion-card color="light" class="brands-card" (click)="goToBrandDetails(brand)">
+        <ion-card color="light" class="brands-home--card" (click)="goToBrandDetails(brand)">
           <img alt="{{brand?.brandName}}" src="{{brand?.brandCss?.logo}}" />
           <ion-card-header>
             <ion-card-title>{{brand.brandName}}</ion-card-title>
@@ -29,7 +29,7 @@
 
     <mat-paginator class="brands--paginator" [length]="pageOptions.total"
             [pageSize]="pageOptions.offset"
-            [pageSizeOptions]="[appUtility.pageLimit]"
+            [pageSizeOptions]="[pageOptions.limit]"
             (page)="pageOptions.onPageChange($event);getAllBrands()"
             aria-label="Select page">
     </mat-paginator>

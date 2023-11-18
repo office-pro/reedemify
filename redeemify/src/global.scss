@@ -25,3 +25,49 @@
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 @import 'theme/custom-theme.css';
+
+.mat-mdc-menu-content, .mat-mdc-menu-content .mat-mdc-menu-item .mat-mdc-menu-item-text {
+  padding: 0px !important;
+}
+
+.mat-mdc-menu-panel {
+  background-color: var(--ion-background-color) !important;
+}
+
+.mat-mdc-menu-content {
+  max-height: 300px;
+  scrollbar-width: 8px !important;
+}
+
+// scrollbar for chrome
+
+::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+    background: var(--ion-background-color);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--ion-text-color);
+    -webkit-border-radius: 1ex;
+    -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.75);
+}
+
+// ::-webkit-scrollbar-corner {
+//     background: #000;
+// }
+
+.dropdown-with-search,.mat-mdc-table {
+  background: var(--ion-background-color) !important;
+  color: var(--ion-text-color) !important;
+}
+
+
+.mat-mdc-header-cell, .mat-mdc-cell, .alert-button-inner,.mat-mdc-menu-item-text, .alert-message {
+  color: var(--ion-text-color) !important;
+}
+
+.isDisabled {
+  pointer-events: none !important;
+  cursor: no-drop !important;
+}

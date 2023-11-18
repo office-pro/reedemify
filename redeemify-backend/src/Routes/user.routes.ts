@@ -7,6 +7,10 @@ const userRouter = express.Router();
 
 userRouter
 .get('/', UserController.getUsers)
+.get('/:brandId', UserController.getUsers)
+.get('/:brandId/:userId', UserController.getUsers)
+.post('/create', UserController.createUsers)
+.post('/delete', UserController.deleteUsers)
 // .post('/:id', (req:Request, res: Response) => {
 //   console.log(req.body);
 //   res.send("users post")

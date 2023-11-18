@@ -30,5 +30,13 @@
       flex: 1;
       text-align: right;
     }
+
+    &--card {
+      display: none;
+      img {
+        height: 163px;
+        border-bottom: 1px solid #dddddd;
+      }
+    }
   }
 }

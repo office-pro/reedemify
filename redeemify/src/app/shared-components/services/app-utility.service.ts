@@ -2,7 +2,9 @@ import { Injectable } from "@angular/core";
 import { AlertController, LoadingController } from "@ionic/angular";
 import { ThemeService } from "./theme.service";
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 
 export class AppUtilityService {
   private isLoading =  false;
@@ -60,9 +62,7 @@ export class AppUtilityService {
     await alert.present();
   }
 
-  updateTheme(primaryColor: string, secondaryColor: string, headerColor: string = "#ffffff", fontColor: string = "#0b171b") {
+  updateTheme(primaryColor: string = "#ffffff", secondaryColor: string="#446879", headerColor: string = "#312f92", fontColor: string = "#292828") {
     this.themeService.updateCustomColors(primaryColor,secondaryColor, headerColor, fontColor);
   }
-  
-
 }
