@@ -16,7 +16,6 @@ export class BrandsHomeComponent {
   pageOptions:PageOptions = new PageOptions();
 
   constructor(private brandsService: BrandService, private router: Router, public appUtility: AppUtilityService) {
-    this.pageOptions.setParams(appUtility.pageLimit,appUtility.pageNo);
   }
 
   ngOnInit() {

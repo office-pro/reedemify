@@ -17,6 +17,9 @@ export class ImageSliderComponent {
   @Input()
   showPreview = false;
 
+  @Input()
+  cssClass: string = "";
+
   private interval: any
 
   currentIndex = 0;

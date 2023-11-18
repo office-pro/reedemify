@@ -6,7 +6,14 @@ export class BrandController {
   
   static async getBrands(req: Request, res: Response) {
     const total = await (models?.default as any)?.["brands"]?.count();
-    (models?.default as any)?.["brands"].findAllBrands({offset: parseInt((req?.query as any)?.offset),limit: parseInt((req?.query as any)?.limit)})
+    let params = {}
+    if(Object.keys(req.query).length > 0) {
+      params =  {
+        offset: parseInt((req?.query as any)?.offset),
+        limit: parseInt((req?.query as any)?.limit)
+      }
+    }
+    (models?.default as any)?.["brands"].findAllBrands(params)
                                        .then((data: any) => {
                                         res.json({data, total});
                                     });

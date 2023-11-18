@@ -15,7 +15,7 @@ import {MatTableModule} from '@angular/material/table'
   declarations: [BrandsHomeComponent, BrandDetailsComponent],
   imports: [CommonModule,FormsModule,HttpClientModule,IonicModule,SharedModule,MatPaginatorModule,BrandsRoutingModule, MatTableModule],
   exports: [],
-  providers: [BrandService]
+  providers: []
 })
 
 export class BrandsModule {

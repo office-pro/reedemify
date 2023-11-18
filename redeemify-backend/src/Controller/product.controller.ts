@@ -61,12 +61,12 @@ export class ProductController {
                                       });
   }
 
-  static async getProductImages(req: Request, res: Response) {
-    (models?.default as any)?.["productImagesUrlContainer"].getAllProductImagesUrlContainer()
+   static async getProductImages(req: Request, res: Response) {
+      (models?.default as any)?.["productImagesUrlContainer"].getAllProductImagesUrlContainer()
                                       .then((data: any) => {
                                          res.json(data)
                                       });
-  }
+   }
 
   static async deleteProductSubCategories(req: Request, res: Response) {
     (models?.default as any)?.["productSubCategory"].deleteProductSubCategories(req.body)

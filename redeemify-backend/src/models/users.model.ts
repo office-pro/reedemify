@@ -1,5 +1,6 @@
-import { DataTypes, Model, Sequelize } from "sequelize";
+import { DataTypes, Model, Op, Sequelize } from "sequelize";
 import * as models from "./index";
+import { StaticModelHelper } from "./static-model-helper";
 
 export default (sequelize: Sequelize) => {
   class users extends Model {
@@ -19,14 +20,25 @@ export default (sequelize: Sequelize) => {
       })
     }
 
-    static deleteUsers(userId: any) {
-       sequelize.transaction(async() => {
-          await users.destroy({
-            where: {
-              'userId': userId
-            }
-          })
-       })
+    static createUsers(usersArr: Array<any> = []) {
+      return StaticModelHelper.bulkCreateOrUpdate(users,usersArr, {
+          keys: ['mobileNo','email']
+         }, {
+          keys: ['mobileNo','email']
+      })
+    }
+
+    static deleteUsers(userIds: Array<any>, options: any = {}) {
+       return sequelize.transaction(async () => {
+                return users.destroy({
+                    where: {
+                      userId: {
+                        [Op.in]: userIds
+                      } 
+                    },
+                    ...options
+                })    
+            })
     }
 
     static getUserById(user: {userId?: number, userName?: string, mobileNo?:number}) {
@@ -36,7 +48,7 @@ export default (sequelize: Sequelize) => {
           include: [
             { 
               model: models.default.brands,
-              attributes: ['brandName','brandId', 'brandCss', 'isActive']
+              attributes: ['brandName','brandId', 'brandCss', 'isActive', 'showPoweredByText']
             },
             {
               model: models.default.roles,
@@ -50,7 +62,7 @@ export default (sequelize: Sequelize) => {
       })
     }
 
-    static getUsers() {
+    static getUsers(options: any = {}) {
       return sequelize.transaction(async() => {
         return users.findAll({
           include: [
@@ -65,7 +77,8 @@ export default (sequelize: Sequelize) => {
           ],
           attributes: {
             exclude: ['password','createdAt','updatedAt']
-          }
+          },
+          ...options
         })
       })
     }
@@ -128,11 +141,15 @@ export default (sequelize: Sequelize) => {
     },
     password: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
     createdAt: {
       type: DataTypes.DATE,
       defaultValue: new Date()
+    },
+    dob: {
+      type: DataTypes.DATEONLY,
+      allowNull: true
     }
 
 

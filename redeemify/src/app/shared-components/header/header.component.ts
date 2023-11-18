@@ -1,6 +1,8 @@
 import { Component, Input } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { Router } from "@angular/router";
+import { UserContext } from "../services/user-context.service";
+import { JwtTokenDecoderService } from "../services/jwt-token.service";
 
 @Component({
   selector: "header-page",
@@ -11,15 +13,38 @@ import { Router } from "@angular/router";
 export class HeaderComponent {
 
   @Input()
-  logo: string = "";
+  logo: string = "https://test-shashi-bucket.s3.amazonaws.com/Redeemify/1699108343135_Redeemify";
 
   @Input()
   showPoweredBy: boolean = false;
 
-  constructor(private router: Router) {}
+  @Input()
+  showAvatar: boolean = true;
+
+  openPopup: boolean = false;
+
+  constructor(private router: Router, public userContext: UserContext, public jwtService: JwtTokenDecoderService) {
+    console.log("usercontext - ", this.userContext)
+
+    this.userContext.brand$.subscribe((brand: any) => {
+      if(brand.logo) {
+        this.logo = brand.logo
+      }
+
+      if(brand.showPoweredByText) {
+        this.showPoweredBy = brand.showPoweredByText;
+      }
+    })
+    
+  }
 
   navigateToHome() {
     this.router.navigateByUrl("/home");
+  }
+
+  logout() {
+    this.jwtService.clearJwtToken();
+    this.router.navigateByUrl("/login");
   }
   
 }

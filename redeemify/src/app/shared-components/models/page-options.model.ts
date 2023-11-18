@@ -30,7 +30,7 @@ export class PageOptions {
 
     UrlUtils.convertObjectToQueryParams({
       ...urlObj,
-      page: this.offset * this.limit,
+      page: this.offset,
       limit: this.limit
     })
   }

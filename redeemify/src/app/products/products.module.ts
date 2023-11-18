@@ -15,9 +15,10 @@ import { ProductImageUploaderComponent } from "./products-image-uploader/product
 import { MatSelectModule } from "@angular/material/select";
 import { CreateProductComponent } from "./create-products/create-products.component";
 import { ProductsDetailComponent } from "./products-detail/products-detail.component";
+import { ProductsImagesListComponent } from "./product-images-list/product-images-list.component";
 
 @NgModule({
-  declarations: [ProductsHomeComponent, ProductsListComponent, ProductsFilterComponent,ProductImageUploaderComponent,CreateProductComponent, ProductsDetailComponent],
+  declarations: [ProductsHomeComponent, ProductsListComponent, ProductsFilterComponent,ProductImageUploaderComponent,CreateProductComponent, ProductsDetailComponent,ProductsImagesListComponent],
   imports: [CommonModule, FormsModule, IonicModule, HttpClientModule, SharedModule,ProductsRoutingModule, MatPaginatorModule, MatToolbarModule, ReactiveFormsModule, MatSelectModule],
   exports: [],
   providers: [ProductService]

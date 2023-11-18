@@ -1,4 +1,4 @@
-<div class="{{type == 'default' ? 'image-slider--images-container' : 'image-slider--images-container-large'}} " *ngIf="!!(imageUrls?.length)">
+<div class="{{type == 'default' ? 'image-slider--images-container' : 'image-slider--images-container-large'}} {{cssClass}}" *ngIf="!!(imageUrls?.length)">
   <ion-icon *ngIf="imageUrls.length > 1" (click)="prev($event)" class="image-slider--back-icon" name="chevron-back-outline"></ion-icon>
   <ng-container *ngFor="let imageUrl of imageUrls; index as i">
     <img [src]="imageUrl" [hidden]="currentIndex != i" (load)="onLoad($event)" (loadstart)="onLoadStart($event)" (loadeddata)="onLoaded($event)"/>

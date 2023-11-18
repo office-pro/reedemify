@@ -1,7 +1,8 @@
 import { Component } from "@angular/core";
 import { BrandService } from "../services/brands.services";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { AppUtilityService } from "src/app/shared-components/services/app-utility.service";
+import { BrandsUtils } from "../brands.utils";
 
 @Component({
   selector: 'brand-details',
@@ -18,8 +19,9 @@ export class BrandDetailsComponent {
   primaryColor: string = "";
   secondaryColor: string = "";
   blob: any;
+  brandUtils = BrandsUtils;
 
-  constructor(private brandService: BrandService, private route: ActivatedRoute, private appUtility: AppUtilityService) {}
+  constructor(private brandService: BrandService, private route: ActivatedRoute, private appUtility: AppUtilityService, public router: Router) {}
 
   ngOnInit() {
     this.route.params.subscribe((params: any) => {
@@ -84,7 +86,7 @@ export class BrandDetailsComponent {
     }
   }
 
-  createBrandObj() {
+  createBrandObj(): any {
     return {
       brandName: "",
       balance: 0,

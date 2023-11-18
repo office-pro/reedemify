@@ -1,8 +1,23 @@
 <ion-header [translucent]="true" class="header-page--container">
   <ion-toolbar class="header-page--container--toolbar">
-    <ion-title (click)="navigateToHome()" class="header-page--container--toolbar-title">
-      <img class="{{showPoweredBy ? 'header-page--container--toolbar-logo-with-powered' : 'header-page--container--toolbar-logo'}}" src="{{logo}}" alt="Reedemify" />
+    <ion-title class="header-page--container--toolbar-title">
+      <img (click)="navigateToHome()" class="{{showPoweredBy ? 'header-page--container--toolbar-logo-with-powered' : 'header-page--container--toolbar-logo'}}" src="{{logo}}" alt="Reedemify" />
+      <ion-avatar id="avatar" class="header-page--container--user-avatar-image" *ngIf="showAvatar" [matMenuTriggerFor]="menu" >
+        <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+      </ion-avatar>
     </ion-title>
     <span *ngIf="showPoweredBy" class="header-page--container--toolbar-powered-by"><strong>Powered</strong> By Reedemify</span>
+    
   </ion-toolbar>
+  
 </ion-header>
+
+<!-- <custom-options id="avatar" [isPopupOpen]="openPopup"></custom-options> -->
+
+<mat-menu #menu="matMenu">
+  <div class="header-popup">
+    <p class="header-popup--text" (click)="$event.stopPropagation()">Welcome {{userContext?.currentName}} !! </p>
+    <button mat-menu-item>Orders</button>
+    <button mat-menu-item (click)="logout()">Logout</button>
+  </div>
+</mat-menu>

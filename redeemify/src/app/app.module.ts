@@ -14,11 +14,14 @@ import { UserService } from './services/user.service';
 import { SharedModule } from './shared-components/shared.modules';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
+
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, BrowserAnimationsModule, IonicModule.forRoot(), AppRoutingModule, 
   HttpClientModule, MatTableModule, MatSortModule, SharedModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, UserService],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, 
+  UserService
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -1,0 +1,34 @@
+.product-images-list {
+  &--grid {}
+  &--row {}
+  &--col {}
+
+  &--card-container {
+    &--content {
+      &--image-container {
+        display: flex;
+        align-items: center;
+        &--image-slider {
+          flex: 1;
+        }
+        &--image-info {
+          flex: 2;
+          display: flex;
+
+          &--label {
+            padding: 0 10px;
+
+            h1,h2 {
+              color: var(--ion-text-color)
+            }
+          }
+        }
+      }
+
+    }
+  }
+}
+
+::ng-deep .productImageList {
+  height: inherit !important;
+}
