@@ -1,0 +1,24 @@
+.brand-bucket-mapper-table-entries {
+  &--ion-item-container {
+
+  }
+  &--bucket-row-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    &--inputs {
+      flex: 1;
+      margin-right: 10px;
+    }
+
+    &--inputs-icon {
+      cursor: pointer;
+    }
+  }
+}
+
+.right-align {
+  text-align: end;
+}

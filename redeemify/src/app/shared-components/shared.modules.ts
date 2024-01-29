@@ -18,11 +18,19 @@ import { MatTableModule } from "@angular/material/table";
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { ProductsDataDirective } from "./directives/products.directive";
+import { BucketsDataDirective } from "./directives/buckets.directive";
+import { BucketsTableComponent } from "./buckets-table/buckets-table.component";
+import { ProductCategoryPipe } from "./pipes/products-category.pipe";
+import { ProductSubCategoryPipe } from "./pipes/products-subcategory.pipe";
+import { BrandBucketMapperTable } from "./brand-bucket-mapper-table/brand-bucket-mapper-table.component";
+import { BrandBucketMapperTableEntries } from "./brand-bucket-mapper-table/entries/brand-bucket-mapper-table-entries.component";
+import { ProductViewerComponent } from "./viewer/products-viewer.component";
 
 @NgModule({
   imports: [CommonModule, IonicModule, FormsModule, MatSelectModule, NgxMatSelectSearchModule, ReactiveFormsModule,MatMenuModule, MatTableModule, MatDialogModule, MatButtonModule],
-  declarations: [HeaderComponent, ImageSliderComponent, FileDragDropComponent,SingleDropdownWithSearch,DropDownWithSearchComponent, BrandsDataDirective, UsersDataDirective, RolesDataDirective, UsersTableComponent,EditUserComponent],
-  exports: [HeaderComponent, ImageSliderComponent,FileDragDropComponent, SingleDropdownWithSearch,DropDownWithSearchComponent,BrandsDataDirective,UsersDataDirective, RolesDataDirective,UsersTableComponent,EditUserComponent],
+  declarations: [HeaderComponent, ImageSliderComponent, FileDragDropComponent,SingleDropdownWithSearch,DropDownWithSearchComponent, BrandsDataDirective, UsersDataDirective, RolesDataDirective, UsersTableComponent,EditUserComponent, ProductsDataDirective, BucketsDataDirective, BucketsTableComponent,ProductCategoryPipe, ProductSubCategoryPipe,BrandBucketMapperTable,BrandBucketMapperTableEntries,ProductViewerComponent],
+  exports: [HeaderComponent, ImageSliderComponent,FileDragDropComponent, SingleDropdownWithSearch,DropDownWithSearchComponent,BrandsDataDirective,UsersDataDirective, RolesDataDirective,UsersTableComponent,EditUserComponent,ProductsDataDirective, BucketsDataDirective, BucketsTableComponent,ProductCategoryPipe, ProductSubCategoryPipe,BrandBucketMapperTable,BrandBucketMapperTableEntries,ProductViewerComponent],
   providers: []
 })
 

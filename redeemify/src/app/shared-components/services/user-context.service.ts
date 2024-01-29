@@ -1,14 +1,17 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import { ThemeService } from "./theme.service";
+import { ProductService } from "src/app/shared-components/services/products.services";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserContext {
-
-  
-private user: any = {};
+  private productCategoriesData: Array<any> = []; 
+  private productCategories$ = new BehaviorSubject([]);
+  private productSubCategoriesData: Array<any> = []; 
+  private productSubCategories$ = new BehaviorSubject([]);
+  private user: any = {};
   private user$ = new BehaviorSubject({});
   brandCss$ = new BehaviorSubject({});
   brandLogo$ = new BehaviorSubject("");
@@ -27,7 +30,8 @@ private user: any = {};
       logo: this.brandLogo,
       isActive: this.user.isActive,
       brandId: this.user.brandId,
-      showPoweredByText: this.user.showPoweredByText
+      showPoweredByText: this.user.showPoweredByText,
+      user: user
     })
     this.themeService.updateCustomColors(this.brandCss?.primaryColor, this.brandCss?.secondaryColor, this.brandCss?.headerColor,this.brandCss?.textColor)
   }
@@ -60,6 +64,24 @@ private user: any = {};
 
   get currentName() {
     return !!this?.user?.firstName  ? this?.user?.firstName  : "";
+  }
+
+  setProductCategories(productCategories: Array<any> = []) {
+    this.productCategoriesData = JSON.parse(JSON.stringify(productCategories));
+    this.productCategories$.next(JSON.parse(JSON.stringify(this.productCategoriesData)))
+  }
+
+  getProductCategories() {
+    return this.productCategories$;
+  }
+
+  setSubProductCategories(data: Array<any> = []) {
+    this.productSubCategoriesData = JSON.parse(JSON.stringify(data));
+    this.productSubCategories$.next(JSON.parse(JSON.stringify(this.productSubCategoriesData)));
+  }
+
+  getSubProductCategories() {
+    return this.productSubCategories$;
   }
 
 }

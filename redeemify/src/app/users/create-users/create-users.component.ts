@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 import { FormArray, FormBuilder, Validators } from "@angular/forms";
 import { ExcelService } from "src/app/shared-components/services/excel-helper.service";
 import { Router } from "@angular/router";
-import { ProductService } from "src/app/products/services/products.services";
+import { ProductService } from "src/app/shared-components/services/products.services";
 import { ProductUtils } from "src/app/products/utils/product.utils";
 import { UserContext } from "src/app/shared-components/services/user-context.service";
 import { UserService } from "src/app/services/user.service";
@@ -55,7 +55,8 @@ export class CreateUsersComponent {
       brandId: [this.brandId,[Validators.required]],
       roleId: [null, [Validators.required]],
       mobileNo:[null,[Validators.required]],
-      email: ["",[Validators.required]]
+      email: ["",[Validators.required]],
+      points: [0,[Validators.required]]
     });
 
     this.userEntriesArray.push(fg);

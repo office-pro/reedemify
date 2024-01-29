@@ -1,0 +1,16 @@
+<ion-card>  
+  <ion-card-header>
+    <ion-card-title>
+      <div class="brand-bucket-mapper-table--details-container">
+        <div class="brand-bucket-mapper-table--details-container--title">Brand Bucket Mapper</div>
+        <div class="brand-bucket-mapper-table--details-container--actions">
+          <ion-button size="small" (click)="onAdd()">Add</ion-button>
+          <ion-button size="small" (click)="onSave()">Save</ion-button>
+        </div>
+      </div>
+    </ion-card-title>
+  </ion-card-header> 
+  <ion-card-content>
+    <brand-bucket-mapper-table-entries [data]="brandBucketMapperData" [onBucketChangeFunc]="onBucketChange.bind(this)" [brandId]="brandId" [userId]="userId" #brandBucketMapper></brand-bucket-mapper-table-entries>
+  </ion-card-content>
+</ion-card>

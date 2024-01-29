@@ -34,25 +34,53 @@ export default (sequelize: Sequelize) => {
         static async getAllbucketListProducts() {
 
            return sequelize.transaction(async() => {
-             return await bucketListProduct.findAll({
-                include: [ 
-                {
-                    model: models?.default?.product
-                  
-                }
-                ]
+            return await bucketListProduct.findAll({
+                
             });
            });
            
         }
 
+        
+        static async editbucketListProduct(bucketListProduct: any, conditions: any = {onSuccess: () => {}, onError: () => {}} ) {
+            return bucketListProduct.findByPk(bucketListProduct.bucketListProductId)
+                             .then((bucketProduct: any) => {
+                                if(!!bucketProduct) {
+                                    bucketProduct.bucketId = bucketListProduct.bucketId;
+                                    bucketProduct.productId= bucketListProduct.productId
+                                    bucketProduct.points= bucketListProduct.points
+                                    bucketProduct.price= bucketListProduct.price
+                                    bucketProduct.discount= bucketListProduct.discount
+                                    bucketProduct.discount= bucketListProduct.discount;
+                                    return bucketProduct.save()
+                                } else {
+                                    console.log("BucketList Product not found");
+                                    return null;
+                                }
+                             })
+                             .then((updatedBucketProductList: any) => {
+                                console.log("Product successfully updated in bucket");
+                                conditions.onSuccess(updatedBucketProductList);
+                             })
+                             .catch((error: any) => {
+                                console.log("error updating product");
+                                conditions.onError(error)
+                             })
+            
+        }
+
+
         static async createbucketListProduct(bucketListProductItems: Array<any>, conditions: any = {}) {
 
-            return StaticModelHelper.bulkCreateOrUpdate(bucketListProduct,bucketListProductItems, {
-                keys: ['bucketListProductId'],
-                ...conditions
-            }, {
-                keys: ['bucketListProductId']
+            // return StaticModelHelper.bulkCreateOrUpdate(bucketListProduct,bucketListProductItems, {
+            //     keys: ['bucketId','productId'],
+            //     ...conditions
+            // }, {
+            //     keys: []
+            // })
+
+            return sequelize.transaction(async() => {
+                return await bucketListProduct.bulkCreate(bucketListProductItems);
             })
         }
 
@@ -79,7 +107,7 @@ export default (sequelize: Sequelize) => {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-       productId: {
+        productId: {
             type: DataTypes.INTEGER,
             allowNull: false
         },
@@ -88,7 +116,7 @@ export default (sequelize: Sequelize) => {
             allowNull:false,
             defaultValue:0
         },
-         price:{
+        price:{
             type:DataTypes.INTEGER,
             allowNull:false,
             defaultValue:0
@@ -97,10 +125,8 @@ export default (sequelize: Sequelize) => {
             type:DataTypes.INTEGER,
             allowNull:false,
             defaultValue:0
-
         },
-    
-         updatedAt: {
+        updatedAt: {
             type: DataTypes.DATE,
             allowNull: false,
             defaultValue: new Date()
@@ -113,8 +139,6 @@ export default (sequelize: Sequelize) => {
         userId:{
             type:DataTypes.INTEGER,
             allowNull:false,
-
-
         }
        
       

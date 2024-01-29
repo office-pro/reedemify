@@ -17,6 +17,8 @@ export class StaticModelHelper {
               ...createConditions
           });
 
+          console.log('recordObj - ',recordObj)
+
           if (created) {
               finalOp.push(recordObj.toJSON());
               console.log('data created:', recordObj.toJSON());
@@ -45,9 +47,11 @@ export class StaticModelHelper {
   static whereKeyValueExtractor(keys:Array<string> = [], record: any = {}) {
     let obj: any = {};
 
-    keys.forEach((key:string) => {
-      obj[key] = record[key];
-    });
+    if(keys?.length > 0) {
+      keys.forEach((key:string) => {
+        obj[key] = record[key];
+      });
+    }
 
     return obj;
   }

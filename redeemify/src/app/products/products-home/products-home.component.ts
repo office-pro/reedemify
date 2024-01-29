@@ -1,5 +1,5 @@
 import {Component, ViewChild} from "@angular/core";
-import { ProductService } from "../services/products.services";
+import { ProductService } from "../../shared-components/services/products.services";
 import { IonModal } from "@ionic/angular";
 import { OverlayEventDetail } from '@ionic/core/components';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
@@ -76,7 +76,7 @@ export class ProductsHomeComponent {
 
   ngOnInit() {
     this.productService.getProducts().subscribe((data: any) => {
-      this.products = data;
+      this.products = data.data;
       console.log(this.products);
     })
 

@@ -70,4 +70,16 @@
 .isDisabled {
   pointer-events: none !important;
   cursor: no-drop !important;
+  opacity: 0.5;
+}
+
+.link {
+  color: var(--ion-text-color) !important;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.button-outline {
+  color: var(--ion-text-color) !important;
+  --border-color: var(--ion-text-color) !important;
 }

@@ -20,6 +20,20 @@ export class BrandController {
   
   }
 
+  static async getActiveBrandProducts(req: Request, res: Response) {
+    let brandId: number = !!req.params.brandId ? parseInt(req.params.brandId) : 0;
+
+    if(brandId) {
+      (models?.default as any)?.["brandbucketmapper"].getActiveBucketProducts(brandId)
+                                                     .then((data: any) => {
+                                                        res.json({data: data})                                                                                                                                                                                                                                                                                                                               
+                                                     })
+
+    } else {
+      res.json({error: "Send Valid Brand Id"}); 
+    }
+  }
+
   static async getBrandByBrandId(req: Request, res: Response) {
 
     (models?.default as any)?.["brands"].findBrandByBrandId({brandId: req?.params?.brandId})

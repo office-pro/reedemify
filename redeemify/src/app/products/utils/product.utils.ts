@@ -20,4 +20,8 @@ export class ProductUtils {
   static goToProductsHomePage(router: Router) {
     router.navigateByUrl("/products")
   }
+
+  static goToAddBucketPage(router: Router) {
+    router.navigateByUrl("/products/bucket/create")
+  }
 }

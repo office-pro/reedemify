@@ -1,0 +1,34 @@
+<ion-grid>
+  <ion-row class="bucket-products--rows">
+      <ion-col size="12">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>
+              <div class="bucket-products--container">
+                <div class="bucket-products--container--title">Add Bucket Products</div>
+                <div class="bucket-products--container--actions">
+                  <ion-button [disabled]="!isEdit" size="small" (click)="addNewProduct()">Add</ion-button>
+                  <ion-button [disabled]="!isEdit" size="small" (click)="updateProduct()">Update</ion-button>
+                </div>
+              </div>
+            </ion-card-title>
+          </ion-card-header> 
+          <ion-card-content>
+            <ion-row>
+              <ion-col size="12">
+                <ion-list [inset]="true" class="bucket-products--ion-item-container">
+                  <ion-item *ngFor="let product of bucket?.products" >
+                    <ion-row class="bucket-products--bucket-row-container">
+                      <dropdown-with-search [class.isDisabled]="!isEdit" class="bucket-products--bucket-row-container--inputs"  selectedIdKey="productId"  [selectedId]="product.productId"  label="Products" placeholder="Select Product" [(data)]="productData" (selectedObjectChange)="onProductChange($event, product)" key="productName" products-data></dropdown-with-search>
+                      <ion-input [disabled]="!isEdit" class="bucket-products--bucket-row-container--inputs" [disabled]="!isEdit" label="Points" placeholder="Enter Points" labelPlacement="stacked" [value]="product?.productPoints"  [(ngModel)]="product.productPoints" (ngModelChange)="updateProduct()"></ion-input>
+                      <ion-icon [class.isDisabled]="bucket?.products?.length == 1 || !isEdit " class="bucket-products--bucket-row-container--inputs-icon" (click)="removeProduct(product)" name="trash-outline"></ion-icon>
+                    </ion-row>
+                  </ion-item>
+                </ion-list>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+  </ion-row>
+</ion-grid>

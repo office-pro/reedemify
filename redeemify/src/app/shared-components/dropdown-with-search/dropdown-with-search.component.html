@@ -1,5 +1,5 @@
 <ion-item>
-  <ion-input [disabled]="isDisabled" [readonly]="true" label="{{label}}" labelPlacement="stacked" placeholder="{{placeholder}}" [value]="selectedValue"  [(ngModel)]="selectedValue" [matMenuTriggerFor]="menu"></ion-input>
+  <ion-input [attr.aria-label]="!showLabel && label" [disabled]="isDisabled" [readonly]="true" label="{{showLabel && label}}" labelPlacement="{{showLabel ? 'stacked' : ''}}" placeholder="{{placeholder}}" [value]="selectedValue"  [(ngModel)]="selectedValue" [matMenuTriggerFor]="menu"></ion-input>
 </ion-item>
 
 <mat-menu #menu="matMenu" class="dropdown-with-search" >

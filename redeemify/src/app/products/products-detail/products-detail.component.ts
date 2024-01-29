@@ -1,5 +1,5 @@
 import {Component, Input} from "@angular/core";
-import { ProductService } from "../services/products.services";
+import { ProductService } from "../../shared-components/services/products.services";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ProductUtils } from "../utils/product.utils";
 import { AppUtilityService } from "src/app/shared-components/services/app-utility.service";

@@ -36,4 +36,8 @@ export class RolesRestrictorService {
     return this.isDealer || this.isDistributor;
   }
 
+   get onlyDealerDistributor() {
+    return BaseRoleModel.isOnlyDealer(this.currentUser) || BaseRoleModel.isOnlyDistributor(this.currentUser);
+  }
+
 }

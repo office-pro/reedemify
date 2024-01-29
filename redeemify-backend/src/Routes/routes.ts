@@ -7,6 +7,7 @@ import WalletRouter from './wallet.routes';
 import environment from '../config/environment';
 import brandRouter from './brand.routes';
 import rolesRouter from './roles.routes';
+import bucketRouter from './bucket.routes';
 
 const router = express.Router();
 
@@ -19,6 +20,7 @@ router.use('/api/products', productsRouter);
 router.use('/api/users', userRouter);
 router.use('/api/brands', brandRouter);
 router.use('/api/roles', rolesRouter);
+router.use('/api/buckets', bucketRouter);
 // router.use('/api/wallet', WalletRouter);
 
 export default router;

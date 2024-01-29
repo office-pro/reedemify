@@ -1,0 +1,146 @@
+
+<ion-content>
+  <header-page></header-page>
+  
+  <ion-grid class="products-bucket-details--grid">
+    <ion-row class="products-bucket-details--rows">
+      <ion-col size="12">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>
+              <div class="products-bucket-details--container">
+                <div class="products-bucket-details--container--title">Bucket Details</div>
+                <div class="products-bucket-details--container--actions">
+                  <ion-button size="small" *ngIf="!isEdit" (click)="isEdit = !isEdit">Edit</ion-button>
+                  <ion-button size="small" *ngIf="isEdit" (click)="isEdit = !isEdit">Cancel</ion-button>
+                  <ion-button size="small" (click)="onSave()">Save</ion-button>
+                </div>
+              </div>
+            </ion-card-title>
+          </ion-card-header> 
+          <ion-card-content>
+             <!-- <ion-col size="12"> -->
+                <ion-item>
+                  <ion-input
+                    label="Bucket Name"
+                    labelPlacement="stacked"
+                    [clearInput]="true"
+                    [value]="brandProductsData?.bucketName"
+                    [(ngModel)]="brandProductsData.bucketName"
+                    [disabled]="!isEdit"
+                  >
+                  </ion-input>
+                  
+                </ion-item>
+              <!-- </ion-col> -->
+
+              <!-- <ion-col size="12">
+                <ion-item>
+                  <ion-input
+                    label="Bucket Name"
+                    labelPlacement="stacked"
+                    [clearInput]="true"
+                    [value]="brand?.brandCss?.primaryColor"
+                    [(ngModel)]="brand.brandCss.primaryColor"
+                    type="color"
+                    [disabled]="!isEdit"
+                  >
+                  </ion-input>
+                  
+                </ion-item>
+              </ion-col> -->
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>
+              <div class="products-bucket-details--container">
+                <div class="products-bucket-details--container--title">Bucket Products</div>
+                <!-- <div class="products-bucket-details--container--actions">
+                  <ion-button size="small" *ngIf="!isEdit" (click)="isEdit = !isEdit">Edit</ion-button>
+                  <ion-button size="small" *ngIf="isEdit" (click)="isEdit = !isEdit">Cancel</ion-button>
+                  <ion-button size="small" (click)="onSave()">Save</ion-button>
+                </div> -->
+              </div>
+            </ion-card-title>
+          </ion-card-header> 
+          <ion-card-content>
+            <div class="products-bucket-details--table-container">
+                <table mat-table [dataSource]="brandProductsData?.bucketListProducts"  class="mat-elevation-z8">
+
+                    <!--- Note that these columns can be defined in any order.
+                          The actual rendered columns are set as a property on the row definition" -->
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="productName">
+                      <th mat-header-cell *matHeaderCellDef> Product Name </th>
+                      <td mat-cell *matCellDef="let element"> 
+                        <a class="link" (click)="productUtils.goToProductDetailsPage(router,element?.product?.productId)">{{element?.product?.productName}}</a> 
+                      </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="points">
+                      <th mat-header-cell *matHeaderCellDef> Product Points </th>
+                      <td mat-cell *matCellDef="let element"> 
+                       {{element?.points}}
+                      </td>
+                    </ng-container>
+
+                    <!-- Weight Column -->
+                    <ng-container matColumnDef="user">
+                      <th mat-header-cell *matHeaderCellDef> Created by </th>
+                      <td mat-cell *matCellDef="let element"> {{brandProductsData?.user.firstName + " " + brandProductsData?.user.lastName}} </td>
+                    </ng-container>
+
+                    <!-- Symbol Column -->
+                    <ng-container matColumnDef="productCategory">
+                      <th mat-header-cell *matHeaderCellDef>Product Category</th>
+                      <td mat-cell *matCellDef="let element"> {{element?.product?.productCategoryId | productCategory}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="productSubCategory">
+                      <th mat-header-cell *matHeaderCellDef> Product SubCategory </th>
+                      <td mat-cell *matCellDef="let element"> {{element?.product?.productSubCategoryId | productSubCategory}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="actions">
+                      <th mat-header-cell *matHeaderCellDef></th>
+                      <td mat-cell *matCellDef="let element">
+                      <ion-icon name="ellipsis-vertical-outline" [matMenuTriggerFor]="bucketMenu"></ion-icon>
+                      <mat-menu #bucketMenu="matMenu" class="dropdown-with-search">
+                        <mat-button  mat-menu-item class="dropdown-with-search--icon-container" (click)="onDelete(element)">
+                          Delete
+                        </mat-button>
+                        <mat-button mat-menu-item class="dropdown-with-search--icon-container" (click)="onEdit(element)">
+                          Edit
+                        </mat-button>
+                      </mat-menu>
+                      </td>
+
+                      
+                    </ng-container>
+
+                    <!-- <ng-container matColumnDef="options">
+                      <th mat-header-cell *matHeaderCellDef> </th>
+                      <td mat-cell *matCellDef="let element"> 
+                        </td>
+                    </ng-container> -->
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+
+      <bucket-rows [isEdit]="true" style="width: 100%;" (productsChange)="onProductsChange($event)" #bucketRows></bucket-rows>
+
+    </ion-row>
+
+  </ion-grid>
+</ion-content>

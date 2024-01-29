@@ -31,16 +31,17 @@ export class ProductController {
 
 
   static async getProductCategory(req: Request, res: Response) {
-    (models?.default as any)?.["productCategory"].getProductCategories()
+    (models?.default as any)?.["productCategory"].getProductCategories({},!!req?.query?.getOnlyCategories)
                                        .then((data: any) => {
                                         res.json(data)
                                       });
   }
 
   static async getProducts(req: Request, res: Response) {
+    const total = await (models?.default as any)?.["product"]?.count();
     (models?.default as any)?.["product"].getAllProducts()
                                        .then((data: any) => {
-                                        res.json(data)
+                                        res.json({data,total})
                                       });                                               
 
   }
@@ -55,10 +56,10 @@ export class ProductController {
   }
 
   static async getProductSubCategories(req: Request, res: Response) {
-    (models?.default as any)?.["productSubCategory"].getAllProductSubCategories()
-                                      .then((data: any) => {
-                                         res.json(data)
-                                      });
+      (models?.default as any)?.["productSubCategory"].getAllProductSubCategories({},!!req?.query?.getOnlySubCategories)
+                                       .then((data: any) => {
+                                          res.json(data)
+                                       });
   }
 
    static async getProductImages(req: Request, res: Response) {
