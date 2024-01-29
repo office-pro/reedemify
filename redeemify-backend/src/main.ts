@@ -14,6 +14,8 @@ import { AuthenticationMiddleware } from './authentication/authenticationMiddlew
 import { S3StorageUploader } from './object-storage-models/s3StorageUploader.model';
 // import { FirebaseStorageModel } from './object-storage-models/firebaseStorage.model';
 
+console.log("starting running 1");
+console.log("env - ",environment );
 (async() => {
     try {
         const db =new Database(environment.nodeEnv,dbConfig);
@@ -23,10 +25,14 @@ import { S3StorageUploader } from './object-storage-models/s3StorageUploader.mod
     }
 })()
 
+console.log("starting running 2");
+
 // const firebaseStorage = new FirebaseStorageModel();
 const s3Storage = new S3StorageUploader();
-
+console.log("starting running 3");
 const app = express();
+
+console.log("starting running 4");
 
 const corsOptions = {
   origin: '*', // Replace with the allowed origin(s)
@@ -34,11 +40,14 @@ const corsOptions = {
   credentials: true, // Allow cookies, authorization headers, etc.
   optionsSuccessStatus: 204, // Some legacy browsers (IE11, various SmartTVs) choke on a 204
 };
+console.log("starting running 5");
 
 app.use(cors(corsOptions));
+
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(express.json());
+console.log("starting running 6");
 app.use(
   session({
     secret: 'your-secret-key', // Replace with a strong secret key
@@ -46,9 +55,10 @@ app.use(
     saveUninitialized: true,
   })
 );
+console.log("starting running 7");
 app.use('/', AuthenticationMiddleware.authenticate , router);
 
-
+console.log("starting running 8");
 app.listen(environment.port, () => {
   console.log('server is running on port '+environment.port);
 })
