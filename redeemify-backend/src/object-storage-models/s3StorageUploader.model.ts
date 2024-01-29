@@ -10,10 +10,10 @@ export class S3StorageUploader {
 
   constructor() {
     S3StorageUploader.s3 = new AWS.S3({
-      ...environment.awsStorage.securityCredentials,
+      ...JSON.parse(environment.awsStorage).securityCredentials,
       ...{
         params: {
-          Bucket: environment.awsStorage.bucketName
+          Bucket: JSON.parse(environment.awsStorage).bucketName
         }
       }
     });
@@ -37,7 +37,7 @@ export class S3StorageUploader {
     const uploadedPromises: Array<Promise<any>> = uploadedFiles.map(async (file: any,index: number) => {
       let folderName = `${req?.body?.productImageName}/${Date.now()}_${((req?.files as any)[index] as any)?.originalname}`;
       const params: AWS.S3.PutObjectRequest = {
-          Bucket: environment.awsStorage.bucketName,
+          Bucket: JSON.parse(environment.awsStorage).bucketName,
           Key: folderName,
           Body: Readable.from(file),// Convert the buffer to a readable stream
           ACL: 'public-read', // Set the ACL to public-read 
@@ -66,7 +66,7 @@ export class S3StorageUploader {
     
       let folderName = `${req?.body?.brandName}/${Date.now()}_${((req?.files as any)[0] as any)?.originalname}`;
       const params: AWS.S3.PutObjectRequest = {
-          Bucket: environment.awsStorage.bucketName,
+          Bucket: JSON.parse(environment.awsStorage).bucketName,
           Key: folderName,
           Body: new Stream.PassThrough().end((req?.files as any)[0]?.buffer),// Convert the buffer to a readable stream
           ACL: 'public-read', // Set the ACL to public-read 

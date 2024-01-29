@@ -19,7 +19,7 @@ const dbConfig = {
     "dialect": "postgres",
     "dialectOptions": {
       "encrypt": true,
-      "ssl": environment.ssl
+      "ssl": JSON.parse(environment.ssl)
     },
      "driver": "tedious",
      "port": 19100

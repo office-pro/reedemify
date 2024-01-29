@@ -8,7 +8,7 @@ export default {
     jwtAccessTokenSecret: process.env.JWT_ACCESS_TOKEN_SECRET || `Jb&';~}jZtve+4%k^fugU*sF.+2;\"O#AbE|fRv7(W*M')A[@Jy$rR%~aQB;}S(`,
     jwtRefreshTokenSecret: process.env.JWT_REFRESH_TOKEN_SECRET || "",
     
-    ssl: {
+    ssl: JSON.stringify({
         rejectUnauthorized: true,
         ca: `-----BEGIN CERTIFICATE-----
 MIIEQTCCAqmgAwIBAgIUc6JG5HWvQSnJKCXQqsN4Z1jcuzQwDQYJKoZIhvcNAQEM
@@ -35,12 +35,12 @@ Nk9SJksxqnYbPVzvTt0SkopEtqMwFw2SDjo5l/OG3rI9krThVrYDy224c0uR5kUs
 FlckhINfhb0m1E2rAl7Qljt5eZMgcmA3kSERl4nI3PzVMXLP/AHz/7QxGyJVKFbr
 Hlt1PJVjiE1vpo29pTiTgbAGaGHJn8vclEHybocjHRp9Vxx4ug==
 -----END CERTIFICATE-----`,
-    },
+    }),
 
-  vultrApiKeys: {
+  vultrApiKeys: JSON.stringify({
     apiKey: '3RCPVH4XHDXWXMJXEAQIA6AQLKX2KJHZFG3Q'
-  },
-  firebaseStorage: {
+  }),
+  firebaseStorage: JSON.stringify({
     name: "redeemify-400715",
     url: "gs://redeemify-400715.appspot.com",
     json: {
@@ -56,15 +56,15 @@ Hlt1PJVjiE1vpo29pTiTgbAGaGHJn8vclEHybocjHRp9Vxx4ug==
       "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-bobl9%40redeemify-400715.iam.gserviceaccount.com",
       "universe_domain": "googleapis.com"
     }
-  },
-  awsStorage: {
+  }),
+  awsStorage: JSON.stringify({
     securityCredentials: {
       accessKeyId: 'AKIAV5CMLKKCFPGQ3ZBB',
       secretAccessKey: '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'
     },
     bucketName: "test-shashi-bucket"
-  },
-  api: {
+  }),
+  api: JSON.stringify({
     vultr: {
       'getAllObjectStorage': "https://api.vultr.com/v2/object-storage"
     },
@@ -72,11 +72,11 @@ Hlt1PJVjiE1vpo29pTiTgbAGaGHJn8vclEHybocjHRp9Vxx4ug==
 
     }
 
-  },
-  resizeImageParameters: {
+  }),
+  resizeImageParameters: JSON.stringify({
     width: 800, 
     height: 600
-  }
+  })
 
 
 }

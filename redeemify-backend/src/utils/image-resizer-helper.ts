@@ -9,7 +9,7 @@ export class ImageResizerHelper {
     let promisedFiles: Array<any> = [];
     if(files.length > 0) {
       promisedFiles = files.map(async(file: any) => {
-        const resizedImage: any = await sharp(file.buffer).resize(!!resizeImageParams ? resizeImageParams : environment.resizeImageParameters)
+        const resizedImage: any = await sharp(file.buffer).resize(!!resizeImageParams ? resizeImageParams :JSON.parse( environment.resizeImageParameters))
                                                           .toBuffer();
         return resizedImage
       })
