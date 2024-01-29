@@ -14,8 +14,8 @@ export class FirebaseStorageModel {
 
   static initializeApp() {
     admin.initializeApp({
-      credential: admin.credential.cert(JSON.parse(JSON.stringify(environment.firebaseStorage.json))),
-      storageBucket: environment.firebaseStorage.url,
+      credential: admin.credential.cert(JSON.parse(JSON.stringify(JSON.parse(environment.firebaseStorage).json))),
+      storageBucket: JSON.parse(environment.firebaseStorage).url,
     });
     FirebaseStorageModel.storage = admin.storage();
     FirebaseStorageModel.bucket = FirebaseStorageModel.storage.bucket();

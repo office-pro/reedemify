@@ -3,9 +3,9 @@ import multer from "multer";
 import multerS3 from 'multer-s3';
 import environment from '../config/environment';
 
-const s3: any = new AWS.S3({...environment.awsStorage.securityCredentials,...{
+const s3: any = new AWS.S3({...JSON.parse(environment.awsStorage).securityCredentials,...{
   params: {
-    Bucket: environment.awsStorage.bucketName
+    Bucket: JSON.parse(environment.awsStorage).bucketName
   }
 }});
 
