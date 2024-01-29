@@ -9,6 +9,7 @@ const brandRouter = express.Router();
 brandRouter
 .get('/', BrandController.getBrands)
 .get('/:brandId', BrandController.getBrandByBrandId)
+.get('/:brandId/products',  BrandController.getActiveBrandProducts)
 .post('/createBrand', BrandController.createBrand)
 .post('/createBrands',UploadData.upload.any(), BrandController.createBrands)
 

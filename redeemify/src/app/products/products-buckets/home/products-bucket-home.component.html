@@ -1,0 +1,27 @@
+
+<ion-content>
+  <header-page></header-page>
+  
+  <ion-grid class="products-bucket-home--grid">
+    <ion-row class="products-bucket-home--rows">
+      <ion-col size="12">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>
+              <div class="products-bucket-home--container">
+                <div class="products-bucket-home--container--title">Buckets</div>
+                <div class="products-bucket-home--container--actions">
+                  <ion-button size="small" (click)="productUtils.goToAddBucketPage(router)">Add</ion-button>
+                </div>
+              </div>
+            </ion-card-title>
+          </ion-card-header> 
+          <ion-card-content>
+            <buckets-table></buckets-table>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+</ion-content>

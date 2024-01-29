@@ -4,13 +4,22 @@
 
   <div id="container">
     
-    <ion-grid>
+    <ion-grid *ngIf="rolesRestrictor.isAdmin">
       <ion-row>
         <ion-col size="3" *ngIf="rolesRestrictor.isSuperAdmin">
           <ion-card (click)="routeUtils.goToProducts(router)" >
             <img src="../../assets/consumer-products.webp">
             <ion-card-content>
               <ion-card-title>Products</ion-card-title>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+
+        <ion-col size="3" *ngIf="rolesRestrictor.isSuperAdmin">
+          <ion-card (click)="routeUtils.goToProductBucketsHomePage(router)" >
+            <img src="../../assets/consumer-products.webp">
+            <ion-card-content>
+              <ion-card-title>Products Buckets</ion-card-title>
             </ion-card-content>
           </ion-card>
         </ion-col>
@@ -42,6 +51,10 @@
           </ion-card>
         </ion-col>
       </ion-row>
+    </ion-grid>
+
+    <ion-grid *ngIf="rolesRestrictor.onlyDealerDistributor">
+      <products-viewer [data]="productsData"></products-viewer>
     </ion-grid>
   
   </div>

@@ -102,6 +102,10 @@ export default (sequelize: Sequelize) => {
         isInt: true
       }
     },
+    points: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0
+    },
     firstName: {
       type: DataTypes.STRING(100),
       validate: {
@@ -123,7 +127,7 @@ export default (sequelize: Sequelize) => {
       allowNull: false
     },
     mobileNo: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.BIGINT,
       validate: {
         len: {
           args: [10,10],

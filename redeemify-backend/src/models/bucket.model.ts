@@ -4,17 +4,15 @@ import { StaticModelHelper } from './static-model-helper';
 export default (sequelize: Sequelize) => {
     class bucket extends Model {
         static associate(models: any) {
-            bucket.belongsTo(models['brands'], {
-                foreignKey: "brandId",
-
-
-            })
+            // bucket.belongsTo(models['brands'], {
+            //     foreignKey: "brandId",
+            // })
              bucket.belongsTo(models['users'], {
                 foreignKey: "userId",
             })
 
             bucket.hasMany(models['bucketListProduct'], {
-                foreignKey: "bucketListProductId",
+                foreignKey: "bucketId",
             })
             
             
@@ -34,21 +32,31 @@ export default (sequelize: Sequelize) => {
             })
         }
 
-        static async getAllbuckets() {
-
+        static async getAllbuckets(conditions: any = {}) {
+           console.log("conditions - ", conditions)
            return sequelize.transaction(async() => {
              return await bucket.findAll({
-                include: [{
-                    model: models?.default?.brands,
-                    attributes: ['brandId', 'brandName']
-                }, 
+                include: [
                 {
                     model: models?.default?.users,
                     attributes: ['userId', 'firstName', 'lastName']
-                }, {
-                    model: models?.default?.bucketListProduct
                 }
-                ]
+                , 
+                {
+                    model: models?.default?.bucketListProduct,
+                    include: [
+                       { 
+                          model: models?.default?.product,
+                          include: [
+                            {
+                                model: models?.default?.productImagesUrlContainer,
+                                attributes: ['productImagesUrlContainerId', 'productImagesName', 'imageUrls']
+                            }
+                          ]
+                       }
+                    ]
+                }],
+                ...conditions
             });
            });
            
@@ -77,16 +85,16 @@ export default (sequelize: Sequelize) => {
             unique:true
 
         },
-        brandId: {
-            type: DataTypes.INTEGER,
-            allowNull: false
-        },
+        // brandId: {
+        //     type: DataTypes.INTEGER,
+        //     allowNull: false
+        // },
         
-       isActive: {
-            type: DataTypes.BOOLEAN,
-            defaultValue:false,
-            allowNull: false
-        },
+    //    isActive: {
+    //         type: DataTypes.BOOLEAN,
+    //         defaultValue:false,
+    //         allowNull: false
+    //     },
         createdAt: {
             type: DataTypes.DATE,
             allowNull: false,

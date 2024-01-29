@@ -25,6 +25,11 @@ const routes: Routes = [
     canLoad: [LoginResolver]
   },
   {
+    path: 'productbuckets',
+    loadChildren: () => import('./product-buckets/product-buckets.module').then(m => m.ProductBucketsModule),
+    canLoad: [LoginResolver]
+  },
+  {
     path: 'users',
     loadChildren: () => import('./users/users.module').then(m => m.UsersModule),
     canLoad: [LoginResolver,AdminRoleResolver]
@@ -32,7 +37,7 @@ const routes: Routes = [
   {
     path: '',
     redirectTo: 'login',
-    pathMatch: 'full'
+    pathMatch: 'full' 
   },
 ];
 

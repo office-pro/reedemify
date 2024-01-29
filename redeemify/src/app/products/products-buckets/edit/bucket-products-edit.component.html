@@ -1,0 +1,27 @@
+<h2 mat-dialog-title>Edit {{data?.bucketName}} Product</h2>
+<mat-dialog-content class="mat-typography">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-list [inset]="true" class="edit-bucket-products--ion-item-container">
+          <ion-item>
+            <ion-row class="edit-bucket-products--bucket-row-container">
+              <ion-col size="12">
+                <dropdown-with-search class="edit-bucket-products--bucket-row-container--inputs" selectedIdKey="productId"  [selectedValue]="data.product.productName"  label="Products" placeholder="Select Product" [(data)]="productData" (selectedObjectChange)="onProductChange($event)" key="productName" products-data></dropdown-with-search>
+              </ion-col>
+              <ion-col size="12">
+                <ion-input class="edit-bucket-products--bucket-row-container--inputs" label="Points" placeholder="Enter Points" labelPlacement="stacked" [value]="data.points"  [(ngModel)]="data.points"></ion-input>
+              </ion-col>
+             
+            </ion-row>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close (click)="onCancel()">Cancel</button>
+  <button mat-button (click)="onSave(data)" cdkFocusInitial>Save</button>
+</mat-dialog-actions>

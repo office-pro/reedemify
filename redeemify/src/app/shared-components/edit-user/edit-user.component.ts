@@ -25,5 +25,5 @@ export class EditUserComponent {
   onSelectedBrandChange(event: any) {}
 
   onSelectedRoleChange(event: any) {}
-  
+
 }

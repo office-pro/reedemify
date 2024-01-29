@@ -1,0 +1,17 @@
+<ion-grid>
+  <ion-list [inset]="true" class="brand-bucket-mapper-table-entries--ion-item-container">
+    <ion-item *ngFor="let brandBucket of brandBucketArr;let i = index" >
+      <ion-row class="brand-bucket-mapper-table-entries--bucket-row-container">
+        <ion-col size="6">
+          <dropdown-with-search [class.isDisabled]="!isEdit" class="brand-bucket-mapper-table-entries--bucket-row-container--inputs"  selectedIdKey="bucketId"  [selectedId]="brandBucket.bucketId"  label="Buckets" placeholder="Select Bucket" [(data)]="bucketsData" (selectedObjectChange)="onBucketChange($event, brandBucket)" key="bucketName" buckets-data></dropdown-with-search>
+        </ion-col>
+        <ion-col size="5">
+          <ion-checkbox [ngModel]="brandBucket.isActive" (ngModelChange)="setBrandActive(i,$event)" [value]="brandBucket?.isActive" [disabled]="!isEdit">Is Active</ion-checkbox>
+        </ion-col>
+        <ion-col size="1" class="right-align">
+         <ion-icon [class.isDisabled]="brandBucketArr?.length == 1 || !isEdit " class="brand-bucket-mapper-table-entries--bucket-row-container--inputs-icon" (click)="removeNewMapper(brandBucket)" name="trash-outline"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+</ion-grid>

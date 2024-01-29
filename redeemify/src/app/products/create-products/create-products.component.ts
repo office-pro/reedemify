@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { FormArray, FormBuilder, Validators } from "@angular/forms";
-import { ProductService } from "../services/products.services";
+import { ProductService } from "../../shared-components/services/products.services";
 import { ExcelService } from "src/app/shared-components/services/excel-helper.service";
 import { Router } from "@angular/router";
 import { ProductUtils } from "../utils/product.utils";

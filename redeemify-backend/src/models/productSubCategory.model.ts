@@ -24,18 +24,19 @@ export default (sequelize: Sequelize) => {
             })
         }
 
-        static async getAllProductSubCategories(conditions: any = {}) {
-
+        static async getAllProductSubCategories(conditions: any = {},getOnlySubCategories: boolean = false) {
+            let include =  [
+                {
+                    model:  models.default.productCategory
+                },
+                {
+                    model:  models.default.product
+                }
+            ]
+            
             return sequelize.transaction(async() => {
                 return await productSubCategory.findAll({
-                    include: [
-                        {
-                            model:  models.default.productCategory
-                        },
-                        {
-                            model:  models.default.product
-                        }
-                    ],
+                    include: getOnlySubCategories ? [] : include,
                     ...conditions
                 })
             })

@@ -1,0 +1,42 @@
+.bucket-products {
+  &--container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &--title {
+          flex: 1;
+    }
+
+    &--actions {
+      flex: 1;
+      text-align: right;
+    }
+  }
+
+  &--col-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  &--ion-item-container {
+    margin: 0;
+  }
+
+  &--bucket-row-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    &--inputs {
+      flex: 1;
+      margin-right: 10px;
+    }
+
+    &--inputs-icon {
+      cursor: pointer;
+    }
+  }
+}

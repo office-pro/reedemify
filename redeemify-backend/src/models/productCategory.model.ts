@@ -4,7 +4,7 @@ import { StaticModelHelper } from './static-model-helper';
 export default (sequelize: Sequelize) => {
     class productCategory extends Model {
         static associate(models: any) {
-            productCategory.hasMany(models?.product, {
+            productCategory.belongsTo(models?.product, {
                 foreignKey: 'productCategoryId'
             });
 
@@ -14,17 +14,19 @@ export default (sequelize: Sequelize) => {
           
         }
 
-        static async getProductCategories(conditions: any = {}) {
+        static async getProductCategories(conditions: any = {},getProductCategories: boolean = false) {
+            let include = [
+                {
+                    model: models.default.product
+                },
+                {
+                    model: models.default.productSubCategory
+                }
+            ]
+            
             return sequelize.transaction(async () => {
                 return productCategory.findAll({
-                    include: [
-                        {
-                            model: models.default.product
-                        },
-                        {
-                            model: models.default.productSubCategory
-                        }
-                    ],
+                    include: getProductCategories ? [] : include,
                     ...conditions
                 })    
             })

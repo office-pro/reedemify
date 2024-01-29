@@ -2,6 +2,7 @@ import { Router } from "@angular/router";
 import { ProductUtils } from "../products/utils/product.utils";
 import { BrandsUtils } from "../brands/brands.utils";
 import { UserRoutingUtils } from "../users/utils/user-routing.utils";
+import { ProductBucketUtils } from "../product-buckets/utils/product-buckets.utils";
 
 export class RouteUtils {
   static goToProducts(router: Router) {
@@ -22,5 +23,9 @@ export class RouteUtils {
 
   static goToUsersHomePage(router: Router) {
     UserRoutingUtils.goToUsersHomePage(router)
+  }
+
+  static goToProductBucketsHomePage(router: Router) {
+    ProductBucketUtils.goToProductBucketHomePage(router)
   }
 }

@@ -7,10 +7,19 @@ export class BaseRoleModel {
            BaseRoleModel.allAdmin(currentUser);
   }
 
+  static isOnlyDistributor(currentUser: any) {
+    return currentUser?.roleName?.trim()?.toLowerCase() == RolesEnum.DISTRIBUTOR;
+  }
+
+  static isOnlyDealer(currentUser: any) {
+    return currentUser?.roleName?.trim()?.toLowerCase() == RolesEnum.DEALER;
+  }
+
   static isDistributor(currentUser: any) {
     return currentUser?.roleName?.trim()?.toLowerCase() == RolesEnum.DISTRIBUTOR ||
       BaseRoleModel.allAdmin(currentUser) ;
   }
+  
 
   static isAdmin(currentUser: any) {
     return BaseRoleModel.allAdmin(currentUser)

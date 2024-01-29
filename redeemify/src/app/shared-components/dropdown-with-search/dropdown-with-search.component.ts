@@ -16,6 +16,9 @@ export class DropDownWithSearchComponent {
   public data: Array<any> = [];
 
   @Input()
+  showLabel: boolean = true;
+
+  @Input()
   isDisabled: boolean = false
 
   @Output()
@@ -60,7 +63,8 @@ export class DropDownWithSearchComponent {
   constructor(private router: Router, private userContext: UserContext) {}
 
   ngOnChanges(change: any) {
-    if(!!change?.data) {
+
+    if(!!change?.data && !this.checkEmptyArray(change?.data?.currentValue)) {
       this.data = change?.data?.currentValue;
       this.filteredData = JSON.parse(JSON.stringify(this.data));
     }
@@ -76,8 +80,7 @@ export class DropDownWithSearchComponent {
       }
     }
 
-    if(!!change?.selectedId && !!this.selectedIdKey) {
-      this.selectedId = change?.selectedId?.currentValue;
+    if(!this.checkEmptyArray(change?.data?.currentValue) && (!!this?.selectedId) && !!this.selectedIdKey) {
       let value: any = this.data.filter((dataObj: any) => dataObj?.[this.selectedIdKey] == this.selectedId );
       if(value.length > 0) {
         this.selectedObject = value[0];
@@ -86,10 +89,6 @@ export class DropDownWithSearchComponent {
         this.selectedValueChange.emit(this.selectedValue)
       }
     }
-
-    
-    
-
   }
 
   ngOnInit() {
@@ -109,5 +108,9 @@ export class DropDownWithSearchComponent {
     this.selectedObject = obj;
     this.selectedValueChange.emit(this.selectedValue);
     this.selectedObjectChange.emit(this.selectedObject);
+  }
+
+  checkEmptyArray(data: any) {
+    return !!data && data.length < 1;
   }
 }

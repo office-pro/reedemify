@@ -1,0 +1,112 @@
+
+<ion-content>
+  <header-page></header-page>
+  
+  <ion-grid class="products-bucket-create--grid">
+    <ion-row class="products-bucket-create--rows">
+      <ion-col size="12">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>
+              <div class="products-bucket-create--container">
+                <div class="products-bucket-create--container--title">Bucket Details</div>
+                <div class="products-bucket-create--container--actions">
+                  <ion-button *ngIf="!isEdit" (click)="isEdit = !isEdit" size="small">Edit</ion-button>
+                  <ion-button *ngIf="isEdit" (click)="isEdit = !isEdit" size="small">Cancel</ion-button>
+                  <ion-button (click)="onSave()" size="small">Save</ion-button>
+                </div>
+              </div>
+            </ion-card-title>
+          </ion-card-header> 
+          <ion-card-content>
+            <ion-row>
+              <ion-col size="12">
+                 <ion-list>
+                  <ion-item>
+                    <ion-input
+                      label="Bucket Name"
+                      labelPlacement="stacked"
+                      [clearInput]="true"
+                      placeholder="Enter Bucket Name"
+                      [value]="bucket?.bucketName"
+                      [(ngModel)]="bucket.bucketName"
+                      [disabled]="!isEdit"
+                    >
+                    </ion-input>
+                  </ion-item>
+
+                  <ion-item>
+                    <ion-input
+                      label="Bucket Cost"
+                      labelPlacement="stacked"
+                      [clearInput]="true"
+                      placeholder="Enter Total Bucket Cost"
+                      [value]="bucket?.balance"
+                      [(ngModel)]="bucket.balance"
+                      [disabled]="!isEdit"
+                    >
+                    </ion-input>
+                  </ion-item>
+
+                  <!-- <ion-item>
+                    <ion-input
+                      label="Wallet Limit"
+                      labelPlacement="stacked"
+                      [clearInput]="true"
+                      placeholder="Enter Wallet Limit Balance"
+                      [value]="brand?.limit"
+                      [(ngModel)]="brand.limit"
+                      [disabled]="!isEdit"
+                    >
+                    </ion-input>
+                  </ion-item> -->
+
+                  <ion-item>
+                    <ion-checkbox [(ngModel)]="bucket.isActive" [value]="bucket?.isActive" [disabled]="!isEdit">Is Active</ion-checkbox>
+                  </ion-item>
+                  
+                </ion-list>
+
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      
+    </ion-row>
+
+    <ion-row class="products-bucket-create--rows">
+      <ion-col size="12">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>
+              <div class="products-bucket-create--container">
+                <div class="products-bucket-create--container--title">Bucket Products</div>
+                <div class="products-bucket-create--container--actions">
+                  <ion-button [disabled]="!isEdit" size="small" (click)="addNewProduct()">Add</ion-button>
+                </div>
+              </div>
+            </ion-card-title>
+          </ion-card-header> 
+          <ion-card-content>
+            <ion-row>
+              <ion-col size="12">
+                <ion-list [inset]="true">
+                  <ion-item *ngFor="let product of bucket?.products">
+                    <ion-row class="products-bucket-create--bucket-row-container">
+                      <dropdown-with-search [class.isDisabled]="!isEdit" class="products-bucket-create--bucket-row-container--inputs"  selectedIdKey="productId"  [selectedId]="product.productId"  label="Products" placeholder="Select Product" [(data)]="productData" key="productName" products-data></dropdown-with-search>
+                      <ion-input [disabled]="!isEdit" class="products-bucket-create--bucket-row-container--inputs" [disabled]="!isEdit" label="Points" placeholder="Enter Points" labelPlacement="stacked" [value]="product?.productPoints"  [(ngModel)]="product.productPoints" ></ion-input>
+                      <ion-icon [class.isDisabled]="bucket?.products?.length == 1 || !isEdit " class="products-bucket-create--bucket-row-container--inputs-icon" (click)="removeProduct(product)" name="trash-outline"></ion-icon>
+                    </ion-row>
+                  </ion-item>
+                </ion-list>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+</ion-content>

@@ -3,6 +3,8 @@ import { BrandService } from "../services/brands.services";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AppUtilityService } from "src/app/shared-components/services/app-utility.service";
 import { BrandsUtils } from "../brands.utils";
+import { ProductUtils } from "src/app/products/utils/product.utils";
+import { UserContext } from "src/app/shared-components/services/user-context.service";
 
 @Component({
   selector: 'brand-details',
@@ -20,19 +22,28 @@ export class BrandDetailsComponent {
   secondaryColor: string = "";
   blob: any;
   brandUtils = BrandsUtils;
+  productUtils = ProductUtils;
+  userId: number = 0;
+  brandId:number = 0;
 
-  constructor(private brandService: BrandService, private route: ActivatedRoute, private appUtility: AppUtilityService, public router: Router) {}
+  constructor(private brandService: BrandService, private route: ActivatedRoute, private appUtility: AppUtilityService, public router: Router, private userContext: UserContext) {}
 
   ngOnInit() {
+
+    this.userContext.currentUser.subscribe((user: any) => {
+      this.userId = user.userId;
+    })
     this.route.params.subscribe((params: any) => {
       console.log(params.brandId)
       if(params.brandId == 'new') {
         this.isEdit = true;
       } else {
+          this.brandId = parseInt(params.brandId);
           this.brandService.getBrandByBrandId(params.brandId)
                         .then((data:any) => {
                           data.subscribe((dataObj: any) => {
                             this.brand = dataObj[0];
+                            this.brandId = this.brand.brandId;
                             this.updateTheme();
                           })
                         })
