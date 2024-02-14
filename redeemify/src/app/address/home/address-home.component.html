@@ -1,0 +1,49 @@
+<ion-grid>
+  <ion-row>
+    <ion-col size="12">
+      <form [formGroup]="addressForm">
+        <ion-list>
+          <ion-item>
+            <ion-textarea
+              label="Address"
+              labelPlacement="stacked"
+              name="address"
+              placeholder="Enter Address"
+              formControlName="address"
+            ></ion-textarea>
+          </ion-item>
+
+          <ion-item>
+            <ion-input
+              label="City"
+              name="city"
+              labelPlacement="stacked"
+              placeholder="Enter City"
+              formControlName="city"
+            ></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-input
+              label="State"
+              labelPlacement="stacked"
+              placeholder="Enter State"
+              name="state"
+              formControlName="state"
+            ></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-input
+              label="Pincode"
+              labelPlacement="stacked"
+              placeholder="Enter Pincode"
+              formControlName="pincode"
+              name="pincode"
+            ></ion-input>
+          </ion-item>
+        </ion-list>
+      </form>
+    </ion-col>
+  </ion-row>
+</ion-grid>

@@ -36,9 +36,10 @@ export class AuthController {
                                   .getUserById({mobileNo})
                                   .then((dataVal: any) => {
                                     if(!!dataVal && (dataVal.dataValues.brandId == data[0].dataValues.brandId)) {
-                                      const {mobileNo, userId, firstName, lastName, email , role, brand} = dataVal.dataValues;
+                                      
+                                      const {mobileNo, userId, firstName, lastName, email , role, brand,wallet} = dataVal.dataValues;
                                       if(brand.dataValues.isActive) {
-                                        res.json({"data": jwt.sign({mobileNo, userId, firstName, lastName, email,...role.dataValues,...brand.dataValues}, environment.jwtAccessTokenSecret, { expiresIn: '1h' })})
+                                        res.json({"data": jwt.sign({mobileNo, userId, firstName, lastName, email,...role.dataValues,...brand.dataValues,...wallet.dataValues}, environment.jwtAccessTokenSecret, { expiresIn: '1h' })})
                                       } else {
                                         res.status(500).send(`${brand.dataValues.brandName} is deactivated. Please connect with Admin to Reactivate`);
                                       }

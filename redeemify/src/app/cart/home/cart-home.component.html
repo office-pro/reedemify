@@ -1,0 +1,121 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>
+      <div class="cart-home--card-header">
+        <div class="cart-home--card-header--title">Cart</div>
+        <div class="cart-home--card-header--actions">
+          <!-- <ion-button
+            size="small"
+            >Add</ion-button
+          > -->
+        </div>
+      </div>
+    </ion-card-title>
+  </ion-card-header>
+  <ion-card-content class="cart-home--card-content">
+    <ion-grid class="cart-home--grid">
+      <ion-row class="cart-home--rows">
+        <div
+          style="
+            width: 100%;
+            padding: 10px;
+            text-align: center;
+            font-size: 15px;
+            font-weight: bold;
+            color: var(--ion-text-color) !important;
+          "
+          class="cart-home--cart-product-container--wrapper"
+        >
+          <div class="cart-home--cart-product-container--wrapper--slider-image">
+            Images
+          </div>
+          <div class="cart-home--cart-product-container--wrapper--details">
+            Product Details
+          </div>
+          <div
+            class="cart-home--cart-product-container--wrapper--delivery-details"
+          >
+            Points
+          </div>
+          <div
+            class="cart-home--cart-product-container--wrapper--delivery-details"
+          >
+            Actions
+          </div>
+        </div>
+        <ng-container
+          *ngFor="let cartProduct of cartService.cartItems; let last = last"
+        >
+          <div class="cart-home--cart-product-container">
+            <div class="cart-home--cart-product-container--wrapper">
+              <div
+                class="cart-home--cart-product-container--wrapper--slider-image"
+              >
+                <image-slider
+                  [imageUrls]="
+                    cartProduct?.product?.product?.productImagesUrlContainer
+                      ?.ima
+                  "
+                ></image-slider>
+              </div>
+              <div class="cart-home--cart-product-container--wrapper--details">
+                {{ cartProduct?.product?.product.productName }}
+              </div>
+              <div
+                class="cart-home--cart-product-container--wrapper--delivery-details"
+              >
+                {{ cartProduct?.product?.points }}
+              </div>
+              <div
+                class="cart-home--cart-product-container--wrapper--delivery-details"
+              >
+                <ion-icon
+                  class="brand-bucket-mapper-table-entries--bucket-row-container--inputs-icon"
+                  (click)="cartService.removeProducts(cartProduct)"
+                  name="trash-outline"
+                ></ion-icon>
+              </div>
+            </div>
+            <div class="cart-home--cart-product-container--quantity">
+              <div class="cart-home--cart-product-container--quantity--wrapper">
+                <ion-icon
+                  name="remove-outline"
+                  class="cart-home--cart-product-container--quantity--wrapper--icons"
+                  (click)="cartService.decreaseProductQuantity(cartProduct)"
+                ></ion-icon>
+                <ion-input
+                  class="cart-home--cart-product-container--quantity--wrapper--input"
+                  type="number"
+                  aria-label="quantity"
+                  [value]="cartProduct.quantity"
+                ></ion-input>
+                <ion-icon
+                  name="add-outline"
+                  class="cart-home--cart-product-container--quantity--wrapper--icons"
+                  (click)="cartService.increaseProductQuantity(cartProduct)"
+                ></ion-icon>
+              </div>
+            </div>
+          </div>
+
+          <!-- <ng-container *ngFor="let cartProduct of cartService.cartItems">
+        <ion-col size="7" class="cart-home--rows--product">
+          {{ cartProduct.product.product.productName }}
+        </ion-col>
+        <ion-col size="4" class="cart-home--rows--quantity">
+          <ion-icon name="remove-outline" class="cart-home--rows--quantity--icons" (click)="cartService.decreaseProductQuantity(cartProduct)"></ion-icon>
+          <ion-input class="cart-home--rows--quantity--quantity-input" type="number" aria-label="quantity" [value]="cartProduct.quantity"></ion-input>
+          <ion-icon name="add-outline" class="cart-home--rows--quantity--icons" (click)="cartService.increaseProductQuantity(cartProduct)"></ion-icon>
+        </ion-col>
+        <ion-col size="1" class="cart-home--rows--trash">
+          <ion-icon
+            class="brand-bucket-mapper-table-entries--bucket-row-container--inputs-icon"
+            (click)="cartService.removeProducts(cartProduct)"
+            name="trash-outline"
+          ></ion-icon>
+        </ion-col>-->
+        </ng-container>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>

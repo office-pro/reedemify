@@ -51,7 +51,7 @@
 
     img {
       object-fit: contain;
-      height: 85px;
+      height: -webkit-fill-available;
     }
   }
 

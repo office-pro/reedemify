@@ -1,0 +1,20 @@
+.cart-container {
+  display: inline-block;
+
+  &--icon {
+    position: relative;
+    height: 23px;
+    width: 23px;
+  }
+
+  &--number {
+    position: relative;
+    font-weight: 600;
+    font-size: 12px;
+    bottom: -4px;
+    right: 3px;
+    border: 2px solid;
+    border-radius: 4px;
+    padding: 0 4px;
+  }
+}

@@ -12,6 +12,8 @@ export class ThemeService {
 
     document.documentElement.style.setProperty('--ion-text-color', fontColor);
     document.documentElement.style.setProperty('--ion-color-base', fontColor);
+    document.documentElement.style.setProperty('--highlight-color-focused', fontColor);
+   
     this.generateMultipleColorShade(primaryColor,fontColor)
     // this.generatePrimaryColorShades(10);
   }

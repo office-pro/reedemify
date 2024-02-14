@@ -25,6 +25,10 @@ export class BaseRoleModel {
     return BaseRoleModel.allAdmin(currentUser)
   }
 
+  static isOnlyAdmin(currentUser: any) {
+    return (currentUser?.roleName?.trim()?.toLowerCase() == RolesEnum.ADMIN)
+  }
+
   static isSuperAdmin(currentUser: any) {
     return currentUser?.roleName?.trim()?.toLowerCase() == RolesEnum.SUPERADMIN;
   }
