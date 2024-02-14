@@ -7,7 +7,9 @@ export default (sequelize: Sequelize) => {
     static associate (models: any) {
       users.belongsTo(models['brands'], {foreignKey: 'brandId'});
       users.belongsTo(models['roles'], {foreignKey: 'roleId'});
-      users.hasOne(models['wallet']);
+      users.hasOne(models['wallet'], {
+        foreignKey: 'userId'
+      });
     }
 
     static createUser({brandId,roleId,firstName,lastName,mobileNo,email,password}: any) {
@@ -53,6 +55,10 @@ export default (sequelize: Sequelize) => {
             {
               model: models.default.roles,
               attributes: ['roleId','roleName']
+            },
+            {
+              model: models.default.wallet,
+              attributes: ['walletId','points']
             }
           ],
           attributes: {
@@ -73,6 +79,10 @@ export default (sequelize: Sequelize) => {
             {
               model: models.default.roles,
               attributes: ['roleId','roleName']
+            },
+            {
+              model: models.default.wallet,
+              attributes: ['walletId','points']
             }
           ],
           attributes: {
@@ -101,10 +111,6 @@ export default (sequelize: Sequelize) => {
       validate: {
         isInt: true
       }
-    },
-    points: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0
     },
     firstName: {
       type: DataTypes.STRING(100),

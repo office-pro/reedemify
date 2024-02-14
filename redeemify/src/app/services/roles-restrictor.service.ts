@@ -24,6 +24,10 @@ export class RolesRestrictorService {
     return BaseRoleModel.isAdmin(this.currentUser);
   }
 
+  get isOnlyAdmin() {
+    return BaseRoleModel.isOnlyAdmin(this.currentUser);
+  }
+
   get isDealer() {
     return BaseRoleModel.isDealer(this.currentUser);
   }

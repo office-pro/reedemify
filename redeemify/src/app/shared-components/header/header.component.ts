@@ -3,6 +3,7 @@ import { NgForm } from "@angular/forms";
 import { Router } from "@angular/router";
 import { UserContext } from "../services/user-context.service";
 import { JwtTokenDecoderService } from "../services/jwt-token.service";
+import { RouteUtils } from "src/app/utils/route.utils";
 
 @Component({
   selector: "header-page",
@@ -21,14 +22,20 @@ export class HeaderComponent {
   @Input()
   showAvatar: boolean = true;
 
+  @Input()
+  points: any = "";
+
   openPopup: boolean = false;
 
-  constructor(private router: Router, public userContext: UserContext, public jwtService: JwtTokenDecoderService) {
+  routeUtils = RouteUtils;
+
+  constructor(public router: Router, public userContext: UserContext, public jwtService: JwtTokenDecoderService) {
     console.log("usercontext - ", this.userContext)
 
     this.userContext.brand$.subscribe((brand: any) => {
       if(brand.logo) {
-        this.logo = brand.logo
+        this.logo = brand.logo;
+        this.points = brand.points;
       }
 
       if(brand.showPoweredByText) {

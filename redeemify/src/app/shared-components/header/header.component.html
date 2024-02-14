@@ -1,22 +1,118 @@
+<!-- <div class="header">
+  <a href="#default" class="logo">
+    <img
+      (click)="navigateToHome()"
+      class="{{
+        showPoweredBy
+          ? 'header-page--container--toolbar-logo-with-powered'
+          : 'header-page--container--toolbar-logo'
+      }}"
+      src="{{ logo }}"
+      alt="Reedemify"
+    />
+  </a>
+  <div class="header-right">
+    <a class="active" href="#home">Home</a>
+
+    <ion-avatar
+      id="avatar"
+      class="header-page--container--user-avatar-image"
+      *ngIf="showAvatar"
+      [matMenuTriggerFor]="menu"
+    >
+      <img
+        alt="user image"
+        src="https://ionicframework.com/docs/img/demos/avatar.svg"
+      />
+    </ion-avatar>
+  </div>
+  <span *ngIf="showPoweredBy" class="header-page--container--toolbar-powered-by"
+    ><strong>Powered</strong> By Reedemify</span
+  >
+</div> -->
+
 <ion-header [translucent]="true" class="header-page--container">
   <ion-toolbar class="header-page--container--toolbar">
     <ion-title class="header-page--container--toolbar-title">
-      <img (click)="navigateToHome()" class="{{showPoweredBy ? 'header-page--container--toolbar-logo-with-powered' : 'header-page--container--toolbar-logo'}}" src="{{logo}}" alt="Reedemify" />
-      <ion-avatar id="avatar" class="header-page--container--user-avatar-image" *ngIf="showAvatar" [matMenuTriggerFor]="menu" >
-        <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+      <!-- <img
+        (click)="navigateToHome()"
+        class="{{
+          showPoweredBy
+            ? 'header-page--container--toolbar-logo-with-powered'
+            : 'header-page--container--toolbar-logo'
+        }}"
+        src="{{ logo }}"
+        alt="Reedemify"
+      /> -->
+
+      
+
+      <!-- <ion-avatar
+        id="avatar"
+        class="header-page--container--user-avatar-image"
+        *ngIf="showAvatar"
+        [matMenuTriggerFor]="menu"
+      >
+        <img
+          alt="user image"
+          src="https://ionicframework.com/docs/img/demos/avatar.svg"
+        />
+      </ion-avatar> -->
+
+      <ion-grid>
+        <ion-row>
+          <ion-col size="9">
+            <img
+        (click)="navigateToHome()"
+        class="{{
+          showPoweredBy
+            ? 'header-page--container--toolbar-logo-with-powered'
+            : 'header-page--container--toolbar-logo'
+        }}"
+        src="{{ logo }}"
+        alt="Reedemify"
+      />
+          </ion-col>
+          <!-- <ion-col size="3">
+            <strong></strong>
+          </ion-col> -->
+          <ion-col size="3" class="header-page--container--user">
+            <ion-badge class="header-page--container--user-points" *ngIf="points">
+              <strong>Points - {{points}}</strong>
+              
+            </ion-badge>
+
+            <cart-icon (click)="routeUtils.goToCheckoutPage(router)"></cart-icon>
+            <ion-avatar
+        id="avatar"
+        class="header-page--container--user-avatar-image"
+        *ngIf="showAvatar"
+        [matMenuTriggerFor]="menu"
+      >
+        <img
+          alt="user image"
+          src="https://ionicframework.com/docs/img/demos/avatar.svg"
+        />
       </ion-avatar>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-title>
-    <span *ngIf="showPoweredBy" class="header-page--container--toolbar-powered-by"><strong>Powered</strong> By Reedemify</span>
-    
+    <span
+      *ngIf="showPoweredBy"
+      class="header-page--container--toolbar-powered-by"
+      ><strong>Powered</strong> By Reedemify</span
+    > 
   </ion-toolbar>
-  
 </ion-header>
 
 <!-- <custom-options id="avatar" [isPopupOpen]="openPopup"></custom-options> -->
 
 <mat-menu #menu="matMenu">
   <div class="header-popup">
-    <p class="header-popup--text" (click)="$event.stopPropagation()">Welcome {{userContext?.currentName}} !! </p>
+    <p class="header-popup--text" (click)="$event.stopPropagation()">
+      Welcome {{ userContext?.currentName }} !!
+    </p>
     <button mat-menu-item>Orders</button>
     <button mat-menu-item (click)="logout()">Logout</button>
   </div>

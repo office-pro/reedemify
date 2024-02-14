@@ -3,6 +3,7 @@ import { ProductUtils } from "../products/utils/product.utils";
 import { BrandsUtils } from "../brands/brands.utils";
 import { UserRoutingUtils } from "../users/utils/user-routing.utils";
 import { ProductBucketUtils } from "../product-buckets/utils/product-buckets.utils";
+import { HomeUtils } from "../home/utils/home-utils";
 
 export class RouteUtils {
   static goToProducts(router: Router) {
@@ -27,5 +28,13 @@ export class RouteUtils {
 
   static goToProductBucketsHomePage(router: Router) {
     ProductBucketUtils.goToProductBucketHomePage(router)
+  }
+
+  static goToActiveProductsPage(router: Router) {
+    HomeUtils.goToProductViewerPage(router);
+  }
+
+  static goToCheckoutPage(router: Router) {
+    HomeUtils.goToCheckoutPage(router);
   }
 }

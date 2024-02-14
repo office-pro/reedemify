@@ -31,8 +31,21 @@ export class UserController {
   static async createUsers(req: Request, res: Response) {
     const total = await (models?.default as any)?.["users"]?.count();
     (models?.default as any)?.["users"].createUsers(req.body)
-                                       .then((data: any) => {
-                                        res.json({data,total})
+                                       .then((dataArr: any) => {
+                                        if(!!dataArr && dataArr.length > 0) {
+                                          let walletArr:Array<any> = [];
+                                          walletArr = dataArr.map((userObj: any) => {
+                                            const {brandId,userId} = userObj;
+                                            const points = (req.body.filter((bodyObj: any) => bodyObj.mobileNo == userObj.mobileNo)[0]).points; 
+                                            return {brandId,userId,points};
+                                          });
+                                          (models?.default as any)?.["wallet"].createWallet(walletArr)
+                                                                              .then((walletData: any) => {
+                                                                                res.json({data: dataArr,total}) 
+                                                                              })
+                                        } else {
+                                          res.json({data: dataArr,total})  
+                                        }
                                       },(err: any) => {
                                           res.json({errorMessage: "duplicate entry present"})
                                         });

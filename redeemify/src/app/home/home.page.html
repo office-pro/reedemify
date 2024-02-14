@@ -42,6 +42,15 @@
           </ion-card>
         </ion-col>
 
+        <ion-col size="3" *ngIf="rolesRestrictor.isOnlyAdmin">
+          <ion-card (click)="routeUtils.goToActiveProductsPage(router)">
+            <img src="../../assets/clients-images.avif">
+            <ion-card-content>
+              <ion-card-title>Products</ion-card-title>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+
         <ion-col size="3" *ngIf="rolesRestrictor.isSuperAdmin">
           <ion-card (click)="routeUtils.goToProductsUploadedImages(router)">
             <img style="height: 192px;" src="../../assets/drag-drop.png">
@@ -53,9 +62,21 @@
       </ion-row>
     </ion-grid>
 
-    <ion-grid *ngIf="rolesRestrictor.onlyDealerDistributor">
+    <!-- <ion-grid *ngIf="rolesRestrictor.onlyDealerDistributor">
       <products-viewer [data]="productsData"></products-viewer>
-    </ion-grid>
+      <cart-home></cart-home>
+      <ion-card>
+        <ion-card-title>Address</ion-card-title>
+        <ion-card-content>
+          <address-home (formChange)="addressForm = $event" #address></address-home>
+          <ion-checkbox [(ngModel)]="isAddressSameAsShippingAddress" (ngModelChange)="changeForm($event)" [value]="isAddressSameAsShippingAddress" >Address same as Shipping Address</ion-checkbox>
+          <address-home [addressForm]="form" #shippingAddress></address-home>
+        </ion-card-content>
+      </ion-card>
+
+      <price-details></price-details>
+      
+    </ion-grid> -->
   
   </div>
 </ion-content>

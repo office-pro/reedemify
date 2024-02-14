@@ -1,5 +1,6 @@
 import { Component, Input } from "@angular/core";
 import { UserContext } from "../services/user-context.service";
+import { CartService } from "src/app/cart/services/cart.service";
 
 @Component({
   selector: 'products-viewer',
@@ -21,7 +22,7 @@ export class ProductViewerComponent {
   @Input()
   col: number = 3
 
-  constructor(private userContext: UserContext) {
+  constructor(private userContext: UserContext, public cartService: CartService) {
     this.userContext.brand$.subscribe((brand: any) => {
       this.brand = brand;
       this.brandId = brand.brandId;

@@ -1,4 +1,5 @@
 import { Sequelize, Model, DataTypes } from 'sequelize';
+import { StaticModelHelper } from './static-model-helper';
 export default (sequelize: Sequelize) => {
     class wallet extends Model {
         static associate(models: any) {
@@ -9,6 +10,14 @@ export default (sequelize: Sequelize) => {
                 foreignKey: "brandId",
             })
 
+        }
+
+        static createWallet(walletArr: Array<any> = []) {
+            return StaticModelHelper.bulkCreateOrUpdate(wallet,walletArr, {
+                keys: ['userId','brandId']
+                }, {
+                keys: ['userId','brandId']
+            })
         }
     }
 

@@ -31,7 +31,8 @@ export class UserContext {
       isActive: this.user.isActive,
       brandId: this.user.brandId,
       showPoweredByText: this.user.showPoweredByText,
-      user: user
+      user: user,
+      points: this.user.points
     })
     this.themeService.updateCustomColors(this.brandCss?.primaryColor, this.brandCss?.secondaryColor, this.brandCss?.headerColor,this.brandCss?.textColor)
   }

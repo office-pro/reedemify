@@ -26,14 +26,15 @@ import { ProductSubCategoryPipe } from "./pipes/products-subcategory.pipe";
 import { BrandBucketMapperTable } from "./brand-bucket-mapper-table/brand-bucket-mapper-table.component";
 import { BrandBucketMapperTableEntries } from "./brand-bucket-mapper-table/entries/brand-bucket-mapper-table-entries.component";
 import { ProductViewerComponent } from "./viewer/products-viewer.component";
+import { CartIconComponent } from "./icon/cart-icon.component";
+import { AddressModule } from "../address/home/address.module";
+import { ActiveProductsDataDirective } from "./directives/active-products.directive";
 
 @NgModule({
-  imports: [CommonModule, IonicModule, FormsModule, MatSelectModule, NgxMatSelectSearchModule, ReactiveFormsModule,MatMenuModule, MatTableModule, MatDialogModule, MatButtonModule],
-  declarations: [HeaderComponent, ImageSliderComponent, FileDragDropComponent,SingleDropdownWithSearch,DropDownWithSearchComponent, BrandsDataDirective, UsersDataDirective, RolesDataDirective, UsersTableComponent,EditUserComponent, ProductsDataDirective, BucketsDataDirective, BucketsTableComponent,ProductCategoryPipe, ProductSubCategoryPipe,BrandBucketMapperTable,BrandBucketMapperTableEntries,ProductViewerComponent],
-  exports: [HeaderComponent, ImageSliderComponent,FileDragDropComponent, SingleDropdownWithSearch,DropDownWithSearchComponent,BrandsDataDirective,UsersDataDirective, RolesDataDirective,UsersTableComponent,EditUserComponent,ProductsDataDirective, BucketsDataDirective, BucketsTableComponent,ProductCategoryPipe, ProductSubCategoryPipe,BrandBucketMapperTable,BrandBucketMapperTableEntries,ProductViewerComponent],
+  imports: [CommonModule, IonicModule, FormsModule, MatSelectModule, NgxMatSelectSearchModule, ReactiveFormsModule,MatMenuModule, MatTableModule, MatDialogModule, MatButtonModule, AddressModule],
+  declarations: [HeaderComponent, CartIconComponent,ImageSliderComponent, FileDragDropComponent,SingleDropdownWithSearch,DropDownWithSearchComponent, BrandsDataDirective, UsersDataDirective, RolesDataDirective, UsersTableComponent,EditUserComponent, ProductsDataDirective, BucketsDataDirective, BucketsTableComponent,ProductCategoryPipe, ProductSubCategoryPipe,BrandBucketMapperTable,BrandBucketMapperTableEntries,ProductViewerComponent, ActiveProductsDataDirective],
+  exports: [HeaderComponent, CartIconComponent,ImageSliderComponent,FileDragDropComponent, SingleDropdownWithSearch,DropDownWithSearchComponent,BrandsDataDirective,UsersDataDirective, RolesDataDirective,UsersTableComponent,EditUserComponent,ProductsDataDirective, BucketsDataDirective, BucketsTableComponent,ProductCategoryPipe, ProductSubCategoryPipe,BrandBucketMapperTable,BrandBucketMapperTableEntries,ProductViewerComponent,ActiveProductsDataDirective],
   providers: []
 })
 
-export class SharedModule {
-
-}
+export class SharedModule {}

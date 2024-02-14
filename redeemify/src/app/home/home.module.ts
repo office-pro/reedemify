@@ -8,6 +8,10 @@ import {MatSortModule} from '@angular/material/sort';
 
 import { HomePageRoutingModule } from './home-routing.module';
 import { SharedModule } from '../shared-components/shared.modules';
+import { CartModule } from '../cart/cart.module';
+import { AddressModule } from '../address/home/address.module';
+import { HomeCheckoutComponent } from './checkout/home-checkout.component';
+import { HomeProductsComponent } from './products/home-products.component';
 
 
 @NgModule({
@@ -17,8 +21,10 @@ import { SharedModule } from '../shared-components/shared.modules';
     IonicModule,
     HomePageRoutingModule,
     MatTableModule,
-    SharedModule
+    SharedModule, 
+    CartModule, 
+    AddressModule
   ],
-  declarations: [HomePage]
+  declarations: [HomePage, HomeCheckoutComponent, HomeProductsComponent]
 })
 export class HomePageModule {}
