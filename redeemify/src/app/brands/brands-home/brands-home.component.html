@@ -3,7 +3,7 @@
 
   <div class="brands-home--search-container">
     <div class="brands-home--search-container--search">
-      <ion-searchbar animated="true" placeholder="Animated"></ion-searchbar>
+      <ion-searchbar [value]="searchData" [(ngModel)]="searchData" animated="true" placeholder="Animated"></ion-searchbar>
     </div>
     <div class="brands-home--search-container--search-actions">
       <ion-button size="small" (click)="goToBrandDetails({})">Create</ion-button>
@@ -14,7 +14,7 @@
     <ion-row class="brands-home--rows">
 
       <div class="brand-home--card-container responsive-grid">
-        <ng-container  *ngFor="let brand of brands">
+        <ng-container  *ngFor="let brand of brands | search:searchData">
           <ion-card class="brands-home--card" (click)="goToBrandDetails(brand)">
             <div class="brands-home--card--image-container">
               <img alt="{{brand?.brandName}}" src="{{brand?.brandCss?.logo}}" />
