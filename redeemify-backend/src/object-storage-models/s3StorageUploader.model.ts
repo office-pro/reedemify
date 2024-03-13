@@ -61,10 +61,12 @@ export class S3StorageUploader {
 
   }
 
-  static async uploadFilesWithoutPromise(req: Request,res: Response,files: Array<any>) {
+  static async uploadFilesWithoutPromise(req: Request,res: Response,files: Array<any>, awsFolderName: string = req?.body?.brandName ) {
     
+      
+      console.log(req?.files)
     
-      let folderName = `${req?.body?.brandName}/${Date.now()}_${((req?.files as any)[0] as any)?.originalname}`;
+      let folderName = `${awsFolderName}/${Date.now()}_${((req?.files as any)[0] as any)?.originalname}`;
       const params: AWS.S3.PutObjectRequest = {
           Bucket: JSON.parse(environment.awsStorage).bucketName,
           Key: folderName,
