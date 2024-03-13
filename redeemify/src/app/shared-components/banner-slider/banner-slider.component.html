@@ -1,0 +1,25 @@
+
+<swiper-container class="banner-slider--container" *ngIf="showBanner">
+  <ng-container *ngFor="let slide of data">
+    <swiper-slide class="banner-slider--container--slide" (click)="routeToLink(slide)">
+      <div class="banner-slider--container--slide--elements">
+        <img
+          class="banner-slider--container--slide--elements--image"
+          src="{{ slide.imageUrl }}"
+          alt=""
+          sizes=""
+          srcset=""
+        />
+      </div>
+      <ion-button class="banner-slider--container--slide--link"
+        >Click</ion-button
+      >
+      <h3 class="banner-slider--container--slide--header">
+        {{ slide.headerText }}
+      </h3>
+      <h5 class="banner-slider--container--slide--sub-header">
+        {{ slide.subHeaderText }}
+      </h5>
+    </swiper-slide>
+  </ng-container>
+</swiper-container>

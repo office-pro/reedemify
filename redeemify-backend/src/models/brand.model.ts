@@ -7,6 +7,7 @@ export default (sequelize: Sequelize) => {
     static associate(models: any) {
       // brands.belongsTo(models?.users, {foreignKey: 'brandId'});
       brands.hasMany(models?.users, {foreignKey: 'brandId'});
+      brands.hasMany(models?.brandbanners, {foreignKey: 'brandId'});
       brands.hasOne(models?.wallet)
     }
 
@@ -58,7 +59,7 @@ export default (sequelize: Sequelize) => {
       return sequelize.transaction(async() => {
         return brands.findAll({
         where: brand,
-        attributes: ['brandId', 'brandName', 'brandCss', 'limit','balance','showPoweredByText','isActive'],
+        attributes: ['brandId', 'brandName', 'brandCss', 'limit','balance','showPoweredByText','isActive','showBanner', 'showClientProducts'],
         include: [
           {  model: models?.default?.users,
             attributes: ['userId','firstName','lastName','mobileNo','roleId','email'],
@@ -66,6 +67,9 @@ export default (sequelize: Sequelize) => {
               model: models?.default?.roles,
               attributes: ['roleName']
             }]
+          },
+          {  
+            model: models?.default?.brandbanners
           }
         ]
         });
@@ -75,7 +79,7 @@ export default (sequelize: Sequelize) => {
     static findAllBrands(options: any = {}) {
       return sequelize.transaction(async() => {
         return brands.findAll({
-        attributes: ['brandId', 'brandName','brandCss','showPoweredByText', 'isActive'],
+        attributes: ['brandId', 'brandName','brandCss','showPoweredByText', 'isActive','showBanner', 'showClientProducts'],
         include: [
           {  model: models?.default?.users,
             attributes: ['userId','firstName','lastName','mobileNo','roleId','email'],
@@ -125,6 +129,16 @@ export default (sequelize: Sequelize) => {
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: true
+    },
+    showBanner: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    },
+    showClientProducts: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
     }
   },{
     sequelize,

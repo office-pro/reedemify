@@ -13,6 +13,7 @@ import { RouteUtils } from "src/app/utils/route.utils";
 export class HomeProductsComponent {
 
   productsData: any = {};
+  bannerArr: any = [];
 
   brandId: number = 0;
 

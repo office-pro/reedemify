@@ -232,6 +232,57 @@
         </ion-card-content>
         </ion-card>
       </ion-col>
+
+      <ion-col size="12">
+
+        <banner-card [brand]="brand" [brandId]="brandId" [isEdit]="isEdit"></banner-card>
+        <!-- <ion-card>  
+        <ion-card-header>
+          <ion-card-title>
+            <div class="brands-details--details-container">
+              <div class="brands-details--details-container--title">Banner Details</div>
+              <div class="brands-details--details-container--actions">
+                <ion-button size="small" (click)="addBanner()" [disabled]="isEdit">Add</ion-button>
+              </div>
+            </div>
+          </ion-card-title>
+        </ion-card-header> 
+        <ion-card-content>
+          <ion-list>
+            <ion-item>
+              <ion-checkbox [(ngModel)]="brand.showBanner" [value]="brand?.showBanner" [disabled]="!isEdit">Show Banner</ion-checkbox>
+            </ion-item>
+
+            <ion-item>
+              <banner-home style="width: 100%;" banner-slider-data [bannerData]="bannerArr" [brandId]="brandId" [(data)]="bannerArr" #banner></banner-home>
+            </ion-item>
+
+          </ion-list>
+        </ion-card-content>
+        </ion-card> -->
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-card>  
+        <ion-card-header>
+          <ion-card-title>
+            <div class="brands-details--details-container">
+              <div class="brands-details--details-container--title">Client Products</div>
+              <div class="brands-details--details-container--actions">
+                <ion-button size="small" *ngIf="!isEdit" (click)="isEdit = !isEdit" [disabled]="isEdit">Edit</ion-button>
+              </div>
+            </div>
+          </ion-card-title>
+        </ion-card-header> 
+        <ion-card-content>
+          <ion-list>
+            <ion-item>
+              <ion-checkbox [(ngModel)]="brand.showClientProducts" [value]="brand?.showClientProducts" [disabled]="!isEdit">Show Client products</ion-checkbox>
+            </ion-item>
+          </ion-list>
+        </ion-card-content>
+        </ion-card>
+      </ion-col>
     </ion-row>
 
   

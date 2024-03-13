@@ -19,8 +19,6 @@ export class HomePage {
 
   productsData: Array<any> = [];
 
-
-
   constructor(
     public router: Router,
     public rolesRestrictor: RolesRestrictorService,

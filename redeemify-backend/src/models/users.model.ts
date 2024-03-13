@@ -50,7 +50,7 @@ export default (sequelize: Sequelize) => {
           include: [
             { 
               model: models.default.brands,
-              attributes: ['brandName','brandId', 'brandCss', 'isActive', 'showPoweredByText']
+              attributes: ['brandName','brandId', 'brandCss', 'isActive', 'showPoweredByText','showBanner','showClientProducts']
             },
             {
               model: models.default.roles,

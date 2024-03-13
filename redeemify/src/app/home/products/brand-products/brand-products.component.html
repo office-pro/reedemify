@@ -1,0 +1,18 @@
+<header-page></header-page>
+
+<ion-content [fullscreen]="true">
+  <div id="container">
+    <ion-grid
+      *ngIf="
+        rolesRestrictor.onlyDealerDistributor || rolesRestrictor.isOnlyAdmin
+      "
+    >
+      <brand-products-viewer
+        [brandId]="brandId"
+        [data]="productsData?.bucket?.bucketListProducts"
+        (dataChange)="productsData = $event"
+        active-products-data
+      ></brand-products-viewer>
+    </ion-grid>
+  </div>
+</ion-content>

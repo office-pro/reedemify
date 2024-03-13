@@ -1,8 +1,10 @@
-import { Component, Input, Output,EventEmitter, SimpleChange, SimpleChanges } from "@angular/core";
+import { Component, Input, Output,EventEmitter, SimpleChange, SimpleChanges, TemplateRef } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { Router } from "@angular/router";
 import { UserContext } from "../services/user-context.service";
 import { MatMenu } from "@angular/material/menu";
+import { DropdownWithSearchModalComponent } from "./modal/dropdown-with-search-modal.component";
+import { MatDialog } from "@angular/material/dialog";
 
 @Component({
   selector: "dropdown-with-search",
@@ -58,9 +60,21 @@ export class DropDownWithSearchComponent {
   @Input()
   key: string = "";
 
+  @Input()
+  customAction: Function | undefined;
+
+  @Input()
+  customActionComponent: any;
+
+  @Input()
+  customActionTitle: string = "add";
+
+  @Input()
+  showCustomAction: boolean = false;
+
   filteredData: Array<any> = [];
 
-  constructor(private router: Router, private userContext: UserContext) {}
+  constructor(private router: Router, private userContext: UserContext, private dialog: MatDialog) {}
 
   ngOnChanges(change: any) {
 
@@ -112,5 +126,23 @@ export class DropDownWithSearchComponent {
 
   checkEmptyArray(data: any) {
     return !!data && data.length < 1;
+  }
+
+  onCustomActionClick(event: any) {
+    const dialogRef = this.dialog.open(this.customActionComponent,{
+      data: {
+        action: this.customAction,
+        event: event
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+    
+    
+    if(!!this.customAction) {
+      this.customAction()
+    }
   }
 }

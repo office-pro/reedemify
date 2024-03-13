@@ -35,6 +35,11 @@ const routes: Routes = [
     canLoad: [LoginResolver,AdminRoleResolver]
   },
   {
+    path: 'client-products',
+    loadChildren: () => import('./client-products/client-products.module').then(m => m.ClientProductsModule),
+    canLoad: [LoginResolver,AdminRoleResolver]
+  },
+  {
     path: '',
     redirectTo: 'login',
     pathMatch: 'full' 

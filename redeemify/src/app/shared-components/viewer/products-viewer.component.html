@@ -1,28 +1,65 @@
 <ion-grid>
   <ion-row>
-    <ng-container *ngFor="let product of productsData">
-      <ion-col [size]="col">
-       <ion-card color="light" class="products-list--card">
-          <image-slider [imageUrls]="product?.product?.productImagesUrlContainer?.ima"></image-slider>
- 
+    <ion-col size="12">
+      <ng-container *ngIf="showBanner">
+        <banner-slider
+          banner-slider-data
+          [bannerData]="bannerArr"
+          [brandId]="brandId"
+          [data]="bannerArr"
+          (dataChange)="bannerArr = $event"
+          class="products-list--banner"
+        ></banner-slider>
+      </ng-container>
+    </ion-col>
+
+    <!-- <product-categories-dropdown></product-categories-dropdown> -->
+
+    <ng-container *ngIf="showClientProducts; else productCategories">
+      <ion-col size="6" style="display: flex !important">
+        <ion-card (click)="utils.goToBrandProductViewerPage(router)">
+          <img
+            alt="Silhouette of mountains"
+            src="https://ionicframework.com/docs/img/demos/card-media.png"
+          />
+          <ion-card-header>
+            <ion-card-title>Buy Products</ion-card-title>
+            <ion-card-subtitle>Buy products via points</ion-card-subtitle>
+          </ion-card-header>
+
           <ion-card-content>
-            <div class="">
-              <div class="">
-                <h3 style="margin: 0; font-weight: 600;">{{product?.product?.productName}}</h3>
-                <p> {{product.points}} Pts</p>
-              </div>
-              <div class="">
-                 <ion-button (click)="cartService.addProducts(product)">Add To Cart</ion-button>
-                 <ion-button>Buy</ion-button>
-              </div>
-            </div>
+            Order and buy products using points
           </ion-card-content>
         </ion-card>
       </ion-col>
-      
 
+      <ion-col size="6" style="display: flex !important">
+        <ion-card>
+          <img
+            alt="Silhouette of mountains"
+            src="https://ionicframework.com/docs/img/demos/card-media.png"
+          />
+          <ion-card-header>
+            <ion-card-title>Place Orders</ion-card-title>
+            <ion-card-subtitle
+              >Place order request inorder to gain points</ion-card-subtitle
+            >
+          </ion-card-header>
+
+          <ion-card-content>
+            Placing order can increase chance of adding more points on
+            successful transaction
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
     </ng-container>
 
-    
+    <ng-template #productCategories> product categories </ng-template>
+
+   
+
+    <ion-col [size]="12">
+      <product-categories-card-slider [data]="products" [numVisible]="4" [numScroll]="3"></product-categories-card-slider>
+    </ion-col>
   </ion-row>
 </ion-grid>

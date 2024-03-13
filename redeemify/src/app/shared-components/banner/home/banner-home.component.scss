@@ -1,0 +1,43 @@
+.banner-wrapper {
+  display: inline-block;
+  width: 100%;
+  padding: 10px;
+
+  &--trash-container {
+    text-align: right;
+  }
+
+  &--container {
+    display: inline-block;
+    width: 100%;
+   
+    &--image-container {
+      width: 100%;
+      display: inline-block;
+      text-align: center;
+      padding: 10px;
+      &--image {
+        
+        width: 100%;
+        &--actual-banner {
+          width: 100%;
+          height: 200px;
+        }
+        &--buttons {
+          width: 100%;
+          margin: 5px 0px;
+          text-align: right;
+        }
+      }
+    }
+
+    &--banner-parameters-wrapper {
+      
+    }
+  }
+}
+
+.ion-color-light,.item-native {
+  background: var(--ion-color-step-100) !important;
+  color: var(--ion-text-color) !important;
+}

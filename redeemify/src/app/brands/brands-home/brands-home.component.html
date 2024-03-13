@@ -13,18 +13,24 @@
   <ion-grid class="brands-home--grid">
     <ion-row class="brands-home--rows">
 
-      <ion-col size="3" class="brands-home--cols" *ngFor="let brand of brands">
-        <ion-card color="light" class="brands-home--card" (click)="goToBrandDetails(brand)">
-          <img alt="{{brand?.brandName}}" src="{{brand?.brandCss?.logo}}" />
-          <ion-card-header>
-            <ion-card-title>{{brand.brandName}}</ion-card-title>
-          </ion-card-header>
+      <div class="brand-home--card-container responsive-grid">
+        <ng-container  *ngFor="let brand of brands">
+          <ion-card class="brands-home--card" (click)="goToBrandDetails(brand)">
+            <div class="brands-home--card--image-container">
+              <img alt="{{brand?.brandName}}" src="{{brand?.brandCss?.logo}}" />
+            </div>
+            <ion-card-header>
+              <ion-card-title>{{brand.brandName}}</ion-card-title>
+            </ion-card-header>
 
-          <!-- <ion-card-content>
-           
-          </ion-card-content> -->
-        </ion-card>
-      </ion-col>
+            <!-- <ion-card-content>
+            
+            </ion-card-content> -->
+          </ion-card>
+        </ng-container>
+      </div>
+
+
     </ion-row>
 
     <mat-paginator class="brands--paginator" [length]="pageOptions.total"

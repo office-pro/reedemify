@@ -1,0 +1,31 @@
+<ion-grid>
+  <ion-row>
+    <!-- <ion-col size="12"> -->
+      <ng-container *ngFor="let product of productData">
+        <ion-col [size]="col">
+          <ion-card class="products-list--card">
+            <image-slider
+              [imageUrls]="product?.product?.productImagesUrlContainer?.ima"
+            ></image-slider>
+            <ion-card-content>
+              <div class="">
+                <div class="">
+                  <h3 style="margin: 0; font-weight: 600">
+                    {{ product?.product?.productName }}
+                  </h3>
+                  <p>{{ product.points }} Pts</p>
+                </div>
+                <div class="">
+                  <ion-button (click)="cartService.addProducts(product)"
+                    >Add To Cart</ion-button
+                  >
+                  <ion-button>Buy</ion-button>
+                </div>
+              </div>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ng-container>
+    <!-- </ion-col> -->
+  </ion-row>
+</ion-grid>

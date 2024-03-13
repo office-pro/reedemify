@@ -37,4 +37,12 @@ export class RouteUtils {
   static goToCheckoutPage(router: Router) {
     HomeUtils.goToCheckoutPage(router);
   }
+
+  static navigateToUrl(url: string, openInNewTab: boolean = true) {
+    if(openInNewTab) {
+      window.open('/'+url, '_blank');
+    } else {
+      window.location.href = url;
+    }
+  }
 }

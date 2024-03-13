@@ -10,6 +10,8 @@
  */
 
 /* Core CSS required for Ionic components to work properly */
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
 @import "@ionic/angular/css/core.css";
 
 /* Basic CSS for apps built with Ionic */
@@ -88,3 +90,21 @@ ion-card-subtitle,ion-note, ion-checkbox {
   color: var(--ion-text-color) !important;
 }
 
+
+
+ion-accordion-group{
+    ion-accordion {
+        border-bottom: 1px solid var(--ion-text-color);
+        .ion-accordion-toggle-icon {
+            color: var(--ion-text-color) !important;
+        }
+    }
+}
+
+.item-content {
+   background: var(--ion-color-step-100) !important;
+}
+
+mat-toolbar,mat-paginator {
+  background-color: var(--ion-color-step-100) !important;
+}
