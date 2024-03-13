@@ -1,11 +1,11 @@
 .brands-home {
   &--grid {
-    height: calc(100% - 56px);
+    // height: calc(100% - 56px);
     padding: 0px;
   }
 
   &--rows {
-    height: calc(100% - 56px);
+    // height: calc(100% - 56px);
   }
 
   &--cols {
@@ -15,6 +15,15 @@
 
   &--paginator {
     width: 100%;
+  }
+
+  &--card {
+    &--image-container {
+      width: 100%;
+      display: inline-block;
+      background-image: url('../../../assets/360_F_296055218_RXc721N9fSYIz3sEV7QALYquMVP31jdJ.jpg');
+      background-color: #cccccc;
+    }
   }
 
   &--search-container {
@@ -39,4 +48,23 @@
       }
     }
   }
+
+  &--card-container {
+    padding: 20px;
+  }
+
+
+}
+
+.responsive-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(250px, 1fr));
+  gap: 4px;
+}
+
+img {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
 }

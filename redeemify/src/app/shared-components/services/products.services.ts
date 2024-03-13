@@ -22,6 +22,10 @@ export class ProductService {
     return this.httpClient.post("http://localhost:3000/api/products/create", product)
   }
 
+  createProductCategory(searchParams: SearchParamModel = new SearchParamModel()) {
+    return this.httpClient.post("http://localhost:3000/api/products/createProductCategories", searchParams?.["productCategories"])
+  }
+
   getProductCategories(searchParams: SearchParamModel = new SearchParamModel()) {
     return this.httpClient.get("http://localhost:3000/api/products/getProductCategories"+`${!!searchParams['getProductCategories'] ? '?getOnlyCategories='+searchParams['getProductCategories']:''}`);
   }

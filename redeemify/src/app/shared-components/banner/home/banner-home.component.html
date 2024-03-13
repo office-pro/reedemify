@@ -1,0 +1,76 @@
+<div class="banner-wrapper">
+  <div class="banner-wrapper--container">
+    <ng-container *ngFor="let banner of bannerData; let i = index">
+      <ion-accordion-group>
+        <ion-accordion value="{{ i }}">
+          <ion-item slot="header" >
+            <ion-label> Banner {{ i }}</ion-label>
+            <ion-label class="banner-wrapper--trash-container">
+              <ion-icon name="trash-outline" (click)="onBannerDelete(i)"></ion-icon>
+            </ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content">
+            <div class="banner-wrapper--container--image-container">
+              <div class="banner-wrapper--container--image-container--image">
+                <file-drag-drop
+                  *ngIf="!banner.imageUrl"
+                  class="products-image-uploader--main--el"
+                  [showUploadButton]="false"
+                  [className]="'small'"
+                  (fileBlobs)="banner.image = $event[0]"
+                  (urls)="banner.imageUrl = $event[0]"
+                ></file-drag-drop>
+                <img
+                  *ngIf="banner.imageUrl"
+                  [src]="banner?.imageUrl"
+                  alt="banner.imageUrl"
+                  class="banner-wrapper--container--image-container--image--actual-banner"
+                />
+              </div>
+              <div
+                class="banner-wrapper--container--image-container--image--buttons"
+              >
+                <ion-button (click)="clearImage(banner)">Clear</ion-button>
+                <ion-button (click)="saveBanner()">Save</ion-button>
+              </div>
+            </div>
+
+            <div class="banner-wrapper--container--banner-parameters-wrapper">
+              <ion-list>
+                <ion-item>
+                  <ion-input
+                    label="Link"
+                    [value]="banner.link"
+                    [(ngModel)]="banner.link"
+                    labelPlacement="stacked"
+                    placeholder="Enter Link"
+                  ></ion-input>
+                </ion-item>
+
+                <ion-item>
+                  <ion-input
+                    [value]="banner.headerText"
+                    [(ngModel)]="banner.headerText"
+                    label="Header"
+                    labelPlacement="stacked"
+                    placeholder="Enter Header"
+                  ></ion-input>
+                </ion-item>
+
+                <ion-item>
+                  <ion-input
+                    [value]="banner.subHeaderText"
+                    [(ngModel)]="banner.subHeaderText"
+                    label="Sub Header"
+                    labelPlacement="stacked"
+                    placeholder="Enter Sub Header"
+                  ></ion-input>
+                </ion-item>
+              </ion-list>
+            </div>
+          </div>
+        </ion-accordion>
+      </ion-accordion-group>
+    </ng-container>
+  </div>
+</div>

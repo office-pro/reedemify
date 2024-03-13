@@ -1,10 +1,12 @@
-import { Component } from "@angular/core";
+import { Component, ViewChild } from "@angular/core";
 import { BrandService } from "../services/brands.services";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AppUtilityService } from "src/app/shared-components/services/app-utility.service";
 import { BrandsUtils } from "../brands.utils";
 import { ProductUtils } from "src/app/products/utils/product.utils";
 import { UserContext } from "src/app/shared-components/services/user-context.service";
+import { Banner } from "src/app/shared-components/models/banner/banner.model";
+import { BannerHomeComponent } from "src/app/shared-components/banner/home/banner-home.component";
 
 @Component({
   selector: 'brand-details',
@@ -15,6 +17,7 @@ import { UserContext } from "src/app/shared-components/services/user-context.ser
 export class BrandDetailsComponent {
 
   brand: any = this.createBrandObj();
+  bannerArr: Array<Banner> = [];
   isEdit = false;
   displayedColumns: string[] = ['firstName', 'lastName', 'email', 'mobileNo'];
   imageUrl: string = 'https://test-shashi-bucket.s3.ap-south-1.amazonaws.com/demo-logo/logo.png';
@@ -25,6 +28,9 @@ export class BrandDetailsComponent {
   productUtils = ProductUtils;
   userId: number = 0;
   brandId:number = 0;
+
+  @ViewChild('banner', {static: true})
+  bannerComponent: BannerHomeComponent | undefined;
 
   constructor(private brandService: BrandService, private route: ActivatedRoute, private appUtility: AppUtilityService, public router: Router, private userContext: UserContext) {}
 
@@ -59,6 +65,15 @@ export class BrandDetailsComponent {
   updateTheme() {
     this.appUtility.updateTheme(this.brand.brandCss.primaryColor,this.brand.brandCss.secondaryColor, this.brand.brandCss.headerColor, this.brand.brandCss.textColor);
   }
+
+  // start of banner related Changes
+  addBanner() {
+    if(this.bannerComponent) {
+      this.bannerComponent.addNewBanner();
+    }
+  }
+
+  // end of banner related changes
 
   showImage(event: any) {
     console.log(event)
@@ -104,6 +119,8 @@ export class BrandDetailsComponent {
       limit: 0,
       isActive: true,
       showPoweredByText: true,
+      showBanner: false,
+      showClientProducts: false,
       brandCss: {
         primaryColor: "#ffffff",
         secondaryColor: "#3dc2ff",

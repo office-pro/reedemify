@@ -1,0 +1,12 @@
+<dropdown-with-search
+  [(data)]="productCategories"
+  [customActionComponent]="customActionComponent"
+  key="productCategoryName"
+  [customAction]="customAction.bind(this)"
+  [label]="'Product Categories'"
+  [showCustomAction]="true"
+  products-categories-data
+  #productCategoryDirective
+></dropdown-with-search>
+
+

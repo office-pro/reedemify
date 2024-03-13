@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { AlertController, LoadingController } from "@ionic/angular";
 import { ThemeService } from "./theme.service";
+import { DomSanitizer } from "@angular/platform-browser";
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +11,10 @@ export class AppUtilityService {
   private isLoading =  false;
   private loading: any = null;
 
-  constructor(private loadingController: LoadingController, private alertController: AlertController, private themeService: ThemeService) {}
+  constructor(private loadingController: LoadingController, private alertController: AlertController, private themeService: ThemeService, private sanitizer: DomSanitizer) {}
 
+  
+  
   async showLoading() {
 
     if(!this.isLoading) {
@@ -64,5 +67,9 @@ export class AppUtilityService {
 
   updateTheme(primaryColor: string = "#ffffff", secondaryColor: string="#446879", headerColor: string = "#312f92", fontColor: string = "#292828") {
     this.themeService.updateCustomColors(primaryColor,secondaryColor, headerColor, fontColor);
+  }
+
+  safeHTML(html: string) {
+    return this.sanitizer.bypassSecurityTrustHtml(html)
   }
 }

@@ -17,5 +17,18 @@
       color: var(--ion-text-color);
     }
   }
+
+  &--actual-input {
+    position: relative;
+  }
+
+  &--actual-action {
+    position: absolute;
+    right: 0px;
+    top: 7px;
+    font-size: 13px;
+    cursor: pointer;
+    text-decoration: underline;
+  }
    
 }

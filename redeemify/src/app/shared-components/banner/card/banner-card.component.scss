@@ -1,0 +1,22 @@
+.banner-card {
+  &--header {
+
+  }
+
+  &--details-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &--title {
+          flex: 1;
+        }
+
+        &--actions {
+          flex: 1;
+          text-align: right;
+        }
+      }
+
+
+}

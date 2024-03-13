@@ -40,7 +40,7 @@
               <ng-container  *ngFor="let entry of userEntriesArray.controls; let i = index">
                   
                   <ion-accordion class="{{(entry?.invalid) ? 'product-create--invalid': null}}" value="{{'product'+i}}">
-                    <ion-item slot="header" color="light">
+                    <ion-item slot="header">
                       <ion-label>{{!!entry?.value?.firstName || !!entry?.value?.lastName  ? entry?.value?.firstName + " " + entry?.value?.lastName : "User "+ (i + 1)}}</ion-label>
                       <ion-label class="product-create--trash-container">
                         <ion-icon name="trash-outline" (click)="removeProductEntries(i)"></ion-icon>

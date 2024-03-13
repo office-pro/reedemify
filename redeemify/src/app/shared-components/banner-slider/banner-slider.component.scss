@@ -1,0 +1,52 @@
+.banner-slider {
+  &--grid {
+    width: 100%;
+
+  }
+
+  &--row {
+    
+  }
+
+  &--container {
+
+    height: 300px !important;
+
+    &--slide {
+      &--elements {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &--image {
+          height: 300px !important;
+          width: 100%;
+          position: relative;
+          opacity: 0.6;
+        }
+      }
+
+      &--link {
+        
+      }
+
+      &--header {
+        position: absolute;
+        bottom: 40px;
+        font-size: 40px;
+        width: 100%;
+        padding: 2%;
+      }
+
+      &--sub-header {
+        position: absolute;
+        bottom: 0px;
+        font-size: 20px;
+        font-weight: 100;
+        width: 100%;
+        padding: 2%;
+      }
+    }
+    
+  }
+}

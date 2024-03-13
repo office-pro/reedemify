@@ -1,0 +1,39 @@
+<ion-card class="banner-card">
+  <ion-card-header class="banner-card--header">
+    <ion-card-title>
+      <div class="banner-card--details-container">
+        <div class="banner-card--details-container--title">
+          Banner Details
+        </div>
+        <div class="banner-card--details-container--actions">
+          <ion-button size="small" (click)="addBanner()" [disabled]="isEdit"
+            >Add</ion-button
+          >
+        </div>
+      </div>
+    </ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-list>
+      <ion-item>
+        <ion-checkbox
+          [(ngModel)]="brand.showBanner"
+          [value]="brand?.showBanner"
+          [disabled]="!isEdit"
+          >Show Banner</ion-checkbox
+        >
+      </ion-item>
+
+      <ion-item>
+        <banner-home
+          style="width: 100%"
+          banner-slider-data
+          [bannerData]="bannerArr"
+          [brandId]="brandId"
+          [(data)]="bannerArr"
+          #banner
+        ></banner-home>
+      </ion-item>
+    </ion-list>
+  </ion-card-content>
+</ion-card>

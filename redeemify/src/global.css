@@ -22,3 +22,10 @@
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";/*# sourceMappingURL=global.css.map */
 @import 'theme/custom-theme.css';
+
+
+.ion-color-light,button.item-native {
+  background: var(--ion-color-step-100) !important;
+  color: var(--ion-text-color) !important;
+}
+

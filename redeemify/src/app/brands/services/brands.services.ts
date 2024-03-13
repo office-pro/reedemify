@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Inject, Injectable } from "@angular/core";
 import { Observable, map, of, tap } from "rxjs";
 import { PageOptions } from "src/app/shared-components/models/page-options.model";
+import { SearchParamModel } from "src/app/shared-components/models/search-params.model";
 import { AppUtilityService } from "src/app/shared-components/services/app-utility.service";
 
 @Injectable({
@@ -46,6 +47,14 @@ export class BrandService {
 
   private fetchDataByBrandId(brandId: number) {
     return this.brands.filter((data: any) => data.brandId == brandId )
+  }
+
+  fetchBannerByBrandId(searchParams: SearchParamModel = new SearchParamModel()) {
+    return this.http.get("http://localhost:3000/api/brands/"+searchParams?.["brandId"]+"/banner")
+  }
+
+  deleteBannerByBrandId(searchParams: SearchParamModel = new SearchParamModel()) {
+    return this.http.delete("http://localhost:3000/api/brands/"+searchParams?.["bannerId"]+"/banner")
   }
 
   createBrands(brand: any) {

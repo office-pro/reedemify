@@ -25,14 +25,16 @@ export class UserContext {
     this.brandCss$.next(this.brandCss);
     this.brandLogo$.next(this.brandLogo);
     this.brand$.next({
-      brandName: this.user.brandName,
+      brandName: user.brandName,
       brandCss: this.brandCss,
       logo: this.brandLogo,
       isActive: this.user.isActive,
       brandId: this.user.brandId,
       showPoweredByText: this.user.showPoweredByText,
       user: user,
-      points: this.user.points
+      points: user.points,
+      showClientProducts: user.showClientProducts,
+      showBanner: user.showBanner
     })
     this.themeService.updateCustomColors(this.brandCss?.primaryColor, this.brandCss?.secondaryColor, this.brandCss?.headerColor,this.brandCss?.textColor)
   }

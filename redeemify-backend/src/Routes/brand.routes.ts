@@ -10,9 +10,11 @@ brandRouter
 .get('/', BrandController.getBrands)
 .get('/:brandId', BrandController.getBrandByBrandId)
 .get('/:brandId/products',  BrandController.getActiveBrandProducts)
+.get('/:brandId/banner',  BrandController.getBrandBanner)
 .post('/createBrand', BrandController.createBrand)
 .post('/createBrands',UploadData.upload.any(), BrandController.createBrands)
-
+.post('/createBrandBanner',UploadData.upload.any(), BrandController.createBrandBanners)
+.delete('/:bannerId/banner',  BrandController.deleteBrandBanner)
 export default brandRouter;
 
 
