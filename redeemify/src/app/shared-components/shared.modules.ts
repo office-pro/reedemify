@@ -45,6 +45,7 @@ import { CardSliderComponent } from './card-slider/card-slider.component';
 import { ProductCategoriesCardSlider } from './product-categories-card-slider/product-categories-card-slider.component';
 import { BrandProductsViewer } from './viewer/brand-products/brand-products.component';
 import { ClientsProductTableComponent } from './clients-products-table/clients-products-table.component';
+import { SearchPipe } from './pipes/search/search.pipe';
 
 @NgModule({
   imports: [
@@ -96,7 +97,8 @@ import { ClientsProductTableComponent } from './clients-products-table/clients-p
     ProductCategoriesDropdownComponent,
     EditProductCategoryComponent,
     BrandProductsViewer,
-    ClientsProductTableComponent
+    ClientsProductTableComponent,
+    SearchPipe
   ],
   exports: [
     HeaderComponent,
@@ -131,7 +133,8 @@ import { ClientsProductTableComponent } from './clients-products-table/clients-p
     ProductCategoriesDropdownComponent,
     EditProductCategoryComponent,
     BrandProductsViewer,
-    ClientsProductTableComponent
+    ClientsProductTableComponent,
+    SearchPipe
   ],
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

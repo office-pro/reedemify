@@ -13,6 +13,7 @@ import { UrlUtils } from "src/app/utils/url.utils";
 export class BrandsHomeComponent {
 
   brands: Array<any> = [];
+  searchData: string = ""
   pageOptions:PageOptions = new PageOptions();
 
   constructor(private brandsService: BrandService, private router: Router, public appUtility: AppUtilityService) {
