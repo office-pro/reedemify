@@ -26,6 +26,7 @@ export class ProductsHomeComponent {
   productUtils = ProductUtils;
 
   files: Array<any> = [];
+  searchKey: string = "";
 
   @ViewChild(IonModal) modal: IonModal | any;
 

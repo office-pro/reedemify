@@ -11,6 +11,8 @@ import { Router } from "@angular/router";
 export class ProductsListComponent {
 
   productUtils = ProductUtils;
+  @Input()
+  searchData: string = "";
   
   @Input()
   data: Array<any> = []
