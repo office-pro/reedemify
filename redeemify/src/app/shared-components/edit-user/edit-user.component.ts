@@ -31,6 +31,11 @@ export class EditUserComponent implements OnInit {
     });
   }
 
+
+  updateData(){
+    console.log(`updated data ${this.data}`);
+  }
+
   onSelectedBrandChange(event: any) {
     // Implement your logic for brand change if needed
   }
