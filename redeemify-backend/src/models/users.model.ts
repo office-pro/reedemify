@@ -10,6 +10,12 @@ export default (sequelize: Sequelize) => {
       users.hasOne(models['wallet'], {
         foreignKey: 'userId'
       });
+      users.hasMany(models['Cart'], {
+        foreignKey: 'userId'
+      });
+      users.hasMany(models['Address'], {
+        foreignKey: 'userId'
+      });
     }
 
     static createUser({brandId,roleId,firstName,lastName,mobileNo,email,password}: any) {

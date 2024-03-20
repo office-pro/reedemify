@@ -8,6 +8,7 @@ export default (sequelize: Sequelize) => {
       // brands.belongsTo(models?.users, {foreignKey: 'brandId'});
       brands.hasMany(models?.users, {foreignKey: 'brandId'});
       brands.hasMany(models?.brandbanners, {foreignKey: 'brandId'});
+      brands.hasMany(models?.Cart, {foreignKey: 'brandId'});
       brands.hasOne(models?.wallet)
     }
 

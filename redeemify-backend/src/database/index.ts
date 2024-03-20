@@ -50,7 +50,11 @@ export default class Database {
   }
 
   async disconnect() {
-
+    await this.connection.close().then(() => {
+      console.log('Database connection closed.');
+    }).catch((err: any) => {
+      console.error('Error closing database connection:', err);
+    });
   }
 
   async sync() {
