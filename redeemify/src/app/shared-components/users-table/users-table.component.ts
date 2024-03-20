@@ -39,7 +39,12 @@ export class UsersTableComponent {
 
   openDialog(elem: any) {
     const dialogRef = this.dialog.open(EditUserComponent,{
-      data: elem
+      data: {
+        user:elem,
+        scope:{
+          usersDataDirective:this.usersDataDirective
+        }
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
