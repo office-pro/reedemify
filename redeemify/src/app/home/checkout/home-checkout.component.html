@@ -24,6 +24,7 @@
               <address-home
                 [addressForm]="form"
                 #shippingAddress
+                *ngIf="isAddressSameAsShippingAddress"
               ></address-home>
             </ion-card-content>
           </ion-card>

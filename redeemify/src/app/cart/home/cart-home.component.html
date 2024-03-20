@@ -54,7 +54,8 @@
                 <image-slider
                   [imageUrls]="
                     cartProduct?.product?.product?.productImagesUrlContainer
-                      ?.ima
+                      ?.ima || cartProduct?.product?.product?.productImagesUrlContainer
+                      ?.imageUrls
                   "
                 ></image-slider>
               </div>

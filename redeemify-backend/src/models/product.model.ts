@@ -13,6 +13,9 @@ export default (sequelize: Sequelize) => {
             product.belongsTo(models['productImagesUrlContainer'], {
                 foreignKey: "productImagesUrlContainerId"
             })
+             product.belongsTo(models['Cart'], {
+                foreignKey: "productId"
+            })
         }
 
         static async deleteProducts(productIds: Array<number>,conditions: any = {}) {

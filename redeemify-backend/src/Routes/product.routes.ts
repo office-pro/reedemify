@@ -18,6 +18,12 @@ productsRouter
 .post('/create', ProductController.createProduct)
 .post('/uploadImages', UploadData.upload.any(), ProductController.uploadImages)
 
+// post cart apis
+
+.post('/addToCart', ProductController.addToCart)
+.post('/cart/delete', ProductController.deleteCartItems)
+.get('/cart', ProductController.getCart)
+
 // update api's
 .put('/updateProductCategories', ProductController.createProductCategories)
 .put('/updateProductSubCategories', ProductController.createProductSubCategory)
