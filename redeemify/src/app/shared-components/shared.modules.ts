@@ -27,7 +27,6 @@ import { BrandBucketMapperTable } from './brand-bucket-mapper-table/brand-bucket
 import { BrandBucketMapperTableEntries } from './brand-bucket-mapper-table/entries/brand-bucket-mapper-table-entries.component';
 import { ProductViewerComponent } from './viewer/products-viewer.component';
 import { CartIconComponent } from './icon/cart-icon.component';
-import { AddressModule } from '../address/home/address.module';
 import { ActiveProductsDataDirective } from './directives/active-products.directive';
 import { BannerSliderComponent } from './banner-slider/banner-slider.component';
 import { NgImageSliderModule } from 'ng-image-slider';
@@ -46,6 +45,8 @@ import { ProductCategoriesCardSlider } from './product-categories-card-slider/pr
 import { BrandProductsViewer } from './viewer/brand-products/brand-products.component';
 import { ClientsProductTableComponent } from './clients-products-table/clients-products-table.component';
 import { SearchPipe } from './pipes/search/search.pipe';
+import { AddressDataDirective } from './directives/address-data.directive';
+import { AddressChipComponent } from './chips/address-chips.component';
 
 @NgModule({
   imports: [
@@ -60,7 +61,6 @@ import { SearchPipe } from './pipes/search/search.pipe';
     MatTableModule,
     MatDialogModule,
     MatButtonModule,
-    AddressModule,
     ButtonModule,
     CarouselModule,
   ],
@@ -98,7 +98,9 @@ import { SearchPipe } from './pipes/search/search.pipe';
     EditProductCategoryComponent,
     BrandProductsViewer,
     ClientsProductTableComponent,
-    SearchPipe
+    SearchPipe,
+    AddressDataDirective,
+    AddressChipComponent
   ],
   exports: [
     HeaderComponent,
@@ -134,7 +136,9 @@ import { SearchPipe } from './pipes/search/search.pipe';
     EditProductCategoryComponent,
     BrandProductsViewer,
     ClientsProductTableComponent,
-    SearchPipe
+    SearchPipe,
+    AddressDataDirective,
+    AddressChipComponent
   ],
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
