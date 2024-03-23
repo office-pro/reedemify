@@ -1,6 +1,6 @@
 "use strict";
 
-const { DataTypes } = require('sequelize');
+const { DataTypes } = require("sequelize");
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -17,6 +17,10 @@ module.exports = {
 				type: DataTypes.INTEGER,
 				autoIncrement: true,
 				primaryKey: true,
+			},
+			addressName: {
+				type: DataTypes.STRING,
+				allowNull: false,
 			},
 			address: {
 				type: DataTypes.STRING,
@@ -64,6 +68,6 @@ module.exports = {
 		 * await queryInterface.dropTable('users');
 		 */
 
-    await queryInterface.dropTable('address')
+		await queryInterface.dropTable("address");
 	},
 };

@@ -8,7 +8,7 @@ import environment from '../config/environment';
 import brandRouter from './brand.routes';
 import rolesRouter from './roles.routes';
 import bucketRouter from './bucket.routes';
-import addressRouter from './address.route';
+import addressRouter from './address.routes';
 
 const router = express.Router();
 

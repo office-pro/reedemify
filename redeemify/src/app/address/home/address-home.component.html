@@ -3,6 +3,17 @@
     <ion-col size="12">
       <form [formGroup]="addressForm">
         <ion-list>
+
+          <ion-item>
+            <ion-input
+              label="Address Name"
+              name="addressName"
+              labelPlacement="stacked"
+              placeholder="Enter Address Name"
+              formControlName="addressName"
+            ></ion-input>
+          </ion-item>
+
           <ion-item>
             <ion-textarea
               label="Address"

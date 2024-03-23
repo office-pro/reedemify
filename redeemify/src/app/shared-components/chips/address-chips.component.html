@@ -1,0 +1,35 @@
+<div
+  class="address-chip--container"
+  address-data
+  #address="addressData"
+  [userId]="userId"
+  [(data)]="addressData"
+>
+  <ng-container *ngFor="let address of addressData">
+    <ion-chip [matMenuTriggerFor]="menu">
+      <ion-avatar>
+        <img
+          alt="Silhouette of a person's head"
+          src="https://ionicframework.com/docs/img/demos/avatar.svg"
+        />
+      </ion-avatar>
+      <ion-label>{{ address.addressName }}</ion-label>
+      <ion-icon
+        name="close-circle"
+        (click)="onDelete(address, $event)"
+      ></ion-icon>
+    </ion-chip>
+
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="onEdit(address, $event)">
+        <span>Edit</span>
+      </button>
+      <button mat-menu-item (click)="onAddressSelected(address, $event)">
+        <span>Set as Address</span>
+      </button>
+      <button mat-menu-item (click)="onShippingSelected(address, $event)">
+        <span>Set as Shipping Address</span>
+      </button>
+    </mat-menu>
+  </ng-container>
+</div>

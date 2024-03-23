@@ -11,7 +11,7 @@ import { RolesRestrictorService } from "src/app/services/roles-restrictor.servic
 
 export class HomeCheckoutComponent {
 
-    isAddressSameAsShippingAddress: boolean = false;
+  isAddressSameAsShippingAddress: boolean = false;
 
   @ViewChild("address")
   address: AddressHomeComponent | undefined;
