@@ -12,10 +12,18 @@ export class FormModel<T>{
     this.keys = (Object.keys(modelObj as Object)) as Array<keyof T>;
   }
  
-  implementFormBuilder(): FormGroup {
+  implementFormBuilder(patchValidations: any = {}, avoidValidations: any[] = []): FormGroup {
     let formObj: any = {};
     this.keys.forEach((key: any) => {
-      formObj[key] = new FormControl("", [Validators.required])
+      if(avoidValidations.includes(key)) {
+        formObj[key] = new FormControl("", []);
+      } else {
+        if(Object.keys(patchValidations).includes(key)) {
+          formObj[key] = new FormControl("", [...patchValidations[key]])
+        } else {
+          formObj[key] = new FormControl("", [Validators.required])
+        }
+      }
     });
 
     let formGroup = new FormGroup(formObj);

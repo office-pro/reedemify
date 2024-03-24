@@ -2,6 +2,7 @@ import { BaseModel } from "../base/base-model";
 
 export class Address extends BaseModel<Address>{
   address: string = '';
+  addressName: string = '';
   city: string = '';
   state: string = '';
   pincode: string = '';
@@ -34,6 +35,10 @@ export class Address extends BaseModel<Address>{
 
   get isPincodePresent() {
     return !!this.pincode;
+  }
+
+  get isAddressNamePresent() {
+    return !!this.addressName;
   }
 
   

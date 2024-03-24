@@ -1,0 +1,35 @@
+<ion-card class="address-card">
+  <ion-card-header class="address-card--header">
+    <ion-card-title class="address-card--header--title"
+      ><div class="address-card--header--title--details-container">
+        <div class="address-card--header--title--details-container--title">Address</div>
+        <div class="address-card--header--title--details-container--actions" (click)="onAdd()">
+          <ion-button size="small" 
+            >Add</ion-button
+          >
+        </div>
+      </div></ion-card-title
+    >
+  </ion-card-header>
+  <ion-card-content>
+    <ng-container>
+
+    <address-chips (addressChange)="onAddressChange($event)"></address-chips>
+
+    <address-home (formChange)="addressForm = $event" #address></address-home>
+    <ion-checkbox
+      [(ngModel)]="isAddressSameAsShippingAddress"
+      (ngModelChange)="changeForm($event)"
+      [value]="isAddressSameAsShippingAddress"
+      >Address same as Shipping Address</ion-checkbox
+    >
+    <address-home
+      [addressForm]="form"
+      #shippingAddress
+      *ngIf="!isAddressSameAsShippingAddress"
+    ></address-home>
+    </ng-container>
+
+    <ion-button (click)="save(address)">Save</ion-button>
+  </ion-card-content>
+</ion-card>

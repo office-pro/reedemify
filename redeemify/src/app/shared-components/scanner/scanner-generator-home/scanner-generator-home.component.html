@@ -1,0 +1,13 @@
+<div class="container">
+    <h1>Scanner Code Generator</h1>
+    <div class="buttons-container">
+      <button (click)="generateQRCode()">QR Code</button>
+      <button (click)="generateBarcode()">Barcode</button>
+    </div>
+    <div class="scanner-container">
+      <!-- Placeholder for generated QR code or barcode -->
+      <app-scanner-qr *ngIf="isQRCodeVisible"></app-scanner-qr>
+      <app-scanner-barcode *ngIf="isBarcodeVisible"></app-scanner-barcode>
+    </div>
+  </div>
+  

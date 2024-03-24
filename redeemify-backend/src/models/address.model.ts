@@ -4,14 +4,15 @@ import { StaticModelHelper } from "./static-model-helper";
 export default (sequelize: Sequelize) => {
 	class Address extends Model {
 		static associate(models: any) {
-
 			Address.belongsTo(models["users"], {
 				foreignKey: "userId",
 			});
-
 		}
 
-		static async deleteAddressItems(addressIds: Array<number>, conditions: any = {}) {
+		static async deleteAddress(
+			addressIds: Array<number>,
+			conditions: any = {}
+		) {
 			return sequelize.transaction(async () => {
 				return Address.destroy({
 					where: {
@@ -26,48 +27,35 @@ export default (sequelize: Sequelize) => {
 
 		static createAddress(
 			AddressArr: Array<{
-				brandId: string;
+				address: string;
+				addressName: string;
 				userId: string;
-				productId: string;
-				quantity: number;
-				total: number;
+				city: string;
+				state: string;
+				pincode: number;
+				isShippingAddress: boolean;
 			}>
 		) {
 			return StaticModelHelper.bulkCreateOrUpdate(
 				Address,
 				AddressArr,
 				{
-					keys: ["brandId", "productId"],
+					keys: ["userId", "pincode", "addressName"],
 				},
 				{
-					keys: ["brandId", "productId"],
+					keys: ["userId", "pincode", "addressName"],
 				}
 			);
 			// });
 		}
 
-		static findAddressByaddressId(address: {
+		static findAddressByAddressId(address: {
 			addressId?: number;
-			userId?: string;
-			productId?: string;
-			brandId?: string;
+			userId?: number;
 		}) {
 			return sequelize.transaction(async () => {
 				return Address.findAll({
-					where: address,
-					attributes: ["addressId", "quantity", "total", "points"],
-					include: [
-						{
-							model: models?.default?.product,
-							include: [
-								{
-									model: models?.default?.productImagesUrlContainer,
-									attributes: ["imageUrls"],
-								},
-							],
-							attributes: ["productName", "productId"],
-						},
-					],
+					where: address
 				});
 			});
 		}
@@ -98,30 +86,34 @@ export default (sequelize: Sequelize) => {
 				autoIncrement: true,
 				primaryKey: true,
 			},
+			addressName: {
+				type: DataTypes.STRING,
+				allowNull: false,
+			},
 			address: {
 				type: DataTypes.STRING,
 				allowNull: false,
 			},
-      city: {
+			city: {
 				type: DataTypes.STRING,
 				allowNull: false,
 			},
-      state: {
+			state: {
 				type: DataTypes.STRING,
 				allowNull: false,
 			},
-      userId: {
+			userId: {
 				type: DataTypes.INTEGER,
 				allowNull: false,
 			},
-      pincode: {
+			pincode: {
 				type: DataTypes.INTEGER,
 				allowNull: false,
 			},
-      isShippingAddress: {
+			isShippingAddress: {
 				type: DataTypes.BOOLEAN,
 				allowNull: false,
-        defaultValue: false
+				defaultValue: false,
 			},
 			createdAt: {
 				type: DataTypes.DATE,
