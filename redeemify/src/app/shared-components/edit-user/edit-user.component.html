@@ -1,6 +1,5 @@
 <h2 mat-dialog-title>Edit User</h2>
 <mat-dialog-content class="mat-typography">
-  {{data | json}}
 
   <ion-grid>
     <form [formGroup]="editUserForm">
@@ -8,14 +7,14 @@
         <ion-col size="6">
           <ion-item>
             <ion-label position="stacked">First Name</ion-label>
-            <ion-input type="text" placeholder="First Name" [(ngModel)]="data.firstName" name="firstName" formControlName="firstName"></ion-input>
+            <ion-input type="text" placeholder="First Name" [(ngModel)]="data.user.firstName" name="firstName" formControlName="firstName"></ion-input>
           </ion-item>
         </ion-col>
 
         <ion-col size="6">
           <ion-item>
             <ion-label position="stacked">Last Name</ion-label>
-            <ion-input type="text" placeholder="Last Name" [(ngModel)]="data.lastName" name="lastName" formControlName="lastName"></ion-input>
+            <ion-input type="text" placeholder="Last Name" [(ngModel)]="data.user.lastName" name="lastName" formControlName="lastName"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -23,12 +22,12 @@
       <ion-row>
         <ion-col size="6">
           <ion-item>
-            <dropdown-with-search [selectedId]="data.brand?.brandId" selectedIdKey="brandId" [selectedValue]="data.brand?.brandName" (selectedObjectChange)="onSelectedBrandChange($event)" label="Brands" placeholder="Select Brands" [(data)]="brandData" name="brandId" formControlName="brandId" key="brandName" brands-data></dropdown-with-search>
+            <dropdown-with-search [selectedId]="data.user.brand?.brandId" selectedIdKey="brandId" [selectedValue]="data.user.brand?.brandName" (selectedObjectChange)="onSelectedBrandChange($event)" label="Brands" placeholder="Select Brands" [(data)]="brandData" name="brandId" formControlName="brandId" key="brandName" brands-data.user></dropdown-with-search>
           </ion-item>
         </ion-col>
         <ion-col size="6">
           <ion-item>
-            <dropdown-with-search [selectedValue]="data.role?.roleName" label="Roles" placeholder="Select Roles" (selectedObjectChange)="onSelectedRoleChange($event)" [(data)]="roleData" name="roleId" formControlName="roleId" key="roleName" roles-data></dropdown-with-search>
+            <dropdown-with-search [selectedValue]="data.user.role?.roleName" label="Roles" placeholder="Select Roles" (selectedObjectChange)="onSelectedRoleChange($event)" [(data)]="roleData" name="roleId" formControlName="roleId" key="roleName" roles-data.user></dropdown-with-search>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -37,22 +36,23 @@
         <ion-col size="6">
           <ion-item>
             <ion-label position="stacked">Mobile Number</ion-label>
-            <ion-input type="text" placeholder="Enter Mobile Number" [(ngModel)]="data.mobileNo" name="mobileNo" formControlName="mobileNo"></ion-input>
+            <ion-input type="text" placeholder="Enter Mobile Number" [(ngModel)]="data.user.mobileNo" name="mobileNo" formControlName="mobileNo"></ion-input>
           </ion-item>
         </ion-col>
 
         <ion-col size="6">
           <ion-item>
             <ion-label position="stacked">Email</ion-label>
-            <ion-input type="text" placeholder="Enter Email" [(ngModel)]="data.email" name="email" formControlName="email"></ion-input>
+            <ion-input type="text" placeholder="Enter Email" [(ngModel)]="data.user.email" name="email" formControlName="email"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
+      
     </form>
   </ion-grid>
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="updateData()">Save</button>
 </mat-dialog-actions>

@@ -11,6 +11,7 @@ userRouter
 .get('/:brandId/:userId', UserController.getUsers)
 .post('/create', UserController.createUsers)
 .post('/delete', UserController.deleteUsers)
+.patch('/:userId', UserController.createUsers);
 // .post('/:id', (req:Request, res: Response) => {
 //   console.log(req.body);
 //   res.send("users post")

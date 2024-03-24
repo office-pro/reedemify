@@ -1,6 +1,9 @@
-import { Component, Inject, OnInit } from "@angular/core";
+import { Component, Inject, OnInit, ViewChild } from "@angular/core";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { UserService } from "src/app/services/user.service";
+import { SearchParamModel } from "../models/search-params.model";
+
 
 @Component({
   selector: 'edit-user',
@@ -15,9 +18,11 @@ export class EditUserComponent implements OnInit {
   brandName: string = "";
   roleName: string = "";
 
-  editUserForm!: FormGroup; // Define the FormGroup
-
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder) {}
+  editUserForm!: FormGroup; 
+  
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, 
+              private fb: FormBuilder,
+              private userService: UserService) {}
 
   ngOnInit(): void {
     // Initialize the FormGroup
@@ -29,6 +34,12 @@ export class EditUserComponent implements OnInit {
       mobileNo: [this.data.mobileNo, Validators.required],
       email: [this.data.email, [Validators.required, Validators.email]]
     });
+  }
+
+  updateData(){
+    this.userService.editUser(new SearchParamModel({userId: this.data.user?.["userId"],user:[this.data.user]})).subscribe((data) => {
+      console.log(`updated data ${data}`);
+    })
   }
 
   onSelectedBrandChange(event: any) {

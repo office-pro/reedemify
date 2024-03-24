@@ -32,5 +32,10 @@ export class UserService {
   deleteUsers(searchParams: SearchParamModel) {
     return this.httpClient.post("http://localhost:3000/api/users/delete",!!searchParams?.["users"] ? searchParams?.["users"] : []);
   }
+
+  editUser(searchParams: SearchParamModel) {
+    const url = `http://localhost:3000/api/users/${searchParams?.["userId"]}`;
+    return this.httpClient.patch(url, searchParams?.["user"]);
+  }
   
 }
