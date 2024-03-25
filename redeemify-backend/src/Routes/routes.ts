@@ -9,6 +9,7 @@ import brandRouter from './brand.routes';
 import rolesRouter from './roles.routes';
 import bucketRouter from './bucket.routes';
 import addressRouter from './address.routes';
+import voucherRouter from './voucher.routes';
 
 const router = express.Router();
 
@@ -23,6 +24,7 @@ router.use('/api/brands', brandRouter);
 router.use('/api/roles', rolesRouter);
 router.use('/api/buckets', bucketRouter);
 router.use('/api/address', addressRouter);
+router.use('/api/voucher', voucherRouter);
 // router.use('/api/wallet', WalletRouter);
 
 export default router;
